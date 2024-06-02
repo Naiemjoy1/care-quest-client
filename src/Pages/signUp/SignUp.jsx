@@ -216,7 +216,7 @@ const SignUp = () => {
             <button className="btn btn-primary text-white">Register</button>
           </div>
 
-          <p className="mt-5">
+          <p className="mt-5 text-center">
             Already Have an Account?{" "}
             <Link to="/signin" className="text-primary">
               Login

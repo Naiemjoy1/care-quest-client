@@ -1,16 +1,30 @@
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../Components/Provider/AuthProvider";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+
   const navLink = (
     <>
       <li>
-        <NavLink to="/">Home</NavLink>
-      </li>
-      <li>
-        <NavLink to="/signin">Login</NavLink>
+        <NavLink
+          to="/"
+          style={({ isActive }) =>
+            isActive ? { backgroundColor: "#47ccc8", color: "white" } : {}
+          }
+        >
+          Home
+        </NavLink>
       </li>
     </>
   );
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => console.log(error));
+  };
 
   return (
     <div>
@@ -46,9 +60,47 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{navLink}</ul>
         </div>
         <div className="navbar-end">
-          <Link to="/signin" className="btn btn-sm bg-primary text-white">
-            Login
-          </Link>
+          {user ? (
+            <div className="dropdown dropdown-hover dropdown-end">
+              <label
+                tabIndex={0}
+                className="btn btn-ghost btn-circle avatar hover-dropdown"
+              >
+                <div className="w-10 rounded-full">
+                  <img
+                    src={
+                      user?.photoURL ||
+                      "https://i.ibb.co/cFXnHG0/360-F-214746128-31-Jkea-P6r-U0-Nzzzd-FC4kh-Gkmqc8noe6h.jpg"
+                    }
+                    alt=""
+                  />
+                </div>
+              </label>
+              <ul className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-primary text-white rounded-box w-52 hover-dropdown-content">
+                <li>
+                  <button className="btn btn-sm btn-ghost">
+                    <Link to="/userupdate" user={user}>
+                      {user?.displayName || user?.email || "user"}
+                    </Link>
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={handleLogOut}
+                    className="btn btn-sm btn-ghost"
+                  >
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            </div>
+          ) : (
+            <>
+              <Link to="/signin" className="btn btn-sm bg-primary text-white">
+                Login
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </div>
