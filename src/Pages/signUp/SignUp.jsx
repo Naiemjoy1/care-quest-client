@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Components/Provider/AuthProvider";
 import signup from "../../assets/signup.png";
+import Swal from "sweetalert2";
 
 const districts = {
   Dhaka: ["Dhanmondi", "Gulshan", "Mirpur"],
@@ -12,29 +13,68 @@ const districts = {
 const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 
 const SignUp = () => {
-  const { createuser } = useContext(AuthContext);
+  const { createuser, updateUserProfile } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const image_hosting_key = import.meta.env.VITE_IMGBB_API;
+  const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+
   const {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm();
   const [selectedDistrict, setSelectedDistrict] = useState("");
 
-  const onSubmit = (data) => {
-    console.log(data);
-    createuser(data.email, data.password).then((result) => {
-      const loggedUser = result.user;
-      console.log(loggedUser);
-      // Handle additional user info (e.g., save to database)
-    });
+  const onSubmit = async (data) => {
+    const imageFile = data.image[0];
+    const name = data.name;
+    const email = data.email;
+    const password = data.password;
+
+    console.log("Form data:", data);
+
+    try {
+      const formData = new FormData();
+      formData.append("image", imageFile);
+
+      const response = await fetch(image_hosting_api, {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+      const displayUrl = result.data.display_url;
+      console.log("Name:", name);
+      console.log("Uploaded Image URL:", displayUrl);
+      console.log("Email:", email);
+
+      // Create user
+      const userResult = await createuser(email, password);
+      console.log("Created user:", userResult);
+
+      // Save username and photo
+      await updateUserProfile(name, displayUrl);
+      console.log("Updated user profile with name and image URL");
+
+      reset();
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "User Created Successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      navigate("/");
+    } catch (error) {
+      console.error("Error in onSubmit:", error);
+    }
   };
 
   // Watch the password field to validate confirm password
   const password = watch("password");
-
-  // Watch the district field to update the upazila options
-  const watchDistrict = watch("district");
 
   return (
     <div className="flex container justify-center mx-auto items-center gap-4 my-14">
@@ -79,10 +119,9 @@ const SignUp = () => {
                 <span className="label-text">Profile Image</span>
               </label>
               <input
-                type="text"
+                type="file"
                 name="image"
-                placeholder="imageurl"
-                className="input input-bordered"
+                className="file-input w-full max-w-xs"
                 {...register("image", { required: true })}
               />
               {errors.image && <span>This field is required</span>}
