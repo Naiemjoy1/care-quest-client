@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Healthy Diet Tips",
+    "description": "Maintain a balanced diet rich in fruits, vegetables, whole grains, and lean proteins to support overall health.",
+    "source": "Nutritionist"
+  },
+  {
+    "title": "Stay Active",
+    "description": "Engage in regular physical activity such as walking, jogging, or cycling to improve cardiovascular health and reduce stress.",
+    "source": "Fitness Trainer"
+  },
+  {
+    "title": "Importance of Regular Checkups",
+    "description": "Schedule routine health checkups to monitor your health status and detect potential issues early.",
+    "source": "Medical Professional"
+  },
+  {
+    "title": "Manage Stress Levels",
+    "description": "Practice relaxation techniques such as deep breathing, meditation, or yoga to manage stress and promote mental well-being.",
+    "source": "Psychologist"
+  },
+  {
+    "title": "Get Enough Sleep",
+    "description": "Ensure you get 7-8 hours of quality sleep each night to support immune function, cognitive function, and overall health.",
+    "source": "Sleep Specialist"
+  },
+  {
+    "title": "Stay Hydrated",
+    "description": "Drink plenty of water throughout the day to maintain hydration, support digestion, and flush out toxins from the body.",
+    "source": "Nutritionist"
+  }
+]

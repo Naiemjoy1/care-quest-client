@@ -27,8 +27,10 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
   const [selectedDistrict, setSelectedDistrict] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = async (data) => {
+    setLoading(true);
     const imageFile = data.image[0];
     const name = data.name;
     const email = data.email;
@@ -70,6 +72,8 @@ const SignUp = () => {
       navigate("/");
     } catch (error) {
       console.error("Error in onSubmit:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -78,6 +82,16 @@ const SignUp = () => {
 
   return (
     <div className="flex container justify-center mx-auto items-center gap-4 my-14">
+      {loading && (
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-200 bg-opacity-75 z-50">
+          <div
+            className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full text-blue-600"
+            role="status"
+          >
+            <span className="loading loading-spinner text-4xl text-primary"></span>
+          </div>
+        </div>
+      )}
       <div className="w-1/2">
         <form onSubmit={handleSubmit(onSubmit)} className="">
           <div className="flex gap-4">
