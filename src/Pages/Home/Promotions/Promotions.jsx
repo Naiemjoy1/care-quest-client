@@ -1,6 +1,22 @@
 import { useEffect, useState } from "react";
 import Promotion from "./Promotion";
 
+import {
+  Navigation,
+  Pagination,
+  Scrollbar,
+  A11y,
+  Autoplay,
+} from "swiper/modules";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+import "swiper/css/autoplay";
+
 const Promotions = () => {
   const [promotions, setPromotions] = useState([]);
 
@@ -25,10 +41,26 @@ const Promotions = () => {
           aliquam odio, ut consectetur enim.
         </p>
       </div>
-      <div className="container mx-auto text-white mt-5">
-        {promotions.map((promotion) => (
-          <Promotion key={promotion._id} promotion={promotion}></Promotion>
-        ))}
+      <div className="container mx-auto text-white mt-10">
+        <Swiper
+          spaceBetween={20}
+          slidesPerView={3}
+          //   navigation={true}
+          autoplay={{ delay: 6000 }}
+          loop={true}
+          // pagination={{ clickable: true }}
+          // scrollbar={{ draggable: true }}
+          modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
+          className="mySwiper"
+          // onSwiper={(swiper) => console.log(swiper)}
+          // onSlideChange={() => console.log("slide change")}
+        >
+          {promotions.map((promotion) => (
+            <SwiperSlide key={promotion._id}>
+              <Promotion promotion={promotion}></Promotion>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </div>
   );
