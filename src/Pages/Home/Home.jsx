@@ -1,8 +1,10 @@
 import AboutClinic from "./About/AboutClinic";
+import AllDoctors from "./AllDoctors/AllDoctors";
 import Banner from "./Banner/Banner";
 import Doctors from "./Doctors/Doctors";
 import FeaturedTest from "./FeaturedTest/FeaturedTest";
 import Promotions from "./Promotions/Promotions";
+import Reviews from "./Reviews/Reviews";
 
 const Home = () => {
   return (
@@ -12,6 +14,8 @@ const Home = () => {
       <FeaturedTest></FeaturedTest>
       <Doctors></Doctors>
       <Promotions></Promotions>
+      <AllDoctors></AllDoctors>
+      <Reviews></Reviews>
     </div>
   );
 };
