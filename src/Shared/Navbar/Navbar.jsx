@@ -17,6 +17,26 @@ const Navbar = () => {
           Home
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          to="/tests"
+          style={({ isActive }) =>
+            isActive ? { backgroundColor: "#47ccc8", color: "white" } : {}
+          }
+        >
+          All Tests
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/dashboard"
+          style={({ isActive }) =>
+            isActive ? { backgroundColor: "#47ccc8", color: "white" } : {}
+          }
+        >
+          Dashboard
+        </NavLink>
+      </li>
     </>
   );
 
@@ -54,7 +74,9 @@ const Navbar = () => {
               {navLink}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">CareQuest</a>
+          <Link to="/" className="btn btn-ghost text-xl">
+            CareQuest
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{navLink}</ul>
