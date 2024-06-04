@@ -9,6 +9,7 @@ import AllTests from "../Pages/AllTests/AllTests";
 import Error from "../Shared/Error/Error";
 import AddBanner from "../Pages/Dashboard/Admin/AddBanner/AddBanner";
 import AdminHome from "../Pages/Dashboard/Admin/AdminHome/AdminHome";
+import TestDetails from "../Pages/AllTests/TestDetails";
 
 export const router = createBrowserRouter([
   {
@@ -23,6 +24,11 @@ export const router = createBrowserRouter([
       {
         path: "/tests",
         element: <AllTests></AllTests>,
+      },
+      {
+        path: "/tests/:_id",
+        element: <TestDetails></TestDetails>,
+        loader: () => fetch("featuredTests.json"),
       },
       {
         path: "/signin",

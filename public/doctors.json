@@ -1,0 +1,268 @@
+[
+  {
+    "_id": 1,
+    "name": "Dr. John Smith",
+    "specialization": "Cardiologist",
+    "image": "https://i.ibb.co/nRsmQtR/pexels-pixabay-415829.jpg",
+    "description": "Dr. John Smith is a highly experienced cardiologist with over 20 years of practice. He specializes in diagnosing and treating heart conditions, including coronary artery disease, heart failure, and arrhythmias. Dr. Smith is committed to providing compassionate care and personalized treatment plans to his patients.",
+    "education": [
+      "MD, Cardiology - University Medical School",
+      "Residency in Internal Medicine - City Hospital",
+      "Fellowship in Cardiology - Cardiovascular Institute"
+    ],
+    "experience": [
+      {
+        "title": "Senior Cardiologist",
+        "organization": "Heart Clinic",
+        "location": "New York, NY",
+        "start_date": "2010",
+        "end_date": "Present"
+      },
+      {
+        "title": "Assistant Professor of Cardiology",
+        "organization": "University Medical School",
+        "location": "New York, NY",
+        "start_date": "2005",
+        "end_date": "2010"
+      }
+    ],
+    "contact": {
+      "email": "john.smith@example.com",
+      "phone": "+1 (123) 456-7890",
+      "address": "123 Main Street, New York, NY 10001",
+      "social_media": {
+        "facebook": "https://www.facebook.com/drjohnsmith",
+        "twitter": "https://twitter.com/drjohnsmith",
+        "linkedin": "https://www.linkedin.com/in/drjohnsmith"
+      }
+    }
+  },
+  {
+    "_id": 2,
+    "name": "Dr. Emily Johnson",
+    "specialization": "Dermatologist",
+    "image": "https://i.ibb.co/nRsmQtR/pexels-pixabay-415829.jpg",
+    "description": "Dr. Emily Johnson is a board-certified dermatologist with expertise in medical and cosmetic dermatology. She offers a wide range of services, including skin cancer screenings, acne treatment, botox injections, and laser therapy. Dr. Johnson is dedicated to helping her patients achieve healthy, beautiful skin.",
+    "education": [
+      "MD, Dermatology - University Medical School",
+      "Residency in Dermatology - Dermatology Center",
+      "Fellowship in Cosmetic Dermatology - Aesthetic Institute"
+    ],
+    "experience": [
+      {
+        "title": "Dermatologist",
+        "organization": "Skin Care Clinic",
+        "location": "Los Angeles, CA",
+        "start_date": "2015",
+        "end_date": "Present"
+      },
+      {
+        "title": "Chief Resident",
+        "organization": "Dermatology Center",
+        "location": "Los Angeles, CA",
+        "start_date": "2012",
+        "end_date": "2015"
+      }
+    ],
+    "contact": {
+      "email": "emily.johnson@example.com",
+      "phone": "+1 (234) 567-8901",
+      "address": "456 Oak Street, Los Angeles, CA 90001",
+      "social_media": {
+        "facebook": "https://www.facebook.com/dremilyjohnson",
+        "twitter": "https://twitter.com/dremilyjohnson",
+        "linkedin": "https://www.linkedin.com/in/dremilyjohnson"
+      }
+    }
+  },
+  {
+    "_id": 3,
+    "name": "Dr. Sarah Lee",
+    "specialization": "Endocrinologist",
+    "image": "https://i.ibb.co/nRsmQtR/pexels-pixabay-415829.jpg",
+    "description": "Dr. Sarah Lee is an experienced endocrinologist who specializes in diabetes, thyroid disorders, and hormonal imbalances. She is dedicated to providing comprehensive care and helping her patients manage their endocrine health.",
+    "education": [
+      "MD, Endocrinology - Harvard Medical School",
+      "Residency in Internal Medicine - Boston Medical Center",
+      "Fellowship in Endocrinology - Joslin Diabetes Center"
+    ],
+    "experience": [
+      {
+        "title": "Endocrinologist",
+        "organization": "Endocrine Health Center",
+        "location": "Boston, MA",
+        "start_date": "2012",
+        "end_date": "Present"
+      },
+      {
+        "title": "Clinical Fellow",
+        "organization": "Joslin Diabetes Center",
+        "location": "Boston, MA",
+        "start_date": "2009",
+        "end_date": "2012"
+      }
+    ],
+    "contact": {
+      "email": "sarah.lee@example.com",
+      "phone": "+1 (345) 678-9012",
+      "address": "789 Maple Avenue, Boston, MA 02115",
+      "social_media": {
+        "facebook": "https://www.facebook.com/drsarahlee",
+        "twitter": "https://twitter.com/drsarahlee",
+        "linkedin": "https://www.linkedin.com/in/drsarahlee"
+      }
+    }
+  },
+  {
+    "_id": 4,
+    "name": "Dr. Michael Brown",
+    "specialization": "Urologist",
+    "image": "https://i.ibb.co/nRsmQtR/pexels-pixabay-415829.jpg",
+    "description": "Dr. Michael Brown is a board-certified urologist with over 15 years of experience. He specializes in treating urinary tract conditions, prostate disorders, and kidney stones. Dr. Brown is committed to offering advanced urological care to his patients.",
+    "education": [
+      "MD, Urology - University Medical School",
+      "Residency in Urology - General Hospital",
+      "Fellowship in Urologic Oncology - Cancer Center"
+    ],
+    "experience": [
+      {
+        "title": "Senior Urologist",
+        "organization": "Urology Associates",
+        "location": "Chicago, IL",
+        "start_date": "2008",
+        "end_date": "Present"
+      },
+      {
+        "title": "Urologic Oncologist",
+        "organization": "Cancer Center",
+        "location": "Chicago, IL",
+        "start_date": "2005",
+        "end_date": "2008"
+      }
+    ],
+    "contact": {
+      "email": "michael.brown@example.com",
+      "phone": "+1 (456) 789-0123",
+      "address": "101 Pine Street, Chicago, IL 60601",
+      "social_media": {
+        "facebook": "https://www.facebook.com/drmichaelbrown",
+        "twitter": "https://twitter.com/drmichaelbrown",
+        "linkedin": "https://www.linkedin.com/in/drmichaelbrown"
+      }
+    }
+  },
+  {
+    "_id": 5,
+    "name": "Dr. Laura Wilson",
+    "specialization": "Neurologist",
+    "image": "https://i.ibb.co/nRsmQtR/pexels-pixabay-415829.jpg",
+    "description": "Dr. Laura Wilson is a renowned neurologist with extensive experience in diagnosing and treating neurological disorders such as epilepsy, Parkinson's disease, and multiple sclerosis. She is passionate about improving the quality of life for her patients.",
+    "education": [
+      "MD, Neurology - Stanford Medical School",
+      "Residency in Neurology - Stanford Hospital",
+      "Fellowship in Neurophysiology - Mayo Clinic"
+    ],
+    "experience": [
+      {
+        "title": "Consultant Neurologist",
+        "organization": "Neurology Center",
+        "location": "San Francisco, CA",
+        "start_date": "2013",
+        "end_date": "Present"
+      },
+      {
+        "title": "Neurophysiology Fellow",
+        "organization": "Mayo Clinic",
+        "location": "Rochester, MN",
+        "start_date": "2010",
+        "end_date": "2013"
+      }
+    ],
+    "contact": {
+      "email": "laura.wilson@example.com",
+      "phone": "+1 (567) 890-1234",
+      "address": "202 Elm Street, San Francisco, CA 94102",
+      "social_media": {
+        "facebook": "https://www.facebook.com/drlaurawilson",
+        "twitter": "https://twitter.com/drlaurawilson",
+        "linkedin": "https://www.linkedin.com/in/drlaurawilson"
+      }
+    }
+  },
+  {
+    "_id": 6,
+    "name": "Dr. David Martinez",
+    "specialization": "Orthopedic",
+    "image": "https://i.ibb.co/nRsmQtR/pexels-pixabay-415829.jpg",
+    "description": "Dr. David Martinez is an experienced orthopedic surgeon specializing in sports injuries, joint replacements, and arthroscopic surgery. He is dedicated to helping his patients achieve optimal musculoskeletal health and recovery.",
+    "education": [
+      "MD, Orthopedics - Johns Hopkins University",
+      "Residency in Orthopedic Surgery - Johns Hopkins Hospital",
+      "Fellowship in Sports Medicine - Hospital for Special Surgery"
+    ],
+    "experience": [
+      {
+        "title": "Orthopedic Surgeon",
+        "organization": "Orthopedic Institute",
+        "location": "Houston, TX",
+        "start_date": "2014",
+        "end_date": "Present"
+      },
+      {
+        "title": "Sports Medicine Fellow",
+        "organization": "Hospital for Special Surgery",
+        "location": "New York, NY",
+        "start_date": "2011",
+        "end_date": "2014"
+      }
+    ],
+    "contact": {
+      "email": "david.martinez@example.com",
+      "phone": "+1 (678) 901-2345",
+      "address": "303 Cedar Road, Houston, TX 77002",
+      "social_media": {
+        "facebook": "https://www.facebook.com/drdavidmartinez",
+        "twitter": "https://twitter.com/drdavidmartinez",
+        "linkedin": "https://www.linkedin.com/in/drdavidmartinez"
+      }
+    }
+  },
+  {
+    "_id": 7,
+    "name": "Dr. John Smith",
+    "specialization": "Cardiologist",
+    "image": "https://i.ibb.co/nRsmQtR/pexels-pixabay-415829.jpg",
+    "description": "Dr. John Smith is a highly experienced cardiologist with over 20 years of practice. He specializes in diagnosing and treating heart conditions, including coronary artery disease, heart failure, and arrhythmias. Dr. Smith is committed to providing compassionate care and personalized treatment plans to his patients.",
+    "education": [
+      "MD, Cardiology - University Medical School",
+      "Residency in Internal Medicine - City Hospital",
+      "Fellowship in Cardiology - Cardiovascular Institute"
+    ],
+    "experience": [
+      {
+        "title": "Senior Cardiologist",
+        "organization": "Heart Clinic",
+        "location": "New York, NY",
+        "start_date": "2010",
+        "end_date": "Present"
+      },
+      {
+        "title": "Assistant Professor of Cardiology",
+        "organization": "University Medical School",
+        "location": "New York, NY",
+        "start_date": "2005",
+        "end_date": "2010"
+      }
+    ],
+    "contact": {
+      "email": "john.smith@example.com",
+      "phone": "+1 (123) 456-7890",
+      "address": "123 Main Street, New York, NY 10001",
+      "social_media": {
+        "facebook": "https://www.facebook.com/drjohnsmith",
+        "twitter": "https://twitter.com/drjohnsmith",
+        "linkedin": "https://www.linkedin.com/in/drjohnsmith"
+      }
+    }
+  }
+]

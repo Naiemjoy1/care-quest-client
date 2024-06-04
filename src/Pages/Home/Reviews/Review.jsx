@@ -1,9 +1,12 @@
+import { Rating } from "@smastrom/react-rating";
+import "@smastrom/react-rating/style.css";
+
 const Review = ({ review }) => {
-  const { title, description, source, image, name } = review;
+  const { title, description, source, image, name, rating } = review;
   return (
     <div>
       <div className="flex flex-col max-w-sm mx-4 my-6 shadow-lg ">
-        <div className="px-4 py-12 rounded-t-lg sm:px-8 md:px-12 bg-gray-900 h-[320px]">
+        <div className="px-4 py-12 rounded-t-lg sm:px-8 md:px-12 bg-gray-900">
           <p className=" text-white text-center text-xl font-semibold mb-5">
             {title}
           </p>
@@ -37,6 +40,7 @@ const Review = ({ review }) => {
           />
           <p className="text-xl font-semibold leading-tight">{name}</p>
           <p className="text-sm uppercase">{source}</p>
+          <Rating style={{ maxWidth: 180 }} value={rating} readOnly />
         </div>
       </div>
     </div>

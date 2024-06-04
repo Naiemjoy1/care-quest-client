@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import PopularTest from "./PopularTest";
 
@@ -17,18 +16,11 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "swiper/css/autoplay";
+import useTests from "../../../Components/Hooks/useTests";
 
 const FeaturedTest = () => {
-  const [test, setTest] = useState([]);
-
-  useEffect(() => {
-    fetch("featuredTests.json")
-      .then((res) => res.json())
-      .then((data) => {
-        const popularItems = data.filter((item) => item.category === "Popular");
-        setTest(popularItems);
-      });
-  }, []);
+  const [tests] = useTests();
+  const popular = tests.filter((item) => item.category === "Popular");
 
   return (
     <div className="mt-10 container mx-auto">
@@ -52,7 +44,7 @@ const FeaturedTest = () => {
         // onSwiper={(swiper) => console.log(swiper)}
         // onSlideChange={() => console.log("slide change")}
       >
-        {test.map((item) => (
+        {popular.map((item) => (
           <SwiperSlide key={item._id}>
             <PopularTest item={item}></PopularTest>
           </SwiperSlide>

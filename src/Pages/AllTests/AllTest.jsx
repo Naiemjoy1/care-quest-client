@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 
-const PopularTest = ({ item }) => {
-  const { _id, name, image, description, price, date, slots, category } = item;
+const AllTest = ({ test }) => {
+  const { _id, image, date, slots, name, description } = test;
+
   return (
     <div>
       <div className="card card-compact bg-base-100 border h-[450px]">
@@ -11,6 +12,8 @@ const PopularTest = ({ item }) => {
         <div className="card-body">
           <h2 className="card-title">{name}</h2>
           <p>{description}</p>
+          <p>Date: {date}</p>
+          <p>Slots: {slots.join(", ")} </p>
           <div className="card-actions justify-end">
             <Link to={`/tests/${_id}`}>
               <button className="btn btn-primary text-white">
@@ -24,4 +27,4 @@ const PopularTest = ({ item }) => {
   );
 };
 
-export default PopularTest;
+export default AllTest;

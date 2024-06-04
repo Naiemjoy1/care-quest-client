@@ -21,7 +21,7 @@ const Promotions = () => {
   const [promotions, setPromotions] = useState([]);
 
   useEffect(() => {
-    fetch("promotions.json")
+    fetch("http://localhost:3000/promotions")
       .then((res) => res.json())
       .then((data) => {
         setPromotions(data);

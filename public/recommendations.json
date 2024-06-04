@@ -1,50 +1,56 @@
 [
   {
-    "id": 1,
+    "_id": 1,
     "title": "Healthy Diet Tips",
     "description": "Maintain a balanced diet rich in fruits, vegetables, whole grains, and lean proteins to support overall health.",
     "source": "Nutritionist",
     "image": "https://i.ibb.co/nRsmQtR/pexels-pixabay-415829.jpg",
-    "name": "Dr. Emily Smith"
+    "name": "Dr. Emily Smith",
+    "rating": 4.8
   },
   {
-    "id": 2,
+    "_id": 2,
     "title": "Stay Active",
     "description": "Engage in regular physical activity such as walking, jogging, or cycling to improve cardiovascular health and reduce stress.",
     "source": "Fitness Trainer",
     "image": "https://i.ibb.co/nRsmQtR/pexels-pixabay-415829.jpg",
-    "name": "John Doe"
+    "name": "John Doe",
+    "rating": 4.7
   },
   {
-    "id": 3,
+    "_id": 3,
     "title": "Importance of Regular Checkups",
     "description": "Schedule routine health checkups to monitor your health status and detect potential issues early.",
     "source": "Medical Professional",
     "image": "https://i.ibb.co/nRsmQtR/pexels-pixabay-415829.jpg",
-    "name": "Dr. Sarah Johnson"
+    "name": "Dr. Sarah Johnson",
+    "rating": 4.9
   },
   {
-    "id": 4,
+    "_id": 4,
     "title": "Manage Stress Levels",
     "description": "Practice relaxation techniques such as deep breathing, meditation, or yoga to manage stress and promote mental well-being.",
     "source": "Psychologist",
     "image": "https://i.ibb.co/nRsmQtR/pexels-pixabay-415829.jpg",
-    "name": "Dr. Michael Williams"
+    "name": "Dr. Michael Williams",
+    "rating": 4.6
   },
   {
-    "id": 5,
+    "_id": 5,
     "title": "Get Enough Sleep",
     "description": "Ensure you get 7-8 hours of quality sleep each night to support immune function, cognitive function, and overall health.",
     "source": "Sleep Specialist",
     "image": "https://i.ibb.co/nRsmQtR/pexels-pixabay-415829.jpg",
-    "name": "Dr. Olivia Clark"
+    "name": "Dr. Olivia Clark",
+    "rating": 4.7
   },
   {
-    "id": 6,
+    "_id": 6,
     "title": "Stay Hydrated",
     "description": "Drink plenty of water throughout the day to maintain hydration, support digestion, and flush out toxins from the body.",
     "source": "Nutritionist",
     "image": "https://i.ibb.co/nRsmQtR/pexels-pixabay-415829.jpg",
-    "name": "Dr. Alex Lee"
+    "name": "Dr. Alex Lee",
+    "rating": 4.8
   }
 ]

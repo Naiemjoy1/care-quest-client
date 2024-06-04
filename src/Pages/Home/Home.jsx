@@ -7,9 +7,15 @@ import FeaturedTest from "./FeaturedTest/FeaturedTest";
 import Promotions from "./Promotions/Promotions";
 import Reviews from "./Reviews/Reviews";
 
+import { Helmet } from "react-helmet-async";
+
 const Home = () => {
   return (
     <div>
+      <Helmet>
+        <title>CareQuest | Home</title>
+        <link rel="canonical" href="https://www.tacobell.com/" />
+      </Helmet>
       <Banner></Banner>
       <AboutClinic></AboutClinic>
       <FeaturedTest></FeaturedTest>
