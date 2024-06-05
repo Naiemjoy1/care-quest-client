@@ -1,6 +1,26 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../Components/Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { useState } from "react";
+
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+import TextField from "@mui/material/TextField";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  // width: 400,
+  bgcolor: "background.paper",
+  // border: "2px solid #000",
+  boxShadow: 24,
+  // p: 4,
+  borderRadius: 12,
+};
 
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
@@ -73,6 +93,18 @@ const AllUsers = () => {
     });
   };
 
+  const [openModal, setOpenModal] = useState(false); // State to control modal visibility
+
+  // Function to handle opening the modal
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+
+  // Function to handle closing the modal
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
+
   return (
     <div>
       <div className="flex justify-evenly">
@@ -90,6 +122,8 @@ const AllUsers = () => {
                 <th>Role</th>
                 <th>Status</th>
                 <th>Action</th>
+                <th>Details</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -152,6 +186,43 @@ const AllUsers = () => {
                     >
                       Delete
                     </button>
+                  </th>
+                  <th>
+                    <button className="btn btn-xs">View Details</button>
+                  </th>
+                  <th>
+                    <button onClick={handleOpenModal} className="btn btn-xs">
+                      see info
+                    </button>
+                    <Modal open={openModal} onClose={handleCloseModal}>
+                      <Box sx={style}>
+                        <div className="flex flex-col justify-center max-w-xs p-6 shadow-md rounded-xl sm:px-12 bg-gray-900 text-gray-100">
+                          <img
+                            src={user.image}
+                            alt=""
+                            className="w-32 h-32 mx-auto rounded-full bg-gray-500 aspect-square"
+                          />
+                          <div className="space-y-4 text-center divide-y divide-gray-700">
+                            <div className="my-2 space-y-1">
+                              <h2 className="text-xl font-semibold sm:text-2xl">
+                                {user.name}
+                              </h2>
+                              <p className="px-5 text-xs sm:text-base text-gray-400">
+                                {user.email}
+                              </p>
+                            </div>
+                            <div className=" justify-center pt-2 space-x-4 align-center">
+                              <p className="px-5 text-xs sm:text-base text-gray-400">
+                                Blood Group: {user.bloodGroup}
+                              </p>
+                              <p className="px-5 text-xs sm:text-base text-gray-400">
+                                Address: {user.upazila},{user.district}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </Box>
+                    </Modal>
                   </th>
                 </tr>
               ))}
