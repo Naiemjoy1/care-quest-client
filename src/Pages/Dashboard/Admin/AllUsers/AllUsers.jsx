@@ -15,7 +15,6 @@ const AllUsers = () => {
 
   const handleMakeAdmin = (user) => {
     axiosSecure.patch(`/users/admin/${user._id}`).then((res) => {
-      console.log(res.data);
       if (res.data.modifiedCount > 0) {
         refetch();
         Swal.fire({
@@ -42,7 +41,6 @@ const AllUsers = () => {
       if (result.isConfirmed) {
         axiosSecure.delete(`/users/${user._id}`).then((res) => {
           if (res.data.deletedCount > 0) {
-            // Correcting the typo
             Swal.fire({
               title: "Deleted!",
               text: "Your file has been deleted.",
@@ -64,18 +62,16 @@ const AllUsers = () => {
       <div>
         <div className="overflow-x-auto">
           <table className="table">
-            {/* head */}
             <thead>
               <tr>
                 <th></th>
                 <th>Name</th>
                 <th>Address</th>
-                <th>Role </th>
+                <th>Role</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
-              {/* row 1 */}
               {users.map((user, index) => (
                 <tr key={user._id}>
                   <th>{index + 1}</th>
