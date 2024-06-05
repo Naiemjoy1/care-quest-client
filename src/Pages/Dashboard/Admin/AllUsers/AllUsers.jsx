@@ -53,6 +53,26 @@ const AllUsers = () => {
     });
   };
 
+  const handleChangeStatus = (user, status) => {
+    if (user.role === "admin") {
+      // If user is admin, don't change status
+      return;
+    }
+
+    axiosSecure.patch(`/users/status/${user._id}`, { status }).then((res) => {
+      if (res.data.modifiedCount > 0) {
+        refetch();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `User status changed to ${status}`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
+  };
+
   return (
     <div>
       <div className="flex justify-evenly">
@@ -68,6 +88,7 @@ const AllUsers = () => {
                 <th>Name</th>
                 <th>Address</th>
                 <th>Role</th>
+                <th>Status</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -104,6 +125,23 @@ const AllUsers = () => {
                         className="btn btn-accent text-white btn-xs"
                       >
                         user
+                      </button>
+                    )}
+                  </td>
+                  <td>
+                    {user.status === "active" ? (
+                      <button
+                        onClick={() => handleChangeStatus(user, "blocked")}
+                        className="btn btn-warning text-white  btn-xs"
+                      >
+                        Block
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => handleChangeStatus(user, "active")}
+                        className="btn btn-success text-white  btn-xs"
+                      >
+                        Activate
                       </button>
                     )}
                   </td>

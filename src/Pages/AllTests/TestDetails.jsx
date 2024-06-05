@@ -60,8 +60,19 @@ const TestDetails = () => {
     setSelectedSlot(event.target.value);
   };
 
-  const handleOpen = () => {
+  const handleOpen = async () => {
     if (user && user.email) {
+      // Check if the user is blocked
+      const response = await axiosSecure.get(`/users/status/${user.email}`);
+      if (response.data.status === "blocked") {
+        Swal.fire({
+          title: "Account Blocked",
+          text: "Your account has been blocked and you cannot book a slot.",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
+        return;
+      }
       setOpen(true);
     } else {
       Swal.fire({

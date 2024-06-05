@@ -3,8 +3,11 @@ import { NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../../Components/Hooks/useAdmin";
 
 const Dashboard = () => {
-  // ToDo
-  const isAdmin = useAdmin();
+  const [isAdmin, isAdminLoading] = useAdmin();
+
+  if (isAdminLoading) {
+    return <div>Loading...</div>; // You can replace this with a loading spinner
+  }
 
   return (
     <div className="flex">
@@ -21,7 +24,7 @@ const Dashboard = () => {
                       : {}
                   }
                 >
-                  <FaHome></FaHome> Admin Home
+                  <FaHome /> Admin Home
                 </NavLink>
               </li>
               <li>
@@ -33,7 +36,19 @@ const Dashboard = () => {
                       : {}
                   }
                 >
-                  <FaHome></FaHome> Add Menu
+                  <FaHome /> Add Banner
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/allbanner"
+                  style={({ isActive }) =>
+                    isActive
+                      ? { backgroundColor: "#2d3663", color: "white" }
+                      : {}
+                  }
+                >
+                  <FaHome /> All Banner
                 </NavLink>
               </li>
               <li>
@@ -45,7 +60,43 @@ const Dashboard = () => {
                       : {}
                   }
                 >
-                  <FaHome></FaHome> All Users
+                  <FaHome /> All Users
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/addtest"
+                  style={({ isActive }) =>
+                    isActive
+                      ? { backgroundColor: "#2d3663", color: "white" }
+                      : {}
+                  }
+                >
+                  <FaHome /> Add Test
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/tests"
+                  style={({ isActive }) =>
+                    isActive
+                      ? { backgroundColor: "#2d3663", color: "white" }
+                      : {}
+                  }
+                >
+                  <FaHome /> All Tests
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/reservations"
+                  style={({ isActive }) =>
+                    isActive
+                      ? { backgroundColor: "#2d3663", color: "white" }
+                      : {}
+                  }
+                >
+                  <FaHome /> Reservations
                 </NavLink>
               </li>
             </>
@@ -60,7 +111,7 @@ const Dashboard = () => {
                       : {}
                   }
                 >
-                  <FaHome></FaHome> User Home
+                  <FaHome /> User Home
                 </NavLink>
               </li>
               <li>
@@ -72,7 +123,7 @@ const Dashboard = () => {
                       : {}
                   }
                 >
-                  <FaHome></FaHome> Appointments
+                  <FaHome /> Appointments
                 </NavLink>
               </li>
               <li>
@@ -84,7 +135,7 @@ const Dashboard = () => {
                       : {}
                   }
                 >
-                  <FaHome></FaHome> Testresults
+                  <FaHome /> Test Results
                 </NavLink>
               </li>
             </>
@@ -92,7 +143,7 @@ const Dashboard = () => {
         </ul>
       </div>
       <div className="w-3/4 flex-1 p-10">
-        <Outlet></Outlet>
+        <Outlet />
       </div>
     </div>
   );

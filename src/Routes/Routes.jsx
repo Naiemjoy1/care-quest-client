@@ -14,6 +14,10 @@ import UserHome from "../Pages/UserDashBoard/UserHome";
 import Appointments from "../Pages/UserDashBoard/Appointments";
 import TestResults from "../Pages/UserDashBoard/TestResults";
 import AllUsers from "../Pages/Dashboard/Admin/AllUsers/AllUsers";
+import AddTest from "../Pages/Dashboard/Admin/AddTest/AddTest";
+import Tests from "../Pages/Dashboard/Admin/Tests/Tests";
+import Reservations from "../Pages/Dashboard/Admin/Reservations/Reservations";
+import AllBanner from "../Pages/Dashboard/Admin/AllBanner/AllBanner";
 
 export const router = createBrowserRouter([
   {
@@ -73,6 +77,23 @@ export const router = createBrowserRouter([
           {
             path: "users",
             element: <AllUsers></AllUsers>,
+          },
+          {
+            path: "allbanner",
+            element: <AllBanner></AllBanner>,
+          },
+
+          {
+            path: "addtest",
+            element: <AddTest></AddTest>,
+          },
+          {
+            path: "tests",
+            element: <Tests></Tests>,
+          },
+          {
+            path: "reservations",
+            element: <Reservations></Reservations>,
           },
         ],
       },
