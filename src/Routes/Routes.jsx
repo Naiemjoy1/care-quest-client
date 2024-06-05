@@ -13,6 +13,7 @@ import TestDetails from "../Pages/AllTests/TestDetails";
 import UserHome from "../Pages/UserDashBoard/UserHome";
 import Appointments from "../Pages/UserDashBoard/Appointments";
 import TestResults from "../Pages/UserDashBoard/TestResults";
+import AllUsers from "../Pages/Dashboard/Admin/AllUsers/AllUsers";
 
 export const router = createBrowserRouter([
   {
@@ -68,6 +69,10 @@ export const router = createBrowserRouter([
           {
             path: "admin",
             element: <AdminHome></AdminHome>,
+          },
+          {
+            path: "users",
+            element: <AllUsers></AllUsers>,
           },
         ],
       },

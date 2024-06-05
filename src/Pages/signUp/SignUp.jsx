@@ -4,6 +4,8 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../Components/Provider/AuthProvider";
 import signup from "../../assets/signup.png";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../Components/Hooks/useAxiosPublic";
+import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 
 const districts = {
   Dhaka: ["Dhanmondi", "Gulshan", "Mirpur"],
@@ -15,6 +17,7 @@ const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 const SignUp = () => {
   const { createuser, updateUserProfile } = useContext(AuthContext);
   const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
 
   const image_hosting_key = import.meta.env.VITE_IMGBB_API;
   const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -35,6 +38,9 @@ const SignUp = () => {
     const name = data.name;
     const email = data.email;
     const password = data.password;
+    const bloodGroup = data.bloodGroup;
+    const district = data.district;
+    const upazila = data.upazila;
 
     console.log("Form data:", data);
 
@@ -60,16 +66,29 @@ const SignUp = () => {
       // Save username and photo
       await updateUserProfile(name, displayUrl);
       console.log("Updated user profile with name and image URL");
-
-      reset();
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "User Created Successfully",
-        showConfirmButton: false,
-        timer: 1500,
+      //create user database
+      const userInfo = {
+        name,
+        email,
+        image: displayUrl,
+        bloodGroup,
+        district,
+        upazila,
+      };
+      axiosPublic.post("/users", userInfo).then((res) => {
+        if (res.data.insertedId) {
+          console.log("added to the database");
+          reset();
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "User Created Successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate("/");
+        }
       });
-      navigate("/");
     } catch (error) {
       console.error("Error in onSubmit:", error);
     } finally {
@@ -276,6 +295,7 @@ const SignUp = () => {
             </Link>
           </p>
         </form>
+        <SocialLogin></SocialLogin>
       </div>
       <div>
         <img src={signup} alt="" />

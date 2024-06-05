@@ -18,24 +18,30 @@ const Appointments = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure.delete(`/bookings/${_id}`).then((res) => {
-          if (res.data.deledCount > 0) {
-            refetch();
+          if (res.data.deletedCount > 0) {
+            // Correcting the typo
             Swal.fire({
               title: "Deleted!",
               text: "Your file has been deleted.",
               icon: "success",
             });
+            refetch();
           }
         });
       }
     });
   };
 
+  // Sort bookings by nearest date
+  const sortedBooking = booking.slice().sort((a, b) => {
+    return new Date(a.date) - new Date(b.date);
+  });
+
   return (
     <div>
-      <div className="flex justify-evenly ">
+      <div className="flex justify-evenly">
         <p>Booking Appointments:</p>
-        <p>{booking.length}</p>
+        <p>{sortedBooking.length}</p>
       </div>
       <div>
         <div className="overflow-x-auto">
@@ -51,8 +57,7 @@ const Appointments = () => {
               </tr>
             </thead>
             <tbody>
-              {/* row 1 */}
-              {booking.map((item, index) => (
+              {sortedBooking.map((item, index) => (
                 <tr key={item._id}>
                   <th>
                     <p>{index + 1}</p>

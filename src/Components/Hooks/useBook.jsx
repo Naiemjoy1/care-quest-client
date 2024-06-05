@@ -5,14 +5,14 @@ import useAuth from "./useAuth";
 const useBook = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
-  const { data: booking = [] } = useQuery({
+  const { data: booking = [], refetch } = useQuery({
     queryKey: ["booking", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/bookings?email=${user.email}`);
       return res.data;
     },
   });
-  return [booking];
+  return [booking, refetch];
 };
 
 export default useBook;

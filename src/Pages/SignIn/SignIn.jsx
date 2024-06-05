@@ -8,6 +8,7 @@ import {
   loadCaptchaEnginge,
   validateCaptcha,
 } from "react-simple-captcha";
+import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 
 const SignIn = () => {
   const { signIn } = useContext(AuthContext);
@@ -62,7 +63,7 @@ const SignIn = () => {
   };
 
   return (
-    <div className="flex gap-4 justify-center items-center container mx-auto">
+    <div className="flex gap-4 justify-center items-center container mx-auto my-10">
       <div className="w-1/2">
         <form onSubmit={handleLogin} className="card-body">
           <div className="form-control">
@@ -119,6 +120,7 @@ const SignIn = () => {
             </Link>
           </p>
         </form>
+        <SocialLogin></SocialLogin>
       </div>
       <div>
         <img src={signin} alt="" />
