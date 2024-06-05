@@ -1,4 +1,4 @@
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import useTests from "../../Components/Hooks/useTests";
 import usePromotions from "../../Components/Hooks/usePromotions";
@@ -11,8 +11,6 @@ import TextField from "@mui/material/TextField";
 import { FaCheckCircle } from "react-icons/fa";
 import useAuth from "../../Components/Hooks/useAuth";
 import Swal from "sweetalert2";
-import useAxiosSecure from "../../Components/Hooks/useAxiosSecure";
-import useBook from "../../Components/Hooks/useBook";
 
 const style = {
   position: "absolute",
@@ -40,10 +38,6 @@ const TestDetails = () => {
   const [finalPrice, setFinalPrice] = useState(null);
   const [promoCodeError, setPromoCodeError] = useState(false);
   const { user } = useAuth();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const axiosSecure = useAxiosSecure();
-  const [booking, refetch] = useBook();
 
   useEffect(() => {
     console.log("Promotions:", promotions);
@@ -60,63 +54,54 @@ const TestDetails = () => {
     setSelectedSlot(event.target.value);
   };
 
-  const handleOpen = () => {
+  const handleBooking = () => {
+    if (capacity > 0 && selectedSlot) {
+      setCapacity(capacity - 1);
+      setSlots(slots.filter((slot) => slot !== selectedSlot));
+      setBookingStatus("Report Pending");
+      setSelectedSlot(slots.filter((slot) => slot !== selectedSlot)[0] || "");
+    }
+  };
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const handleConfirmBooking = () => {
+    const foundTest = tests.find((test) => test._id === _id);
+    console.log("Found Test Data:", foundTest, user.email);
     if (user && user.email) {
-      setOpen(true);
+      if (promoCode && finalPrice) {
+        console.log("Test Name:", test.name);
+        console.log("Test Date:", test.date);
+        console.log("Final Price:", test);
+      } else {
+        console.log("Test Name:", test.name);
+        console.log("Test Date:", test.date);
+        console.log("Original Price:", test.price);
+      }
+      // Update slots after confirming booking
+      setSlots(slots.filter((slot) => slot !== selectedSlot));
+      // Perform booking confirmation logic here
+      setBookingStatus("Report Pending");
     } else {
       Swal.fire({
-        title: "You are not logged in",
-        text: "Please log in to book a slot",
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, Login",
+        confirmButtonText: "Yes, delete it!",
       }).then((result) => {
         if (result.isConfirmed) {
-          navigate("/signin", { state: { from: location } });
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success",
+          });
         }
       });
     }
-  };
-
-  const handleClose = () => setOpen(false);
-
-  const handleConfirmBooking = () => {
-    console.log("Confirm button clicked");
-    const foundTest = tests.find((test) => test._id === _id);
-    console.log("Found Test Data:", foundTest, "User:", user?.email);
-    const finalBookingPrice = finalPrice !== null ? finalPrice : test.price;
-    const bookTest = {
-      bookId: test._id,
-      email: user.email,
-      name: user.displayName,
-      test_name: test.name,
-      image: test.image,
-      date: test.date,
-      selectedSlot,
-      originalPrice: test.price,
-      finalPrice: finalBookingPrice,
-    };
-    handleClose();
-    axiosSecure.post("/bookings", bookTest).then((res) => {
-      console.log(res.data);
-      if (res.data.insertedId) {
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: `${test.name} is booked`,
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        handleClose();
-        refetch();
-      }
-    });
-    // Update slots after confirming booking
-    setSlots(slots.filter((slot) => slot !== selectedSlot));
-    // Perform booking confirmation logic here
-    setBookingStatus("Report Pending");
   };
 
   if (!test) {
@@ -151,12 +136,11 @@ const TestDetails = () => {
       </figure>
       <div className="flex justify-between gap-10 container mx-auto my-14">
         <div className="w-1/2">
-          <p>{booking.length}</p>
           <h2 className="card-title">{test.name}</h2>
           <p>{test.description}</p>
           <p>Date: {test.date}</p>
           <p>Price: ${test.price}</p>
-          {/* <p>Capacity: {capacity}</p> */}
+          <p>Capacity: {capacity}</p>
           <p>Slots: {slots.join(", ")}</p>
         </div>
         <div className="w-1/2">
@@ -224,7 +208,7 @@ const TestDetails = () => {
                       <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                         Original Price: ${test.price}
                       </Typography>
-                      {promoCode && finalPrice !== null && (
+                      {promoCode && finalPrice && (
                         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                           Final Price after Discount: ${finalPrice}
                         </Typography>

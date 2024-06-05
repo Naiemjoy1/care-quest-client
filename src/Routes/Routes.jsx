@@ -10,6 +10,9 @@ import Error from "../Shared/Error/Error";
 import AddBanner from "../Pages/Dashboard/Admin/AddBanner/AddBanner";
 import AdminHome from "../Pages/Dashboard/Admin/AdminHome/AdminHome";
 import TestDetails from "../Pages/AllTests/TestDetails";
+import UserHome from "../Pages/UserDashBoard/UserHome";
+import Appointments from "../Pages/UserDashBoard/Appointments";
+import TestResults from "../Pages/UserDashBoard/TestResults";
 
 export const router = createBrowserRouter([
   {
@@ -46,6 +49,18 @@ export const router = createBrowserRouter([
           </PrivateRoutes>
         ),
         children: [
+          {
+            path: "userhome",
+            element: <UserHome></UserHome>,
+          },
+          {
+            path: "appointments",
+            element: <Appointments></Appointments>,
+          },
+          {
+            path: "testresults",
+            element: <TestResults></TestResults>,
+          },
           {
             path: "addbanner",
             element: <AddBanner></AddBanner>,

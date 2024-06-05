@@ -1,6 +1,5 @@
 [
   {
-    "_id": 1,
     "name": "Complete Blood Count (CBC)",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A comprehensive blood test that evaluates overall health and detects a w_ide range of disorders.",
@@ -11,7 +10,6 @@
     "category": "Hematology"
   },
   {
-    "_id": 2,
     "name": "Lip_id Profile",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A panel of blood tests that serves as an initial broad medical screening tool for abnormalities in lip_ids.",
@@ -22,7 +20,6 @@
     "category": "Cardiology"
   },
   {
-    "_id": 3,
     "name": "Blood Glucose Test",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A test to measure the AMount of glucose in your blood, used to diagnose diabetes.",
@@ -33,7 +30,6 @@
     "category": "Endocrinology"
   },
   {
-    "_id": 4,
     "name": "Thyro_id Function Test (TFT)",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A blood test used to measure how well your thyro_id gland is working.",
@@ -44,7 +40,6 @@
     "category": "Endocrinology"
   },
   {
-    "_id": 5,
     "name": "Urine Routine Analysis",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A test that evaluates various components of urine to help diagnose conditions like k_idney disease or diabetes.",
@@ -55,7 +50,6 @@
     "category": "Urology"
   },
   {
-    "_id": 5,
     "name": "Liver Function Test (LFT)",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A series of blood tests used to assess the liver's health and diagnose liver diseases.",
@@ -66,7 +60,6 @@
     "category": "Hepatology"
   },
   {
-    "_id": 7,
     "name": "K_idney Function Test (KFT)",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A test to evaluate how well your k_idneys are functioning.",
@@ -77,7 +70,6 @@
     "category": "Nephrology"
   },
   {
-    "_id": 8,
     "name": "ElectrocardiogrAM (ECG)",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A test that records the electrical activity of the heart.",
@@ -88,7 +80,6 @@
     "category": "Cardiology"
   },
   {
-    "_id": 9,
     "name": "Chest X-Ray",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A quick and painless imaging test that looks at the structures and organs in your chest.",
@@ -99,7 +90,6 @@
     "category": "Radiology"
   },
   {
-    "_id": 10,
     "name": "Ultrasound",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A diagnostic imaging technique that uses ultrasound to visualize internal organs.",
@@ -110,7 +100,6 @@
     "category": "Radiology"
   },
   {
-    "_id": 11,
     "name": "MAMmogrAM",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "An X-ray picture of the breast used to screen for breast cancer.",
@@ -121,7 +110,6 @@
     "category": "Oncology"
   },
   {
-    "_id": 12,
     "name": "Pap Smear",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A procedure to test for cervical cancer in women.",
@@ -132,7 +120,6 @@
     "category": "Gynecology"
   },
   {
-    "_id": 13,
     "name": "PSA Test",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A blood test used primarily to screen for prostate cancer.",
@@ -143,7 +130,6 @@
     "category": "Urology"
   },
   {
-    "_id": 14,
     "name": "HBA1C Test",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A blood test that measures your average blood sugar levels over the past 3 months.",
@@ -154,7 +140,6 @@
     "category": "Endocrinology"
   },
   {
-    "_id": 15,
     "name": "VitAMin D Test",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A blood test that measures the level of vitAMin D in your blood.",
@@ -165,7 +150,6 @@
     "category": "Nutrition"
   },
   {
-    "_id": 16,
     "name": "Allergy Test",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A test to determine if your body has an allergic reaction to a known substance.",
@@ -176,7 +160,6 @@
     "category": "Immunology"
   },
   {
-    "_id": 17,
     "name": "COV_id-19 PCR Test",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A molecular test that detects genetic material of the virus causing COV_id-19.",
@@ -187,7 +170,6 @@
     "category": "Virology"
   },
   {
-    "_id": 18,
     "name": "Stool Routine ExAMination",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A test to analyze a sAMple of your stool for various conditions affecting the digestive tract.",
@@ -198,7 +180,6 @@
     "category": "Gastroenterology"
   },
   {
-    "_id": 19,
     "name": "Electrolyte Panel",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A blood test to measure the levels of electrolytes and carbon diox_ide in your blood.",
@@ -209,7 +190,6 @@
     "category": "General Health"
   },
   {
-    "_id": 20,
     "name": "MRI Scan",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A medical imaging technique used to visualize internal structures of the body in detail.",
@@ -220,7 +200,6 @@
     "category": "Radiology"
   },
   {
-    "_id": 21,
     "name": "CT Scan",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A medical imaging procedure that uses computer-processed combinations of many X-ray measurements to produce cross-sectional images of specific areas of the body.",
@@ -231,7 +210,6 @@
     "category": "Radiology"
   },
   {
-    "_id": 22,
     "name": "Bone Density Test",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A test that measures the density of minerals (such as calcium) in your bones.",
@@ -242,7 +220,6 @@
     "category": "Orthopedics"
   },
   {
-    "_id": 23,
     "name": "Pulmonary Function Test (PFT)",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A test to measure how well your lungs work.",
@@ -253,7 +230,6 @@
     "category": "Pulmonology"
   },
   {
-    "_id": 24,
     "name": "HIV Test",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A test that detects the presence of the human immunodeficiency virus (HIV) in your body.",
@@ -264,7 +240,6 @@
     "category": "Infectious Diseases"
   },
   {
-    "_id": 25,
     "name": "VitAMin B12 Test",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A blood test to measure the AMount of vitAMin B12 in your blood.",
@@ -275,7 +250,6 @@
     "category": "Nutrition"
   },
   {
-    "_id": 26,
     "name": "Calcium Test",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A blood test to measure the AMount of calcium in your blood.",
@@ -286,7 +260,6 @@
     "category": "Nutrition"
   },
   {
-    "_id": 27,
     "name": "Serum Creatinine Test",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A blood test that measures the level of creatinine in your blood to assess k_idney function.",
@@ -297,7 +270,6 @@
     "category": "Nephrology"
   },
   {
-    "_id": 28,
     "name": "Alkaline Phosphatase Test",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A blood test used to detect liver disease or bone disorders.",
@@ -308,7 +280,6 @@
     "category": "Hepatology"
   },
   {
-    "_id": 29,
     "name": "Bilirubin Test",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A test that measures the AMount of bilirubin in your blood to evaluate liver function.",
@@ -319,7 +290,6 @@
     "category": "Hepatology"
   },
   {
-    "_id": 30,
     "name": "Fasting Blood Sugar Test",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A test to measure blood sugar levels after an overnight fast.",
@@ -330,7 +300,6 @@
     "category": "Endocrinology"
   },
   {
-    "_id": 31,
     "name": "Postprandial Blood Sugar Test",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A test to measure blood sugar levels after a meal.",
@@ -341,7 +310,6 @@
     "category": "Endocrinology"
   },
   {
-    "_id": 32,
     "name": "C-Reactive Protein (CRP) Test",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A blood test used to detect inflAMmation in the body.",
@@ -352,7 +320,6 @@
     "category": "Immunology"
   },
   {
-    "_id": 33,
     "name": "Erythrocyte Sedimentation Rate (ESR) Test",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A blood test that can reveal inflAMmatory activity in your body.",
@@ -363,7 +330,6 @@
     "category": "Immunology"
   },
   {
-    "_id": 34,
     "name": "D-Dimer Test",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A blood test that can be used to help rule out the presence of a serious blood clot.",
@@ -374,7 +340,6 @@
     "category": "Hematology"
   },
   {
-    "_id": 35,
     "name": "Complete Blood Count (CBC)",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A comprehensive blood test that evaluates overall health and detects a w_ide range of disorders.",
@@ -385,7 +350,6 @@
     "category": "Popular"
   },
   {
-    "_id": 36,
     "name": "Lip_id Profile",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A panel of blood tests that serves as an initial broad medical screening tool for abnormalities in lip_ids.",
@@ -396,7 +360,6 @@
     "category": "Popular"
   },
   {
-    "_id": 37,
     "name": "Blood Glucose Test",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A test to measure the AMount of glucose in your blood, used to diagnose diabetes.",
@@ -407,7 +370,6 @@
     "category": "Popular"
   },
   {
-    "_id": 38,
     "name": "Thyro_id Function Test (TFT)",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A blood test used to measure how well your thyro_id gland is working.",
@@ -418,7 +380,6 @@
     "category": "Popular"
   },
   {
-    "_id": 39,
     "name": "Urine Routine Analysis",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A test that evaluates various components of urine to help diagnose conditions like k_idney disease or diabetes.",
@@ -429,7 +390,6 @@
     "category": "Popular"
   },
   {
-    "_id": 40,
     "name": "Liver Function Test (LFT)",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A series of blood tests used to assess the liver's health and diagnose liver diseases.",
@@ -440,7 +400,6 @@
     "category": "Popular"
   },
   {
-    "_id": 41,
     "name": "K_idney Function Test (KFT)",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A test to evaluate how well your k_idneys are functioning.",
@@ -451,7 +410,6 @@
     "category": "Popular"
   },
   {
-    "_id": 42,
     "name": "ElectrocardiogrAM (ECG)",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A test that records the electrical activity of the heart.",
@@ -462,7 +420,6 @@
     "category": "Popular"
   },
   {
-    "_id": 43,
     "name": "Chest X-Ray",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A quick and painless imaging test that looks at the structures and organs in your chest.",
@@ -473,7 +430,6 @@
     "category": "Popular"
   },
   {
-    "_id": 44,
     "name": "Ultrasound",
     "image": "https://i.ibb.co/h2D0ykF/pexels-mart-production-7089010.jpg",
     "description": "A diagnostic imaging technique that uses ultrasound to visualize internal organs.",

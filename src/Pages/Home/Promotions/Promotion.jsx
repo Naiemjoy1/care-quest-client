@@ -1,6 +1,4 @@
 import { IoIosGift } from "react-icons/io";
-import { Rating } from "@smastrom/react-rating";
-import "@smastrom/react-rating/style.css";
 
 const Promotion = ({ promotion }) => {
   const { title, description, expiry, couponCode, discountRate } = promotion;

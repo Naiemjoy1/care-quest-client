@@ -8,6 +8,36 @@ const Dashboard = () => {
         <ul className="menu text-white text-lg gap-4">
           <li>
             <NavLink
+              to="/dashboard/userhome"
+              style={({ isActive }) =>
+                isActive ? { backgroundColor: "#2d3663", color: "white" } : {}
+              }
+            >
+              <FaHome></FaHome> User Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/dashboard/appointments"
+              style={({ isActive }) =>
+                isActive ? { backgroundColor: "#2d3663", color: "white" } : {}
+              }
+            >
+              <FaHome></FaHome> Appointments
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/dashboard/testresults"
+              style={({ isActive }) =>
+                isActive ? { backgroundColor: "#2d3663", color: "white" } : {}
+              }
+            >
+              <FaHome></FaHome> Testresults
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
               to="/dashboard/admin"
               style={({ isActive }) =>
                 isActive ? { backgroundColor: "#2d3663", color: "white" } : {}

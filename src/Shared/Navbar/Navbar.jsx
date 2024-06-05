@@ -1,10 +1,13 @@
 import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../Components/Provider/AuthProvider";
+import useBook from "../../Components/Hooks/useBook";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [theme, setTheme] = useState("light");
+  const [booking] = useBook();
+  console.log("booking data", booking);
 
   const navLink = (
     <>
@@ -91,6 +94,10 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{navLink}</ul>
         </div>
         <div className="navbar-end">
+          <button className="btn btn-sm">
+            Booked
+            <div className="badge  badge-primary">+{booking.length}</div>
+          </button>
           {user ? (
             <div className="dropdown dropdown-hover dropdown-end">
               <label

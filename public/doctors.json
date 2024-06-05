@@ -1,6 +1,5 @@
 [
   {
-    "_id": 1,
     "name": "Dr. John Smith",
     "specialization": "Cardiologist",
     "image": "https://i.ibb.co/nRsmQtR/pexels-pixabay-415829.jpg",
@@ -38,7 +37,6 @@
     }
   },
   {
-    "_id": 2,
     "name": "Dr. Emily Johnson",
     "specialization": "Dermatologist",
     "image": "https://i.ibb.co/nRsmQtR/pexels-pixabay-415829.jpg",
@@ -76,7 +74,6 @@
     }
   },
   {
-    "_id": 3,
     "name": "Dr. Sarah Lee",
     "specialization": "Endocrinologist",
     "image": "https://i.ibb.co/nRsmQtR/pexels-pixabay-415829.jpg",
@@ -114,7 +111,6 @@
     }
   },
   {
-    "_id": 4,
     "name": "Dr. Michael Brown",
     "specialization": "Urologist",
     "image": "https://i.ibb.co/nRsmQtR/pexels-pixabay-415829.jpg",
@@ -152,7 +148,6 @@
     }
   },
   {
-    "_id": 5,
     "name": "Dr. Laura Wilson",
     "specialization": "Neurologist",
     "image": "https://i.ibb.co/nRsmQtR/pexels-pixabay-415829.jpg",
@@ -190,7 +185,6 @@
     }
   },
   {
-    "_id": 6,
     "name": "Dr. David Martinez",
     "specialization": "Orthopedic",
     "image": "https://i.ibb.co/nRsmQtR/pexels-pixabay-415829.jpg",
@@ -228,7 +222,6 @@
     }
   },
   {
-    "_id": 7,
     "name": "Dr. John Smith",
     "specialization": "Cardiologist",
     "image": "https://i.ibb.co/nRsmQtR/pexels-pixabay-415829.jpg",
