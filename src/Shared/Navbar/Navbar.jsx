@@ -2,37 +2,27 @@ import { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../Components/Provider/AuthProvider";
 import useBook from "../../Components/Hooks/useBook";
-import useAdmin from "../../Components/Hooks/useAdmin";
+import useAxiosSecure from "../../Components/Hooks/useAxiosSecure";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [theme, setTheme] = useState("light");
   const [booking] = useBook();
   console.log("booking data", booking);
-  const [isAdmin] = useAdmin();
   const [userStatus, setUserStatus] = useState(null); // State to hold user status
-
-  // Function to fetch user status
-  const fetchUserStatus = async () => {
-    try {
-      const response = await fetch(`/users/status/${user.email}`);
-      if (response.ok) {
-        const data = await response.json();
-        setUserStatus(data.status);
-      } else {
-        setUserStatus("Unknown");
-      }
-    } catch (error) {
-      console.error("Error fetching user status:", error);
-      setUserStatus("Unknown");
-    }
-  };
+  const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
-    if (user) {
-      fetchUserStatus();
-    }
-  }, [user]);
+    const fetchUserStatus = async () => {
+      if (user) {
+        const response = await axiosSecure.get(`/users/status/${user.email}`);
+        console.log("User status response:", response.data); // Log response data
+        setUserStatus(response.data.status);
+      }
+    };
+
+    fetchUserStatus();
+  }, [user, axiosSecure]);
 
   const navLink = (
     <>
@@ -56,22 +46,10 @@ const Navbar = () => {
           All Tests
         </NavLink>
       </li>
-      {user && isAdmin && (
+      {user && userStatus === "active" && (
         <li>
           <NavLink
-            to="/dashboard/admin"
-            style={({ isActive }) =>
-              isActive ? { backgroundColor: "#47ccc8", color: "white" } : {}
-            }
-          >
-            Dashboard
-          </NavLink>
-        </li>
-      )}
-      {user && !isAdmin && (
-        <li>
-          <NavLink
-            to="/dashboard/userhome"
+            to="/dashboard"
             style={({ isActive }) =>
               isActive ? { backgroundColor: "#47ccc8", color: "white" } : {}
             }
@@ -132,7 +110,15 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{navLink}</ul>
         </div>
-        <div className="navbar-end">
+        <div className="navbar-end gap-4">
+          {user ? (
+            userStatus === "active" ? (
+              <button className="badge badge-success">Active</button>
+            ) : userStatus === "blocked" ? (
+              <button className="badge badge-warning">Blocked</button>
+            ) : null
+          ) : null}
+
           <button className="btn btn-sm">
             Booked
             <div className="badge  badge-primary">+{booking.length}</div>
@@ -153,6 +139,7 @@ const Navbar = () => {
                   />
                 </div>
               </label>
+
               <ul className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-primary text-white rounded-box w-52 hover-dropdown-content">
                 <li>
                   <button className="btn btn-sm btn-ghost">
@@ -215,9 +202,6 @@ const Navbar = () => {
               <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
             </svg>
           </label>
-        </div>
-        <div className="text-sm text-gray-400 ml-4">
-          Status: {userStatus || "Loading..."}
         </div>
       </div>
     </div>
