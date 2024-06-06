@@ -5,6 +5,7 @@ import SignIn from "../Pages/SignIn/SignIn";
 import SignUp from "../Pages/signUp/SignUp";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import PrivateRoutes from "../Components/Private/PrivateRoute";
+import AdminRoute from "../Routes/AdminRoute";
 import AllTests from "../Pages/AllTests/AllTests";
 import Error from "../Shared/Error/Error";
 import AddBanner from "../Pages/Dashboard/Admin/AddBanner/AddBanner";
@@ -14,7 +15,7 @@ import UserHome from "../Pages/UserDashBoard/UserHome";
 import Appointments from "../Pages/UserDashBoard/Appointments";
 import TestResults from "../Pages/UserDashBoard/TestResults";
 import AllUsers from "../Pages/Dashboard/Admin/AllUsers/AllUsers";
-import AddTest from "../Pages/Dashboard/Admin/AddTest/AddTest";
+import AddTest from "../Pages/Dashboard/Admin/AddTest/AddTest"; // Make sure to import AddTest
 import Tests from "../Pages/Dashboard/Admin/Tests/Tests";
 import Reservations from "../Pages/Dashboard/Admin/Reservations/Reservations";
 import AllBanner from "../Pages/Dashboard/Admin/AllBanner/AllBanner";
@@ -82,7 +83,6 @@ export const router = createBrowserRouter([
             path: "allbanner",
             element: <AllBanner></AllBanner>,
           },
-
           {
             path: "addtest",
             element: <AddTest></AddTest>,
