@@ -29,6 +29,7 @@ const style = {
 const TestDetails = () => {
   const { _id } = useParams();
   const [tests] = useTests();
+  console.log("details data", tests);
   const [test, setTest] = useState(null);
   const [capacity, setCapacity] = useState(0);
   const [slots, setSlots] = useState([]);
@@ -50,6 +51,7 @@ const TestDetails = () => {
     const foundTest = tests.find((test) => test._id === _id);
     if (foundTest) {
       setTest(foundTest);
+      console.log("details data by id", foundTest);
       setCapacity(foundTest.capacity);
       setSlots(foundTest.slots);
       setSelectedSlot(foundTest.slots[0]);

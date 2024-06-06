@@ -3,9 +3,16 @@ import useAxiosSecure from "../../../../Components/Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
+import useBook from "../../../../Components/Hooks/useBook";
+import useAllBookings from "../../../../Components/Hooks/useAllBookings";
 
 const Tests = () => {
   const axiosSecure = useAxiosSecure();
+  const [bookings] = useBook();
+  console.log("booking data from test name", bookings);
+
+  const [allBookings] = useAllBookings();
+  console.log("all books", allBookings);
 
   const { data: tests = [], refetch } = useQuery({
     queryKey: ["tests"],
@@ -73,7 +80,17 @@ const Tests = () => {
                         </div>
                       </div>
                       <div>
-                        <div className="font-bold">{test.name}</div>
+                        <h2>{test.name}</h2>
+                        <div className="flex gap-2">
+                          <p>Reservision: </p>
+                          <ul>
+                            {bookings
+                              .filter((booking) => booking.bookId === test._id)
+                              .map((booking) => (
+                                <li key={booking._id}>{booking.email}</li>
+                              ))}
+                          </ul>
+                        </div>
                       </div>
                     </div>
                   </td>

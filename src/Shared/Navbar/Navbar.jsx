@@ -24,6 +24,8 @@ const Navbar = () => {
     fetchUserStatus();
   }, [user, axiosSecure]);
 
+  const userBookings = booking.filter((book) => book.email === user?.email);
+
   const navLink = (
     <>
       <li>
@@ -119,7 +121,7 @@ const Navbar = () => {
 
           <button className="btn btn-sm">
             Booked
-            <div className="badge  badge-primary">+{booking.length}</div>
+            <div className="badge  badge-primary">+{userBookings.length}</div>
           </button>
           {user ? (
             <div className="dropdown dropdown-hover dropdown-end">
