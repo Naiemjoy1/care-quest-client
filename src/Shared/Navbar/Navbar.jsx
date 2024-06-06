@@ -47,16 +47,14 @@ const Navbar = () => {
         </NavLink>
       </li>
       {user && userStatus === "active" && (
-        <li>
-          <NavLink
-            to="/dashboard"
-            style={({ isActive }) =>
-              isActive ? { backgroundColor: "#47ccc8", color: "white" } : {}
-            }
-          >
-            Dashboard
-          </NavLink>
-        </li>
+        <NavLink
+          to={user.role === "admin" ? "/dashboard/user" : "/dashboard/admin"}
+          style={({ isActive }) =>
+            isActive ? { backgroundColor: "#47ccc8", color: "white" } : {}
+          }
+        >
+          Dashboard
+        </NavLink>
       )}
     </>
   );

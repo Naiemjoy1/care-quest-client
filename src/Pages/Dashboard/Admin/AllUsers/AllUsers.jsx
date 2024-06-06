@@ -4,10 +4,7 @@ import Swal from "sweetalert2";
 import { useState } from "react";
 
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import TextField from "@mui/material/TextField";
 import jsPDF from "jspdf";
 
 const style = {
