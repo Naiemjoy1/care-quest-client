@@ -176,12 +176,18 @@ const Reservations = () => {
                                 </button>
                               </td>
                               <td>
-                                <button
-                                  onClick={() => handleOpenModal(booking)}
-                                  className="btn btn-xs btn-primary text-white"
-                                >
-                                  submit
-                                </button>
+                                {booking.status === "Pending" ? (
+                                  <button
+                                    onClick={() => handleOpenModal(booking)}
+                                    className="btn btn-xs btn-primary text-white"
+                                  >
+                                    submit
+                                  </button>
+                                ) : (
+                                  <button className="btn btn-warning text-white btn-xs">
+                                    Done
+                                  </button>
+                                )}
                               </td>
                               <td>
                                 <td>
