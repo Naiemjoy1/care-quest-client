@@ -8,17 +8,15 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
+import jsPDF from "jspdf";
 
 const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  // width: 400,
   bgcolor: "background.paper",
-  // border: "2px solid #000",
   boxShadow: 24,
-  // p: 4,
   borderRadius: 12,
 };
 
@@ -75,7 +73,6 @@ const AllUsers = () => {
 
   const handleChangeStatus = (user, status) => {
     if (user.role === "admin") {
-      // If user is admin, don't change status
       return;
     }
 
@@ -93,16 +90,27 @@ const AllUsers = () => {
     });
   };
 
-  const [openModal, setOpenModal] = useState(false); // State to control modal visibility
+  const [openModal, setOpenModal] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
 
-  // Function to handle opening the modal
-  const handleOpenModal = () => {
+  const handleOpenModal = (user) => {
+    setCurrentUser(user);
     setOpenModal(true);
   };
 
-  // Function to handle closing the modal
   const handleCloseModal = () => {
     setOpenModal(false);
+    setCurrentUser(null);
+  };
+
+  const generatePDF = (user) => {
+    const doc = new jsPDF();
+    doc.text(`Name: ${user.name}`, 10, 10);
+    doc.text(`Email: ${user.email}`, 10, 20);
+    doc.text(`Address: ${user.upazila}, ${user.district}`, 10, 30);
+    doc.text(`Blood Group: ${user.bloodGroup}`, 10, 40);
+    // Add more details as needed
+    doc.save(`${user.name}_details.pdf`);
   };
 
   return (
@@ -147,7 +155,7 @@ const AllUsers = () => {
                     </div>
                   </td>
                   <td>
-                    {user.upazila},{user.district}
+                    {user.upazila}, {user.district}
                     <br />
                   </td>
                   <td>
@@ -166,14 +174,14 @@ const AllUsers = () => {
                     {user.status === "active" ? (
                       <button
                         onClick={() => handleChangeStatus(user, "blocked")}
-                        className="btn btn-warning text-white  btn-xs"
+                        className="btn btn-warning text-white btn-xs"
                       >
                         Block
                       </button>
                     ) : (
                       <button
                         onClick={() => handleChangeStatus(user, "active")}
-                        className="btn btn-success text-white  btn-xs"
+                        className="btn btn-success text-white btn-xs"
                       >
                         Activate
                       </button>
@@ -188,41 +196,20 @@ const AllUsers = () => {
                     </button>
                   </th>
                   <th>
-                    <button className="btn btn-xs">View Details</button>
-                  </th>
-                  <th>
-                    <button onClick={handleOpenModal} className="btn btn-xs">
+                    <button
+                      onClick={() => handleOpenModal(user)}
+                      className="btn btn-xs btn-primary text-white"
+                    >
                       see info
                     </button>
-                    <Modal open={openModal} onClose={handleCloseModal}>
-                      <Box sx={style}>
-                        <div className="flex flex-col justify-center max-w-xs p-6 shadow-md rounded-xl sm:px-12 bg-gray-900 text-gray-100">
-                          <img
-                            src={user.image}
-                            alt=""
-                            className="w-32 h-32 mx-auto rounded-full bg-gray-500 aspect-square"
-                          />
-                          <div className="space-y-4 text-center divide-y divide-gray-700">
-                            <div className="my-2 space-y-1">
-                              <h2 className="text-xl font-semibold sm:text-2xl">
-                                {user.name}
-                              </h2>
-                              <p className="px-5 text-xs sm:text-base text-gray-400">
-                                {user.email}
-                              </p>
-                            </div>
-                            <div className=" justify-center pt-2 space-x-4 align-center">
-                              <p className="px-5 text-xs sm:text-base text-gray-400">
-                                Blood Group: {user.bloodGroup}
-                              </p>
-                              <p className="px-5 text-xs sm:text-base text-gray-400">
-                                Address: {user.upazila},{user.district}
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      </Box>
-                    </Modal>
+                  </th>
+                  <th>
+                    <button
+                      onClick={() => generatePDF(user)}
+                      className="btn btn-accent text-white btn-xs"
+                    >
+                      Download Details
+                    </button>
                   </th>
                 </tr>
               ))}
@@ -230,6 +217,43 @@ const AllUsers = () => {
           </table>
         </div>
       </div>
+      {currentUser && (
+        <Modal open={openModal} onClose={handleCloseModal}>
+          <Box sx={style}>
+            <div className="flex flex-col justify-center max-w-xs p-6 shadow-md rounded-xl sm:px-12 bg-gray-900 text-gray-100">
+              <img
+                src={currentUser.image}
+                alt=""
+                className="w-32 h-32 mx-auto rounded-full bg-gray-500 aspect-square"
+              />
+              <div className="space-y-4 text-center divide-y divide-gray-700">
+                <div className="my-2 space-y-1">
+                  <h2 className="text-xl font-semibold sm:text-2xl">
+                    {currentUser.name}
+                  </h2>
+                  <p className="px-5 text-xs sm:text-base text-gray-400">
+                    {currentUser.email}
+                  </p>
+                </div>
+                <div className="justify-center pt-2 space-x-4 align-center">
+                  <p className="px-5 text-xs sm:text-base text-gray-400">
+                    Blood Group: {currentUser.bloodGroup}
+                  </p>
+                  <p className="px-5 text-xs sm:text-base text-gray-400">
+                    Address: {currentUser.upazila}, {currentUser.district}
+                  </p>
+                </div>
+                <button
+                  onClick={() => generatePDF(currentUser)}
+                  className="btn btn-accent text-white btn-xs"
+                >
+                  Download Details
+                </button>
+              </div>
+            </div>
+          </Box>
+        </Modal>
+      )}
     </div>
   );
 };

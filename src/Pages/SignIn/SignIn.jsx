@@ -9,15 +9,14 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 import SocialLogin from "../../Components/SocialLogin/SocialLogin";
+import useAxiosSecure from "../../Components/Hooks/useAxiosSecure";
 
 const SignIn = () => {
   const { signIn } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   const [disabled, setDisabled] = useState(true);
-
-  const from = location.state?.from?.pathname || "/";
-  console.log("state in the location log", location.state);
+  const axiosSecure = useAxiosSecure();
 
   const handleValidateCaptcha = (e) => {
     const user_captcha_value = e.target.value;
@@ -43,6 +42,10 @@ const SignIn = () => {
       const user = result.user;
       console.log(user);
 
+      // Fetch user role
+      const response = await axiosSecure.get(`/users/status/${user.email}`);
+      const userRole = response.data.role;
+
       Swal.fire({
         position: "top-end",
         icon: "success",
@@ -51,6 +54,10 @@ const SignIn = () => {
         timer: 1500,
       });
 
+      // Navigate based on user role
+      const defaultPath =
+        userRole === "admin" ? "/dashboard/admin" : "/dashboard/user";
+      const from = location.state?.from?.pathname || defaultPath;
       navigate(from, { replace: true });
     } catch (error) {
       console.error("Login failed", error);

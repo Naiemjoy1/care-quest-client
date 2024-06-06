@@ -104,7 +104,7 @@ const Dashboard = () => {
             <>
               <li>
                 <NavLink
-                  to="/dashboard/userhome"
+                  to="/dashboard/user"
                   style={({ isActive }) =>
                     isActive
                       ? { backgroundColor: "#2d3663", color: "white" }

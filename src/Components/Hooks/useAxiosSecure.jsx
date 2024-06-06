@@ -32,7 +32,7 @@ const useAxiosSecure = () => {
       console.log("status error in the interceptor", status);
       if (status === 401 || status === 403) {
         await logOut(); // Use await here
-        navigate("/login");
+        navigate("/signin");
       }
       return Promise.reject(error);
     }
