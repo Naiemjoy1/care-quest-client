@@ -122,6 +122,7 @@ const TestDetails = () => {
       selectedSlot,
       originalPrice: test.price,
       finalPrice: finalBookingPrice,
+      status: "Pending",
     };
     handleClose();
     axiosSecure.post("/bookings", bookTest).then((res) => {

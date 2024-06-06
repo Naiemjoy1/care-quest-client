@@ -217,37 +217,7 @@ const AllUsers = () => {
       {currentUser && (
         <Modal open={openModal} onClose={handleCloseModal}>
           <Box sx={style}>
-            <div className="flex flex-col justify-center max-w-xs p-6 shadow-md rounded-xl sm:px-12 bg-gray-900 text-gray-100">
-              <img
-                src={currentUser.image}
-                alt=""
-                className="w-32 h-32 mx-auto rounded-full bg-gray-500 aspect-square"
-              />
-              <div className="space-y-4 text-center divide-y divide-gray-700">
-                <div className="my-2 space-y-1">
-                  <h2 className="text-xl font-semibold sm:text-2xl">
-                    {currentUser.name}
-                  </h2>
-                  <p className="px-5 text-xs sm:text-base text-gray-400">
-                    {currentUser.email}
-                  </p>
-                </div>
-                <div className="justify-center pt-2 space-x-4 align-center">
-                  <p className="px-5 text-xs sm:text-base text-gray-400">
-                    Blood Group: {currentUser.bloodGroup}
-                  </p>
-                  <p className="px-5 text-xs sm:text-base text-gray-400">
-                    Address: {currentUser.upazila}, {currentUser.district}
-                  </p>
-                </div>
-                <button
-                  onClick={() => generatePDF(currentUser)}
-                  className="btn btn-accent text-white btn-xs"
-                >
-                  Download Details
-                </button>
-              </div>
-            </div>
+            <h2>hello</h2>
           </Box>
         </Modal>
       )}
