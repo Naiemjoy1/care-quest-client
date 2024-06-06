@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../Components/Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
+import { FaEdit } from "react-icons/fa";
 
 const Tests = () => {
   const axiosSecure = useAxiosSecure();
@@ -84,7 +86,11 @@ const Tests = () => {
                     </button>
                   </td>
                   <td>
-                    <button>Update</button>
+                    <Link to={`/dashboard/updateitem/${test._id}`}>
+                      <button className="btn btn-xs btn-warning ">
+                        <FaEdit className=" text-white"></FaEdit>
+                      </button>
+                    </Link>
                   </td>
 
                   <td>

@@ -56,6 +56,18 @@ const TestDetails = () => {
     }
   }, [tests, _id, promotions]);
 
+  useEffect(() => {
+    console.log("Test Data:", test);
+    console.log("Promotions:", promotions);
+    const foundTest = tests.find((test) => test._id === _id);
+    if (foundTest) {
+      setTest(foundTest);
+      setCapacity(foundTest.capacity);
+      setSlots(foundTest.slots);
+      setSelectedSlot(foundTest.slots[0]);
+    }
+  }, [tests, _id, promotions]);
+
   const handleSlotChange = (event) => {
     setSelectedSlot(event.target.value);
   };

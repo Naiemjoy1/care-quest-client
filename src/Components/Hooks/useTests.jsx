@@ -1,24 +1,23 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "./useAxiosPublic";
 
 const useTests = () => {
-  const [tests, setTests] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const axiosPublic = useAxiosPublic();
 
-  useEffect(() => {
-    fetch("http://localhost:3000/tests")
-      .then((res) => res.json())
-      .then((data) => {
-        setTests(data);
-        setLoading(false);
-        console.log("Fetched data:", data); // Log the fetched data
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-        setLoading(false);
-      });
-  }, []);
+  const {
+    data: tests = [],
+    isLoading,
+    isError,
+    refetch,
+  } = useQuery({
+    queryKey: ["tests"],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/tests");
+      return res.data;
+    },
+  });
 
-  return [tests, loading];
+  return [tests, isLoading, isError, refetch];
 };
 
 export default useTests;
