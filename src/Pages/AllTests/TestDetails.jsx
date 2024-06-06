@@ -29,14 +29,13 @@ const style = {
 const TestDetails = () => {
   const { _id } = useParams();
   const [tests] = useTests();
-  console.log("details data", tests);
   const [test, setTest] = useState(null);
   const [capacity, setCapacity] = useState(0);
   const [slots, setSlots] = useState([]);
   const [selectedSlot, setSelectedSlot] = useState("");
   const [bookingStatus, setBookingStatus] = useState("");
   const [open, setOpen] = useState(false);
-  const [promotions, loading] = usePromotions(); // Fetch promotions and loading state
+  const [promotions] = usePromotions(); // Fetch promotions and loading state
   const [promoCode, setPromoCode] = useState("");
   const [finalPrice, setFinalPrice] = useState(null);
   const [promoCodeError, setPromoCodeError] = useState(false);
@@ -45,22 +44,10 @@ const TestDetails = () => {
   const location = useLocation();
   const axiosSecure = useAxiosSecure();
   const [booking, refetch] = useBook();
+  const [filteredBookings, setFilteredBookings] = useState([]);
 
+  // Fetch test details based on _id
   useEffect(() => {
-    console.log("Promotions:", promotions);
-    const foundTest = tests.find((test) => test._id === _id);
-    if (foundTest) {
-      setTest(foundTest);
-      console.log("details data by id", foundTest);
-      setCapacity(foundTest.capacity);
-      setSlots(foundTest.slots);
-      setSelectedSlot(foundTest.slots[0]);
-    }
-  }, [tests, _id, promotions]);
-
-  useEffect(() => {
-    console.log("Test Data:", test);
-    console.log("Promotions:", promotions);
     const foundTest = tests.find((test) => test._id === _id);
     if (foundTest) {
       setTest(foundTest);
@@ -68,7 +55,18 @@ const TestDetails = () => {
       setSlots(foundTest.slots);
       setSelectedSlot(foundTest.slots[0]);
     }
-  }, [tests, _id, promotions]);
+  }, [tests, _id]);
+
+  // Filter bookings based on test id
+  useEffect(() => {
+    if (test && user) {
+      const filtered = booking.filter(
+        (book) => book.bookId === _id && book.email === user.email
+      );
+      console.log("Filtered Bookings: ", filtered);
+      setFilteredBookings(filtered);
+    }
+  }, [booking, test, _id, user]);
 
   const handleSlotChange = (event) => {
     setSelectedSlot(event.target.value);
@@ -108,9 +106,6 @@ const TestDetails = () => {
   const handleClose = () => setOpen(false);
 
   const handleConfirmBooking = () => {
-    console.log("Confirm button clicked");
-    const foundTest = tests.find((test) => test._id === _id);
-    console.log("Found Test Data:", foundTest, "User:", user?.email);
     const finalBookingPrice = finalPrice !== null ? finalPrice : test.price;
     const bookTest = {
       bookId: test._id,
@@ -126,7 +121,6 @@ const TestDetails = () => {
     };
     handleClose();
     axiosSecure.post("/bookings", bookTest).then((res) => {
-      console.log(res.data);
       if (res.data.insertedId) {
         Swal.fire({
           position: "top-end",
@@ -139,15 +133,9 @@ const TestDetails = () => {
         refetch();
       }
     });
-    // Update slots after confirming booking
     setSlots(slots.filter((slot) => slot !== selectedSlot));
-    // Perform booking confirmation logic here
     setBookingStatus("Report Pending");
   };
-
-  if (!test) {
-    return <p>Test not found</p>;
-  }
 
   const handlePromoCodeChange = (event) => {
     setPromoCode(event.target.value);
@@ -170,6 +158,10 @@ const TestDetails = () => {
     }
   };
 
+  if (!test) {
+    return <p>Test not found</p>;
+  }
+
   return (
     <div>
       <figure>
@@ -177,12 +169,10 @@ const TestDetails = () => {
       </figure>
       <div className="flex justify-between gap-10 container mx-auto my-14">
         <div className="w-1/2">
-          <p>{booking.length}</p>
           <h2 className="card-title">{test.name}</h2>
           <p>{test.description}</p>
           <p>Date: {test.date}</p>
           <p>Price: ${test.price}</p>
-          {/* <p>Capacity: {capacity}</p> */}
           <p>Slots: {slots.join(", ")}</p>
         </div>
         <div className="w-1/2">
@@ -206,6 +196,14 @@ const TestDetails = () => {
               <Button variant="contained" onClick={handleOpen}>
                 Book Now
               </Button>
+              {filteredBookings.map((booking) => (
+                <div key={booking._id}>
+                  <button className="btn btn-sm btn-primary mt-5 text-white">
+                    {booking.status}
+                  </button>
+                </div>
+              ))}
+
               <Modal
                 open={open}
                 onClose={handleClose}
@@ -291,7 +289,6 @@ const TestDetails = () => {
           ) : (
             <p>No available slots</p>
           )}
-          {bookingStatus && <p>{bookingStatus}</p>}
         </div>
       </div>
     </div>

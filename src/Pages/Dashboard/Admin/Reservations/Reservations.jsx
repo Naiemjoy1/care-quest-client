@@ -48,20 +48,20 @@ const Reservations = () => {
     });
   };
 
-  const handleSubmitTestResult = (bookingId, resultLink) => {
-    axiosSecure
-      .patch(`/bookings/${bookingId}`, { resultLink, status: "delivered" })
-      .then((res) => {
-        if (res.data.modifiedCount > 0) {
-          Swal.fire({
-            title: "Success!",
-            text: "Test result has been submitted.",
-            icon: "success",
-          });
-          refetch();
-        }
-      });
-  };
+  // const handleSubmitTestResult = (bookingId, resultLink) => {
+  //   axiosSecure
+  //     .patch(`/bookings/${bookingId}`, { resultLink, status: "delivered" })
+  //     .then((res) => {
+  //       if (res.data.modifiedCount > 0) {
+  //         Swal.fire({
+  //           title: "Success!",
+  //           text: "Test result has been submitted.",
+  //           icon: "success",
+  //         });
+  //         refetch();
+  //       }
+  //     });
+  // };
 
   const handleChangeStatus = (booking, status, report) => {
     axiosSecure
