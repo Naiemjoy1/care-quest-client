@@ -80,7 +80,7 @@ const Reservations = () => {
       });
   };
 
-  const [report, setReport] = useState("");
+  const [report, setReport] = useState(""); // State to hold report data
 
   const handleReportChange = (e) => {
     setReport(e.target.value);
@@ -233,18 +233,23 @@ const Reservations = () => {
                 placeholder="Report"
                 value={report}
                 onChange={handleReportChange}
-                className="input input-bordered w-full max-w-xs"
+                className="input input-bordered text-black w-full max-w-xs"
               />
+              {/* Button to change booking status and submit report */}
               {currentUser.status === "Pending" ? (
                 <button
-                  onClick={() => handleChangeStatus(currentUser, "Delivered")}
+                  onClick={
+                    () => handleChangeStatus(currentUser, "Delivered", report) // Pass report data
+                  }
                   className="btn btn-success text-white btn-xs"
                 >
                   Submit
                 </button>
               ) : (
                 <button
-                  onClick={() => handleChangeStatus(currentUser, "Pending")}
+                  onClick={
+                    () => handleChangeStatus(currentUser, "Pending", report) // Pass report data
+                  }
                   className="btn btn-warning text-white btn-xs"
                 >
                   Delivered
