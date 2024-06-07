@@ -51,13 +51,28 @@ const TestDetails = () => {
     const foundTest = tests.find((test) => test._id === _id);
     if (foundTest) {
       setTest(foundTest);
-      setCapacity(foundTest.capacity);
-      setSlots(foundTest.slots);
-      setSelectedSlot(foundTest.slots[0]);
-    }
-  }, [tests, _id]);
+      console.log("foundTest", foundTest);
 
-  // Filter bookings based on test id
+      // Filter bookings by test ID
+      const filteredByBookId = booking.filter((book) => book.bookId === _id);
+      console.log("Bookings with matching bookId: ", filteredByBookId);
+
+      // Log the length of foundTest.slots
+      console.log("Length of foundTest.slots:", foundTest.slots.length);
+
+      // Reduce capacity by the number of bookings for this test
+      setCapacity(foundTest.slots.length - filteredByBookId.length);
+
+      // Reduce slots by removing already booked slots
+      const availableSlots = foundTest.slots.filter(
+        (slot) => !filteredByBookId.some((book) => book.selectedSlot === slot)
+      );
+      setSlots(availableSlots);
+      setSelectedSlot(availableSlots[0]);
+    }
+  }, [tests, _id, booking]);
+
+  // Filter bookings based on test id and user email
   useEffect(() => {
     if (test && user) {
       const filtered = booking.filter(
@@ -173,6 +188,7 @@ const TestDetails = () => {
           <p>{test.description}</p>
           <p>Date: {test.date}</p>
           <p>Price: ${test.price}</p>
+          <p>Capacity: {capacity}</p>
           <p>Slots: {slots.join(", ")}</p>
         </div>
         <div className="w-1/2">
@@ -267,20 +283,22 @@ const TestDetails = () => {
                           sx={{ mt: 2 }}
                         />
                       </Typography>
-                      <Button
-                        variant="contained"
-                        onClick={applyPromoCode}
-                        sx={{ mt: 2 }}
-                      >
-                        Apply Promocode
-                      </Button>
-                      <Button
-                        variant="contained"
-                        onClick={handleConfirmBooking}
-                        sx={{ mt: 2 }}
-                      >
-                        Confirm
-                      </Button>
+                      <div className="grid grid-cols-1">
+                        <Button
+                          variant="contained"
+                          onClick={applyPromoCode}
+                          sx={{ mt: 2 }}
+                        >
+                          Apply Promocode
+                        </Button>
+                        <Button
+                          variant="contained"
+                          onClick={handleConfirmBooking}
+                          sx={{ mt: 2 }}
+                        >
+                          Pay
+                        </Button>
+                      </div>
                     </>
                   )}
                 </Box>
