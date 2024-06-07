@@ -13,6 +13,10 @@ import useAuth from "../../Components/Hooks/useAuth";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../Components/Hooks/useAxiosSecure";
 import useBook from "../../Components/Hooks/useBook";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import CheckOutForm from "../../Components/Payment/CheckOutForm";
+import TestSendData from "./TestSendData";
 
 const style = {
   position: "absolute",
@@ -166,6 +170,7 @@ const TestDetails = () => {
         foundPromotion.discountRate.replace("%", "")
       );
       const discountedPrice = test.price - (test.price * discountRate) / 100;
+
       setFinalPrice(discountedPrice);
     } else {
       setFinalPrice(null);
@@ -176,6 +181,9 @@ const TestDetails = () => {
   if (!test) {
     return <p>Test not found</p>;
   }
+
+  // TODO pk
+  const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GATEWAY_PK);
 
   return (
     <div>
@@ -212,6 +220,8 @@ const TestDetails = () => {
               <Button variant="contained" onClick={handleOpen}>
                 Book Now
               </Button>
+              {/* test data  */}
+              <TestSendData test={test} finalPrice={finalPrice} />
               {filteredBookings.map((booking) => (
                 <div key={booking._id}>
                   <button className="btn btn-sm btn-primary mt-5 text-white">
@@ -283,7 +293,7 @@ const TestDetails = () => {
                           sx={{ mt: 2 }}
                         />
                       </Typography>
-                      <div className="grid grid-cols-1">
+                      <div className="grid grid-cols-1 gap-4">
                         <Button
                           variant="contained"
                           onClick={applyPromoCode}
@@ -298,6 +308,13 @@ const TestDetails = () => {
                         >
                           Pay
                         </Button>
+                        <Elements stripe={stripePromise}>
+                          <CheckOutForm
+                            handleConfirmBooking={handleConfirmBooking}
+                            test={test}
+                            finalPrice={finalPrice}
+                          ></CheckOutForm>
+                        </Elements>
                       </div>
                     </>
                   )}
