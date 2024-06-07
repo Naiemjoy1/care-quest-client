@@ -82,9 +82,21 @@ const CheckOutForm = ({
             },
           }}
         />
-        <button type="submit" disabled={!stripe || !clientSecret}>
+        <button
+          className="btn btn-primary"
+          type="submit"
+          disabled={!stripe || !clientSecret}
+        >
           Pay
         </button>
+        <Button
+          type="submit"
+          disabled={!stripe || !clientSecret}
+          variant="contained"
+          sx={{ mt: 2 }}
+        >
+          Pay
+        </Button>
         <p className="text-red-600">{error}</p>
       </form>
     </div>
