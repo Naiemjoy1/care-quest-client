@@ -69,6 +69,7 @@ const Reservations = () => {
       .then((res) => {
         if (res.data.modifiedCount > 0) {
           refetch();
+          handleCloseModal();
           Swal.fire({
             position: "top-end",
             icon: "success",

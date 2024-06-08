@@ -244,87 +244,62 @@ const TestDetails = () => {
                 aria-describedby="modal-modal-description"
               >
                 <Box sx={style}>
-                  {bookingStatus === "Report Pending" ? (
-                    <Typography
-                      id="modal-modal-description"
-                      sx={{
-                        mt: 2,
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        textAlign: "center",
-                      }}
+                  <Typography
+                    id="modal-modal-title"
+                    variant="h6"
+                    component="h2"
+                  >
+                    {test.name}
+                  </Typography>
+                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                    Date: {test.date}
+                  </Typography>
+                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                    Selected Slot: {selectedSlot}
+                  </Typography>
+                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                    Original Price: ${test.price}
+                  </Typography>
+                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                    Final Price after Discount: ${totalPrice}
+                  </Typography>
+                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                    <TextField
+                      label="Promocode"
+                      variant="outlined"
+                      fullWidth
+                      value={promoCode}
+                      onChange={handlePromoCodeChange}
+                      error={promoCodeError}
+                      helperText={promoCodeError && "Promo code is not valid"}
+                      sx={{ mt: 2 }}
+                    />
+                  </Typography>
+                  <div className="grid grid-cols-1 gap-4">
+                    <Button
+                      variant="contained"
+                      onClick={applyPromoCode}
+                      sx={{ mt: 2 }}
                     >
-                      <div style={{ marginBottom: "8px" }}>
-                        <span className=" text-4xl text-green-600">
-                          <FaCheckCircle />
-                        </span>
-                      </div>
-                      <div>Your report is pending.</div>
-                    </Typography>
-                  ) : (
-                    <>
-                      <Typography
-                        id="modal-modal-title"
-                        variant="h6"
-                        component="h2"
-                      >
-                        {test.name}
-                      </Typography>
-                      <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        Date: {test.date}
-                      </Typography>
-                      <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        Selected Slot: {selectedSlot}
-                      </Typography>
-                      <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        Original Price: ${test.price}
-                      </Typography>
-                      <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        Final Price after Discount: ${totalPrice}
-                      </Typography>
-                      <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        <TextField
-                          label="Promocode"
-                          variant="outlined"
-                          fullWidth
-                          value={promoCode}
-                          onChange={handlePromoCodeChange}
-                          error={promoCodeError}
-                          helperText={
-                            promoCodeError && "Promo code is not valid"
-                          }
-                          sx={{ mt: 2 }}
-                        />
-                      </Typography>
-                      <div className="grid grid-cols-1 gap-4">
-                        <Button
-                          variant="contained"
-                          onClick={applyPromoCode}
-                          sx={{ mt: 2 }}
-                        >
-                          Apply Promocode
-                        </Button>
-                        <Button
-                          variant="contained"
-                          onClick={handleConfirmBooking}
-                          sx={{ mt: 2 }}
-                        >
-                          Pay
-                        </Button>
-                        <Elements stripe={stripePromise}>
-                          <CheckOutForm
-                            handleConfirmBooking={handleConfirmBooking}
-                            test={test}
-                            finalPrice={finalPrice}
-                            totalPrice={totalPrice}
-                            finalBookingPrice={finalBookingPrice} // Add this line
-                          />
-                        </Elements>
-                      </div>
-                    </>
-                  )}
+                      Apply Promocode
+                    </Button>
+                    <Button
+                      variant="contained"
+                      onClick={handleConfirmBooking}
+                      sx={{ mt: 2 }}
+                    >
+                      Pay
+                    </Button>
+                    <Elements stripe={stripePromise}>
+                      <CheckOutForm
+                        handleConfirmBooking={handleConfirmBooking}
+                        test={test}
+                        finalPrice={finalPrice}
+                        totalPrice={totalPrice}
+                        finalBookingPrice={finalBookingPrice} // Add this line
+                      />
+                    </Elements>
+                  </div>
                 </Box>
               </Modal>
             </div>
