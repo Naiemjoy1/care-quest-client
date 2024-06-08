@@ -16,6 +16,7 @@ import useAxiosSecure from "../../Components/Hooks/useAxiosSecure";
 import useBook from "../../Components/Hooks/useBook";
 import TestSendData from "./TestSendData";
 import CheckOutForm from "../../Components/Payment/CheckOutForm";
+import MakeReview from "./MakeReview";
 
 const style = {
   position: "absolute",
@@ -313,6 +314,7 @@ const TestDetails = () => {
           )}
         </div>
       </div>
+      <MakeReview _id={_id}></MakeReview>
     </div>
   );
 };
