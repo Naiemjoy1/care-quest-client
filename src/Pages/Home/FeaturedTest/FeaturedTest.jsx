@@ -1,4 +1,3 @@
-import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import PopularTest from "./PopularTest";
 
 import {
@@ -24,12 +23,10 @@ const FeaturedTest = () => {
 
   return (
     <div className="mt-10 container mx-auto">
-      <section>
-        <SectionTitle
-          heading="Discover our top-rated tests carefully curated for you."
-          subHeading="Featured Tests"
-        ></SectionTitle>
-      </section>
+      <div className="w-1/2 text-center mx-auto space-y-4 mb-5">
+        <p className="text-lg font-bold">Diagnostic plans</p>
+        <p className="text-5xl text-primary font-semibold">Featured Tests</p>
+      </div>
 
       <Swiper
         spaceBetween={20}

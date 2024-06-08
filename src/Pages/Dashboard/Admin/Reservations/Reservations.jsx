@@ -19,6 +19,7 @@ const style = {
 
 const Reservations = () => {
   const [bookings, refetch] = useBook();
+  console.log("booking all", bookings);
   const [tests] = useTests();
   const [searchTerm, setSearchTerm] = useState("");
   const axiosSecure = useAxiosSecure();

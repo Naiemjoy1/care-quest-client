@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
-import { FaCheckCircle } from "react-icons/fa";
 import Swal from "sweetalert2";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -37,7 +36,6 @@ const TestDetails = () => {
   const [capacity, setCapacity] = useState(0);
   const [slots, setSlots] = useState([]);
   const [selectedSlot, setSelectedSlot] = useState("");
-  const [bookingStatus, setBookingStatus] = useState("");
   const [open, setOpen] = useState(false);
   const [promotions] = usePromotions();
   const [promoCode, setPromoCode] = useState("");
@@ -50,6 +48,7 @@ const TestDetails = () => {
   const axiosSecure = useAxiosSecure();
   const [booking, refetch] = useBook();
   const [filteredBookings, setFilteredBookings] = useState([]);
+  const [isBooked, setIsBooked] = useState(false); // New state variable
   const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GATEWAY_PK);
 
   // Calculate total price
@@ -69,8 +68,16 @@ const TestDetails = () => {
       );
       setSlots(availableSlots);
       setSelectedSlot(availableSlots[0]);
+
+      // Check if the user has already booked a slot
+      if (user) {
+        const userBooking = filteredByBookId.find(
+          (book) => book.email === user.email
+        );
+        setIsBooked(!!userBooking);
+      }
     }
-  }, [tests, _id, booking]);
+  }, [tests, _id, booking, user]);
 
   useEffect(() => {
     if (test && user) {
@@ -155,7 +162,6 @@ const TestDetails = () => {
       }
     });
     setSlots(slots.filter((slot) => slot !== selectedSlot));
-    setBookingStatus("Report Pending");
   };
 
   // Function to handle promo code change
@@ -219,16 +225,15 @@ const TestDetails = () => {
                   </option>
                 ))}
               </select>
-              <Button variant="contained" onClick={handleOpen}>
-                Book Now
-              </Button>
+              {isBooked ? (
+                <Button variant="contained">Booked</Button>
+              ) : (
+                <Button variant="contained" onClick={handleOpen}>
+                  Book Now
+                </Button>
+              )}
               {/* test data  */}
-              <TestSendData
-                handleConfirmBooking={handleConfirmBooking}
-                test={test}
-                finalPrice={finalPrice}
-                finalBookingPrice={finalBookingPrice} // Add this line
-              />
+
               {filteredBookings.map((booking) => (
                 <div key={booking._id}>
                   <button className="btn btn-sm btn-primary mt-5 text-white">
@@ -296,7 +301,7 @@ const TestDetails = () => {
                         test={test}
                         finalPrice={finalPrice}
                         totalPrice={totalPrice}
-                        finalBookingPrice={finalBookingPrice} // Add this line
+                        finalBookingPrice={finalBookingPrice}
                       />
                     </Elements>
                   </div>
@@ -304,7 +309,7 @@ const TestDetails = () => {
               </Modal>
             </div>
           ) : (
-            <p>No available slots</p>
+            <p>All slots are booked</p>
           )}
         </div>
       </div>
