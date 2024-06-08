@@ -1,7 +1,6 @@
-import { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import AllTest from "./AllTest";
 import useTests from "../../Components/Hooks/useTests";
-
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 
@@ -9,10 +8,15 @@ const AllTests = () => {
   const [filteredTests, setFilteredTests] = useState([]);
   const [searchDate, setSearchDate] = useState("");
   const [tabIndex, setTabIndex] = useState(0);
-
-  // Fetch tests using the custom hook
+  const [currentPage, setCurrentPage] = useState(1);
   const [tests] = useTests();
-  console.log("all test page", tests);
+
+  const testsPerPage = 6;
+  const totalPages = Math.ceil(filteredTests.length / testsPerPage);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   const filterTests = useCallback(() => {
     const today = new Date();
@@ -37,6 +41,10 @@ const AllTests = () => {
     setSearchDate(event.target.value);
   };
 
+  const indexOfLastTest = currentPage * testsPerPage;
+  const indexOfFirstTest = indexOfLastTest - testsPerPage;
+  const currentTests = filteredTests.slice(indexOfFirstTest, indexOfLastTest);
+
   return (
     <div>
       <div className="flex justify-between py-2 px-6 rounded-full items-center gap-4 border border-primary w-1/2 mx-auto mt-10 text-center">
@@ -56,15 +64,21 @@ const AllTests = () => {
           </TabList>
           <TabPanel>
             <div className="grid grid-cols-3 gap-4">
-              {filteredTests.map((test) => (
+              {currentTests.map((test) => (
                 <AllTest key={test.id} test={test}></AllTest>
               ))}
             </div>
-          </TabPanel>
-          <TabPanel>
-            <div className="grid grid-cols-3 gap-4">
-              {filteredTests.map((test) => (
-                <AllTest key={test.id} test={test}></AllTest>
+            <div className="join">
+              {[...Array(totalPages)].map((_, index) => (
+                <input
+                  key={index}
+                  className="join-item btn btn-square mt-10"
+                  type="radio"
+                  name="options"
+                  aria-label={index + 1}
+                  checked={currentPage === index + 1}
+                  onChange={() => handlePageChange(index + 1)}
+                />
               ))}
             </div>
           </TabPanel>
