@@ -8,21 +8,28 @@ const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [theme, setTheme] = useState("light");
   const [booking] = useBook();
-  console.log("booking data", booking);
+  // console.log("booking data", booking);
   const [userStatus, setUserStatus] = useState(null); // State to hold user status
   const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
     const fetchUserStatus = async () => {
       if (user) {
-        const response = await axiosSecure.get(`/users/status/${user.email}`);
-        console.log("User status response:", response.data); // Log response data
-        setUserStatus(response.data.status);
+        try {
+          const response = await axiosSecure.get(`/users/status/${user.email}`);
+          console.log("User status response:", response.data); // Log response data
+          setUserStatus(response.data.status);
+        } catch (error) {
+          console.error("Error fetching user status:", error);
+        }
       }
     };
 
     fetchUserStatus();
   }, [user, axiosSecure]);
+
+  console.log("login user ", user);
+  console.log("user userStatus", userStatus);
 
   const userBookings = booking.filter((book) => book.email === user?.email);
 
@@ -50,7 +57,7 @@ const Navbar = () => {
       </li>
       {user && userStatus === "active" && (
         <NavLink
-          to={user.role === "admin" ? "/dashboard/user" : "/dashboard/admin"}
+          to={user.role === "admin" ? "/dashboard/admin" : "/dashboard/user"}
           style={({ isActive }) =>
             isActive ? { backgroundColor: "#47ccc8", color: "white" } : {}
           }

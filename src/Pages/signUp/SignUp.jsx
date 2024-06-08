@@ -74,6 +74,7 @@ const SignUp = () => {
         bloodGroup,
         district,
         upazila,
+        status: "active",
       };
       axiosPublic.post("/users", userInfo).then((res) => {
         if (res.data.insertedId) {

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import useAuth from "../../Components/Hooks/useAuth";
 import Swal from "sweetalert2";
+import EmailUser from "./EmailUser";
 
 const image_hosting_key = import.meta.env.VITE_IMGBB_API;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -150,6 +151,7 @@ const UserHome = () => {
           </button>
         </div>
       </div>
+      <EmailUser></EmailUser>
     </div>
   );
 };
