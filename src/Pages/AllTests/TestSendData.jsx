@@ -1,8 +1,14 @@
-const TestSendData = ({ finalPrice }) => {
+const TestSendData = ({
+  handleConfirmBooking,
+  finalPrice,
+  finalBookingPrice,
+  test,
+  filteredBookings,
+}) => {
   return (
     <div>
       <h2>Test Data Pass</h2>
-      <p>Final Price: ${finalPrice}</p>
+      <p>Final Price: ${finalBookingPrice}</p>
     </div>
   );
 };

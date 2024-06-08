@@ -1,105 +1,140 @@
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
+import useAuth from "../Hooks/useAuth";
 
-const CheckOutForm = ({
-  handleConfirmBooking,
-  finalPrice,
-  test,
-  filteredBookings,
-}) => {
+const CheckOutForm = ({ handleConfirmBooking, finalPrice, test }) => {
   const [error, setError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
+  const [transactionId, setTransactionId] = useState("");
   const stripe = useStripe();
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
-  const { price } = test;
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  //   const totalPrice = cart.reduce((total, item) => total + item.price, 0);
 
   useEffect(() => {
-    const fetchClientSecret = async () => {
-      try {
-        const response = await axiosSecure.post("/create-payment-intent", {
-          price: finalPrice,
+    if (finalPrice > 0) {
+      axiosSecure
+        .post("/create-payment-intent", { price: finalPrice })
+        .then((res) => {
+          console.log(res.data.clientSecret);
+          setClientSecret(res.data.clientSecret);
+        })
+        .catch((err) => {
+          console.error("Error creating payment intent:", err);
+          setError("Error creating payment intent");
         });
-        setClientSecret(response.data.clientSecret);
-      } catch (error) {
-        console.error("Error fetching client secret:", error);
-      }
-    };
-    if (finalPrice !== null) {
-      fetchClientSecret();
     }
   }, [axiosSecure, finalPrice]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    if (!stripe || !elements || !clientSecret) {
+    if (!stripe || !elements) {
       return;
     }
-
     const card = elements.getElement(CardElement);
 
     if (card === null) {
       return;
     }
 
-    const { error, paymentIntent } = await stripe.confirmCardPayment(
-      clientSecret,
-      {
-        payment_method: {
-          card,
-        },
-      }
-    );
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+      type: "card",
+      card,
+    });
+
     if (error) {
-      console.log("Payment error:", error);
+      console.error("[error]", error);
       setError(error.message);
     } else {
-      console.log("Payment intent:", paymentIntent);
-      handleConfirmBooking();
+      console.log("[PaymentMethod]", paymentMethod);
+      setError("");
+    }
+
+    // confirm payment
+    const { paymentIntent, error: confirmError } =
+      await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: card,
+          billing_details: {
+            email: user?.email || "anonymous",
+            name: user?.displayName || "anonymous",
+          },
+        },
+      });
+    handleConfirmBooking();
+
+    if (confirmError) {
+      console.error("Error confirming card payment:", confirmError);
+      setError(confirmError.message);
+    } else {
+      console.log("Payment intent", paymentIntent);
+      if (paymentIntent.status === "succeeded") {
+        console.log("Transaction ID:", paymentIntent.id);
+        setTransactionId(paymentIntent.id);
+
+        // save payment
+        const payment = {
+          email: user.email,
+          price: finalPrice,
+          transactionId: paymentIntent.id,
+          date: new Date(),
+          bookId: test._id,
+          status: "pending",
+        };
+
+        const res = await axiosSecure.post("/payments", payment);
+        console.log("Payment saved:", res.data);
+        if (res.data?.paymentResult.insertedId) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Thank You for payment",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate("/dashboard");
+        }
+      }
     }
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <p>{price}</p>
-        <CardElement
-          options={{
-            style: {
-              base: {
-                fontSize: "16px",
-                color: "#424770",
-                "::placeholder": {
-                  color: "#aab7c4",
-                },
-              },
-              invalid: {
-                color: "#9e2146",
+    <form onSubmit={handleSubmit}>
+      <p>Please Pay: {finalPrice}</p>
+      <CardElement
+        options={{
+          style: {
+            base: {
+              fontSize: "16px",
+              color: "#424770",
+              "::placeholder": {
+                color: "#aab7c4",
               },
             },
-          }}
-        />
-        <button
-          className="btn btn-primary"
-          type="submit"
-          disabled={!stripe || !clientSecret}
-        >
-          Pay
-        </button>
-        <Button
-          type="submit"
-          disabled={!stripe || !clientSecret}
-          variant="contained"
-          sx={{ mt: 2 }}
-        >
-          Pay
-        </Button>
-        <p className="text-red-600">{error}</p>
-      </form>
-    </div>
+            invalid: {
+              color: "#9e2146",
+            },
+          },
+        }}
+      />
+      <button
+        className="btn btn-primary btn-sm mt-10"
+        type="submit"
+        disabled={!stripe || !clientSecret}
+      >
+        Pay
+      </button>
+      <p className="text-red-600">{error}</p>
+      {transactionId && (
+        <p className="text-green-600">Your transaction ID: {transactionId}</p>
+      )}
+    </form>
   );
 };
 

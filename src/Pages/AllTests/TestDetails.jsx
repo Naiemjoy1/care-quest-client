@@ -1,22 +1,22 @@
-import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import useTests from "../../Components/Hooks/useTests";
-import usePromotions from "../../Components/Hooks/usePromotions";
-
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import { FaCheckCircle } from "react-icons/fa";
+import Swal from "sweetalert2";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
-import { FaCheckCircle } from "react-icons/fa";
+
+import useTests from "../../Components/Hooks/useTests";
+import usePromotions from "../../Components/Hooks/usePromotions";
 import useAuth from "../../Components/Hooks/useAuth";
-import Swal from "sweetalert2";
 import useAxiosSecure from "../../Components/Hooks/useAxiosSecure";
 import useBook from "../../Components/Hooks/useBook";
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
-import CheckOutForm from "../../Components/Payment/CheckOutForm";
 import TestSendData from "./TestSendData";
+import CheckOutForm from "../../Components/Payment/CheckOutForm";
 
 const style = {
   position: "absolute",
@@ -39,35 +39,31 @@ const TestDetails = () => {
   const [selectedSlot, setSelectedSlot] = useState("");
   const [bookingStatus, setBookingStatus] = useState("");
   const [open, setOpen] = useState(false);
-  const [promotions] = usePromotions(); // Fetch promotions and loading state
+  const [promotions] = usePromotions();
   const [promoCode, setPromoCode] = useState("");
   const [finalPrice, setFinalPrice] = useState(null);
   const [promoCodeError, setPromoCodeError] = useState(false);
+  const [finalBookingPrice, setFinalBookingPrice] = useState(null);
   const { user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const axiosSecure = useAxiosSecure();
   const [booking, refetch] = useBook();
   const [filteredBookings, setFilteredBookings] = useState([]);
+  const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GATEWAY_PK);
 
-  // Fetch test details based on _id
+  // Calculate total price
+  const totalPrice =
+    finalPrice !== null ? finalPrice : test ? test.price : null;
+
   useEffect(() => {
     const foundTest = tests.find((test) => test._id === _id);
     if (foundTest) {
       setTest(foundTest);
-      console.log("foundTest", foundTest);
 
-      // Filter bookings by test ID
       const filteredByBookId = booking.filter((book) => book.bookId === _id);
-      console.log("Bookings with matching bookId: ", filteredByBookId);
-
-      // Log the length of foundTest.slots
-      console.log("Length of foundTest.slots:", foundTest.slots.length);
-
-      // Reduce capacity by the number of bookings for this test
       setCapacity(foundTest.slots.length - filteredByBookId.length);
 
-      // Reduce slots by removing already booked slots
       const availableSlots = foundTest.slots.filter(
         (slot) => !filteredByBookId.some((book) => book.selectedSlot === slot)
       );
@@ -76,24 +72,28 @@ const TestDetails = () => {
     }
   }, [tests, _id, booking]);
 
-  // Filter bookings based on test id and user email
   useEffect(() => {
     if (test && user) {
       const filtered = booking.filter(
         (book) => book.bookId === _id && book.email === user.email
       );
-      console.log("Filtered Bookings: ", filtered);
       setFilteredBookings(filtered);
     }
   }, [booking, test, _id, user]);
 
+  useEffect(() => {
+    setFinalBookingPrice(test ? test.price : null);
+  }, [test]);
+
+  // Function to handle slot change
   const handleSlotChange = (event) => {
     setSelectedSlot(event.target.value);
   };
 
+  // Function to handle modal open
   const handleOpen = async () => {
+    const finalBookingPrice = test.price;
     if (user && user.email) {
-      // Check if the user is blocked
       const response = await axiosSecure.get(`/users/status/${user.email}`);
       if (response.data.status === "blocked") {
         Swal.fire({
@@ -120,12 +120,14 @@ const TestDetails = () => {
         }
       });
     }
+    setFinalPrice(finalBookingPrice);
   };
 
+  // Function to handle modal close
   const handleClose = () => setOpen(false);
 
+  // Function to handle booking confirmation
   const handleConfirmBooking = () => {
-    const finalBookingPrice = finalPrice !== null ? finalPrice : test.price;
     const bookTest = {
       bookId: test._id,
       email: user.email,
@@ -135,7 +137,7 @@ const TestDetails = () => {
       date: test.date,
       selectedSlot,
       originalPrice: test.price,
-      finalPrice: finalBookingPrice,
+      finalPrice: finalPrice,
       status: "Pending",
     };
     handleClose();
@@ -156,11 +158,13 @@ const TestDetails = () => {
     setBookingStatus("Report Pending");
   };
 
+  // Function to handle promo code change
   const handlePromoCodeChange = (event) => {
     setPromoCode(event.target.value);
-    setPromoCodeError(false); // Reset promo code error when promo code changes
+    setPromoCodeError(false);
   };
 
+  // Function to apply promo code
   const applyPromoCode = () => {
     const foundPromotion = promotions.find(
       (promotion) => promotion.couponCode === promoCode
@@ -169,21 +173,18 @@ const TestDetails = () => {
       const discountRate = parseFloat(
         foundPromotion.discountRate.replace("%", "")
       );
-      const discountedPrice = test.price - (test.price * discountRate) / 100;
-
+      const discountedPrice =
+        finalBookingPrice - (finalBookingPrice * discountRate) / 100;
       setFinalPrice(discountedPrice);
     } else {
-      setFinalPrice(null);
-      setPromoCodeError(true); // Set promo code error if not found
+      setFinalPrice(finalBookingPrice);
+      setPromoCodeError(true);
     }
   };
 
   if (!test) {
     return <p>Test not found</p>;
   }
-
-  // TODO pk
-  const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GATEWAY_PK);
 
   return (
     <div>
@@ -198,6 +199,7 @@ const TestDetails = () => {
           <p>Price: ${test.price}</p>
           <p>Capacity: {capacity}</p>
           <p>Slots: {slots.join(", ")}</p>
+          <p>Total Price: {totalPrice}</p>
         </div>
         <div className="w-1/2">
           {capacity > 0 && slots.length > 0 ? (
@@ -221,7 +223,12 @@ const TestDetails = () => {
                 Book Now
               </Button>
               {/* test data  */}
-              <TestSendData test={test} finalPrice={finalPrice} />
+              <TestSendData
+                handleConfirmBooking={handleConfirmBooking}
+                test={test}
+                finalPrice={finalPrice}
+                finalBookingPrice={finalBookingPrice} // Add this line
+              />
               {filteredBookings.map((booking) => (
                 <div key={booking._id}>
                   <button className="btn btn-sm btn-primary mt-5 text-white">
@@ -274,11 +281,9 @@ const TestDetails = () => {
                       <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                         Original Price: ${test.price}
                       </Typography>
-                      {promoCode && finalPrice !== null && (
-                        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                          Final Price after Discount: ${finalPrice}
-                        </Typography>
-                      )}
+                      <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                        Final Price after Discount: ${totalPrice}
+                      </Typography>
                       <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                         <TextField
                           label="Promocode"
@@ -313,7 +318,9 @@ const TestDetails = () => {
                             handleConfirmBooking={handleConfirmBooking}
                             test={test}
                             finalPrice={finalPrice}
-                          ></CheckOutForm>
+                            totalPrice={totalPrice}
+                            finalBookingPrice={finalBookingPrice} // Add this line
+                          />
                         </Elements>
                       </div>
                     </>
