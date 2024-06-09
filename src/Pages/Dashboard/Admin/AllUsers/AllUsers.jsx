@@ -73,18 +73,23 @@ const AllUsers = () => {
       return;
     }
 
-    axiosSecure.patch(`/users/status/${user._id}`, { status }).then((res) => {
-      if (res.data.modifiedCount > 0) {
-        refetch();
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: `User status changed to ${status}`,
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      }
-    });
+    axiosSecure
+      .patch(`/users/status/${user.email}`, { status })
+      .then((res) => {
+        if (res.data.modifiedCount > 0) {
+          refetch();
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: `User status changed to ${status}`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      })
+      .catch((error) => {
+        console.error("Error changing status:", error);
+      });
   };
 
   const [openModal, setOpenModal] = useState(false);
@@ -184,6 +189,7 @@ const AllUsers = () => {
                       </button>
                     )}
                   </td>
+
                   <th>
                     <button
                       onClick={() => handleDelete(user)}
