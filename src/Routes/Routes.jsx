@@ -19,6 +19,8 @@ import Tests from "../Pages/Dashboard/Admin/Tests/Tests";
 import Reservations from "../Pages/Dashboard/Admin/Reservations/Reservations";
 import AllBanner from "../Pages/Dashboard/Admin/AllBanner/AllBanner";
 import UpdateItem from "../Pages/Dashboard/Admin/UpdateItem/UpdateItem";
+import MakeReview from "../Pages/AllTests/MakeReview";
+import AddReview from "../Pages/Dashboard/Admin/AddReview/AddReview";
 
 export const router = createBrowserRouter([
   {
@@ -98,6 +100,10 @@ export const router = createBrowserRouter([
           {
             path: "reservations",
             element: <Reservations></Reservations>,
+          },
+          {
+            path: "reviews",
+            element: <AddReview></AddReview>,
           },
         ],
       },

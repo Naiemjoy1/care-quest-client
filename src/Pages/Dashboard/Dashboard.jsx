@@ -99,6 +99,18 @@ const Dashboard = () => {
                   <FaHome /> Reservations
                 </NavLink>
               </li>
+              {/* <li>
+                <NavLink
+                  to="/dashboard/reviews"
+                  style={({ isActive }) =>
+                    isActive
+                      ? { backgroundColor: "#2d3663", color: "white" }
+                      : {}
+                  }
+                >
+                  <FaHome /> Add Reviews
+                </NavLink>
+              </li> */}
             </>
           ) : (
             <>

@@ -1,3 +1,4 @@
+import { useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../Components/Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
@@ -5,10 +6,12 @@ import { Link } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
 import useBook from "../../../../Components/Hooks/useBook";
 import useAllBookings from "../../../../Components/Hooks/useAllBookings";
+import AddReview from "../AddReview/AddReview";
 
 const Tests = () => {
   const axiosSecure = useAxiosSecure();
   const [bookings] = useBook();
+  const [currentTestId, setCurrentTestId] = useState(null); // State to hold the current test _id
   console.log("booking data from test name", bookings);
 
   const [allBookings] = useAllBookings();
@@ -47,6 +50,12 @@ const Tests = () => {
     });
   };
 
+  const [isModalOpen, setIsModalOpen] = useState(false); // State to manage modal visibility
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false); // Close the modal
+  };
+
   return (
     <div>
       <div className="flex justify-evenly">
@@ -62,6 +71,7 @@ const Tests = () => {
                 <th>Name</th>
                 <th>Delete</th>
                 <th>Update</th>
+                <th>Add Review</th>
               </tr>
             </thead>
             <tbody>
@@ -104,14 +114,33 @@ const Tests = () => {
                   </td>
                   <td>
                     <Link to={`/dashboard/updateitem/${test._id}`}>
-                      <button className="btn btn-xs btn-warning ">
-                        <FaEdit className=" text-white"></FaEdit>
+                      <button className="btn btn-xs btn-warning">
+                        <FaEdit className="text-white" />
                       </button>
                     </Link>
                   </td>
 
                   <td>
-                    <button className="btn btn-ghost btn-xs">details</button>
+                    <button
+                      className="btn btn-xs btn-primary text-white"
+                      onClick={() => {
+                        setCurrentTestId(test._id);
+                        document.getElementById("my_modal_2").showModal();
+                      }}
+                    >
+                      Add Review
+                    </button>
+                    <dialog id="my_modal_2" className="modal">
+                      <div className="modal-box p-4">
+                        <AddReview
+                          onCloseModal={handleCloseModal}
+                          _id={currentTestId}
+                        />
+                      </div>
+                      <form method="dialog" className="modal-backdrop">
+                        <button>close</button>
+                      </form>
+                    </dialog>
                   </td>
                 </tr>
               ))}
