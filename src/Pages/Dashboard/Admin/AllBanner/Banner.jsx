@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const Banner = ({ banner, isChecked, onCheckboxChange }) => {
+const Banner = ({ banner, isChecked, onCheckboxChange, handleDelete }) => {
   const {
     bannertitle,
     description,
@@ -52,6 +52,12 @@ const Banner = ({ banner, isChecked, onCheckboxChange }) => {
           </div>
         </div>
       </div>
+      <button
+        onClick={() => handleDelete(banner)}
+        className="btn btn-accent text-white btn-xs"
+      >
+        Delete
+      </button>
     </div>
   );
 };
