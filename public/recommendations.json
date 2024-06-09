@@ -1,50 +1,223 @@
 [
   {
-    "title": "Healthy Diet Tips",
-    "description": "Maintain a balanced diet rich in fruits, vegetables, whole grains, and lean proteins to support overall health.",
+    "title": "Exceptional Dentist Services",
+    "description": "The dental services provided were exceptional, exceeding my expectations. The dentist was highly skilled, professional, and caring, ensuring a comfortable experience.",
+    "source": "Dentist",
+    "rating": 4.9,
+    "image": "https://i.ibb.co/2k1d7nJ/blob.jpg",
+    "name": "Emma Wilson",
+    "email": "emma@example.com",
+    "reviewsId": "665f0688296426610e9ad33d"
+  },
+  {
+    "title": "Excellent Physical Therapist!",
+    "description": "The physical therapist provided effective treatment and rehabilitation exercises, facilitating my recovery process. I was impressed by their expertise and dedication, ensuring a smooth recovery journey.",
+    "source": "Physical Therapist",
+    "rating": 4.7,
+    "image": "https://i.ibb.co/2k1d7nJ/blob.jpg",
+    "name": "Sophie Lee",
+    "email": "sophie@example.com",
+    "reviewsId": "9e45a87b65f24471a03c12e3"
+  },
+  {
+    "title": "Outstanding Chiropractor!",
+    "description": "The chiropractor demonstrated exceptional skills and knowledge in addressing my back issues. I experienced significant relief and improvement after each session, leading to overall better health.",
+    "source": "Chiropractor",
+    "rating": 4.8,
+    "image": "https://i.ibb.co/2k1d7nJ/blob.jpg",
+    "name": "Oliver Davis",
+    "email": "oliver@example.com",
+    "reviewsId": "f6d8a72b32e54889c14a96b0"
+  },
+  {
+    "title": "Amazing Massage Therapist!",
+    "description": "The massage therapist provided a rejuvenating experience, relieving tension and promoting relaxation. Their technique was excellent, and the ambiance was soothing, creating a perfect retreat.",
+    "source": "Massage Therapist",
+    "rating": 4.6,
+    "image": "https://i.ibb.co/2k1d7nJ/blob.jpg",
+    "name": "Ava Johnson",
+    "email": "ava@example.com",
+    "reviewsId": "abf6e4c38d294fa2b1c8075d"
+  },
+  {
+    "title": "Fantastic Nutritionist Advice!",
+    "description": "The nutritionist offered fantastic advice tailored to my dietary needs and health goals. Their expertise helped me make informed choices, leading to noticeable improvements in my well-being.",
     "source": "Nutritionist",
-    "image": "https://i.ibb.co/nRsmQtR/pexels-pixabay-415829.jpg",
-    "name": "Dr. Emily Smith",
-    "rating": 4.8
+    "rating": 4.5,
+    "image": "https://i.ibb.co/2k1d7nJ/blob.jpg",
+    "name": "Noah Miller",
+    "email": "noah@example.com",
+    "reviewsId": "8f5c1de4b37e4539a28dc6b1"
   },
   {
-    "title": "Stay Active",
-    "description": "Engage in regular physical activity such as walking, jogging, or cycling to improve cardiovascular health and reduce stress.",
-    "source": "Fitness Trainer",
-    "image": "https://i.ibb.co/nRsmQtR/pexels-pixabay-415829.jpg",
-    "name": "John Doe",
-    "rating": 4.7
-  },
-  {
-    "title": "Importance of Regular Checkups",
-    "description": "Schedule routine health checkups to monitor your health status and detect potential issues early.",
-    "source": "Medical Professional",
-    "image": "https://i.ibb.co/nRsmQtR/pexels-pixabay-415829.jpg",
-    "name": "Dr. Sarah Johnson",
-    "rating": 4.9
-  },
-  {
-    "title": "Manage Stress Levels",
-    "description": "Practice relaxation techniques such as deep breathing, meditation, or yoga to manage stress and promote mental well-being.",
+    "title": "Exceptional Psychologist Services!",
+    "description": "The psychologist provided exceptional guidance and support during therapy sessions. Their insights were valuable, helping me navigate challenges and achieve personal growth and resilience.",
     "source": "Psychologist",
-    "image": "https://i.ibb.co/nRsmQtR/pexels-pixabay-415829.jpg",
-    "name": "Dr. Michael Williams",
-    "rating": 4.6
+    "rating": 4.9,
+    "image": "https://i.ibb.co/2k1d7nJ/blob.jpg",
+    "name": "Liam Thompson",
+    "email": "liam@example.com",
+    "reviewsId": "2c8e17f694d647fc8b3a1e05"
   },
   {
-    "title": "Get Enough Sleep",
-    "description": "Ensure you get 7-8 hours of quality sleep each night to support immune function, cognitive function, and overall health.",
-    "source": "Sleep Specialist",
-    "image": "https://i.ibb.co/nRsmQtR/pexels-pixabay-415829.jpg",
-    "name": "Dr. Olivia Clark",
-    "rating": 4.7
+    "title": "Top-notch Yoga Instructor!",
+    "description": "The yoga instructor delivered top-notch classes, combining expertise with a nurturing approach. I felt energized and relaxed after each session, experiencing physical and mental benefits.",
+    "source": "Yoga Instructor",
+    "rating": 4.7,
+    "image": "https://i.ibb.co/2k1d7nJ/blob.jpg",
+    "name": "Mia Garcia",
+    "email": "mia@example.com",
+    "reviewsId": "d5b68f2e971542ea8c36a7d0"
   },
   {
-    "title": "Stay Hydrated",
-    "description": "Drink plenty of water throughout the day to maintain hydration, support digestion, and flush out toxins from the body.",
+    "title": "Excellent Personal Trainer!",
+    "description": "The personal trainer provided excellent guidance and motivation during workouts. Their personalized approach helped me achieve my fitness goals efficiently, resulting in noticeable progress.",
+    "source": "Personal Trainer",
+    "rating": 4.8,
+    "image": "https://i.ibb.co/2k1d7nJ/blob.jpg",
+    "name": "Jack Brown",
+    "email": "jack@example.com",
+    "reviewsId": "c4a1f9d6b283479aa7e24dc5"
+  },
+  {
+    "title": "Exceptional Dermatologist Services!",
+    "description": "The dermatologist offered exceptional services, addressing my skin concerns effectively. Their expertise and personalized treatment plan resulted in significant improvements in my skin health.",
+    "source": "Dermatologist",
+    "rating": 4.9,
+    "image": "https://i.ibb.co/2k1d7nJ/blob.jpg",
+    "name": "Ella Clark",
+    "email": "ella@example.com",
+    "reviewsId": "9de7f3a5c1784db2a6e95c04"
+  },
+  {
+    "title": "Highly Recommended Acupuncturist!",
+    "description": "The acupuncturist provided highly effective treatments, addressing my health issues holistically. I experienced remarkable improvements in my well-being, and the sessions were calming and rejuvenating.",
+    "source": "Acupuncturist",
+    "rating": 4.7,
+    "image": "https://i.ibb.co/2k1d7nJ/blob.jpg",
+    "name": "Lucas White",
+    "email": "lucas@example.com",
+    "reviewsId": "3b9e45a7d6384fc89b6ac201"
+  },
+  {
+    "title": "Exceptional Ophthalmologist Services!",
+    "description": "The ophthalmologist provided exceptional care and expertise during my eye examination. Their thorough evaluation and clear communication instilled confidence, ensuring optimal eye health.",
+    "source": "Ophthalmologist",
+    "rating": 4.8,
+    "image": "https://i.ibb.co/2k1d7nJ/blob.jpg",
+    "name": "Isabella Martinez",
+    "email": "isabella@example.com",
+    "reviewsId": "e5bfa7d8c69b4fe2a32d10c8"
+  },
+
+  {
+    "title": "Exceptional Physical Therapist!",
+    "description": "The physical therapist provided exceptional care, focusing on personalized treatment plans tailored to my needs. I experienced significant improvements in mobility and pain relief, enhancing my overall well-being.",
+    "source": "Physical Therapist",
+    "rating": 4.7,
+    "image": "https://i.ibb.co/2k1d7nJ/blob.jpg",
+    "name": "Olivia Johnson",
+    "email": "olivia@example.com",
+    "reviewsId": "bf6541d8c72a43e6b9f852a1"
+  },
+  {
+    "title": "Outstanding Nutritionist Advice!",
+    "description": "The nutritionist offered outstanding advice, educating me on healthy eating habits and dietary choices. Their guidance was invaluable, leading to positive changes in my lifestyle and overall health.",
     "source": "Nutritionist",
-    "image": "https://i.ibb.co/nRsmQtR/pexels-pixabay-415829.jpg",
-    "name": "Dr. Alex Lee",
-    "rating": 4.8
+    "rating": 4.8,
+    "image": "https://i.ibb.co/2k1d7nJ/blob.jpg",
+    "name": "William Brown",
+    "email": "william@example.com",
+    "reviewsId": "c7b4a29e586f1d341d7e9b3c"
+  },
+  {
+    "title": "Amazing Massage Therapist!",
+    "description": "The massage therapist provided amazing services, alleviating muscle tension and promoting relaxation. I felt rejuvenated after each session, experiencing both physical and mental benefits.",
+    "source": "Massage Therapist",
+    "rating": 4.6,
+    "image": "https://i.ibb.co/2k1d7nJ/blob.jpg",
+    "name": "Sophia Miller",
+    "email": "sophia@example.com",
+    "reviewsId": "e9c7b6a4f12d3e895b2a6187"
+  },
+  {
+    "title": "Excellent Psychologist Services!",
+    "description": "The psychologist provided excellent support and guidance, helping me navigate through challenging times. Their expertise and compassion were evident, contributing to positive outcomes in therapy.",
+    "source": "Psychologist",
+    "rating": 4.9,
+    "image": "https://i.ibb.co/2k1d7nJ/blob.jpg",
+    "name": "Daniel Wilson",
+    "email": "daniel@example.com",
+    "reviewsId": "f8d4b7e9a65c3d21b9e8f4c6"
+  },
+  {
+    "title": "Top-notch Yoga Instructor!",
+    "description": "The yoga instructor was top-notch, guiding me through challenging poses with patience and encouragement. I felt a sense of peace and rejuvenation after each session, enhancing my overall well-being.",
+    "source": "Yoga Instructor",
+    "rating": 4.7,
+    "image": "https://i.ibb.co/2k1d7nJ/blob.jpg",
+    "name": "Amelia Garcia",
+    "email": "amelia@example.com",
+    "reviewsId": "d3f6c2b8a49e5d7c1b8f6e2a"
+  },
+  {
+    "title": "Exceptional Personal Trainer!",
+    "description": "The personal trainer provided exceptional training, customizing workouts to target specific goals effectively. I noticed significant improvements in strength and endurance, achieving fitness milestones with their guidance.",
+    "source": "Personal Trainer",
+    "rating": 4.8,
+    "image": "https://i.ibb.co/2k1d7nJ/blob.jpg",
+    "name": "Ethan Martinez",
+    "email": "ethan@example.com",
+    "reviewsId": "b2d8c3a9f5e6d4c7a1b7e8f3"
+  },
+  {
+    "title": "Highly Recommended Dermatologist!",
+    "description": "The dermatologist came highly recommended, providing expert care and solutions for my skin concerns. Their professionalism and attention to detail instilled confidence, resulting in improved skin health.",
+    "source": "Dermatologist",
+    "rating": 4.9,
+    "image": "https://i.ibb.co/2k1d7nJ/blob.jpg",
+    "name": "Charlotte Taylor",
+    "email": "charlotte@example.com",
+    "reviewsId": "b8c9a3d4e7f6b2d8c1e9a5f4"
+  },
+  {
+    "title": "Excellent Chiropractor Services!",
+    "description": "The chiropractor provided excellent services, addressing my back issues with skill and precision. I experienced significant relief and improvement, allowing me to resume my daily activities without discomfort.",
+    "source": "Chiropractor",
+    "rating": 4.7,
+    "image": "https://i.ibb.co/2k1d7nJ/blob.jpg",
+    "name": "Lucas Wilson",
+    "email": "lucas@example.com",
+    "reviewsId": "c5b9a2d8f4e7b1c3d9e8a6f5"
+  },
+  {
+    "title": "Fantastic Ophthalmologist Services!",
+    "description": "The ophthalmologist provided fantastic services, conducting a thorough examination and offering valuable insights into my eye health. Their expertise and professionalism ensured a positive experience.",
+    "source": "Ophthalmologist",
+    "rating": 4.8,
+    "image": "https://i.ibb.co/2k1d7nJ/blob.jpg",
+    "name": "Ella Wilson",
+    "email": "ella@example.com",
+    "reviewsId": "b3c2d9a5f6e4b7c8d1a2e3f4"
+  },
+  {
+    "title": "Exceptional Acupuncturist Services!",
+    "description": "The acupuncturist provided exceptional services, addressing my health concerns with expertise and care. I experienced remarkable improvements in my well-being, thanks to their holistic approach.",
+    "source": "Acupuncturist",
+    "rating": 4.7,
+    "image": "https://i.ibb.co/2k1d7nJ/blob.jpg",
+    "name": "Liam Martinez",
+    "email": "liam@example.com",
+    "reviewsId": "c6d9b4a5e7f8c2d3b1a6e9f5"
+  },
+  {
+    "title": "Outstanding Dentist Services!",
+    "description": "The dentist provided outstanding services, demonstrating expertise and professionalism in every aspect of dental care. I experienced minimal discomfort and exceptional results, ensuring a positive dental experience.",
+    "source": "Dentist",
+    "rating": 4.9,
+    "image": "https://i.ibb.co/2k1d7nJ/blob.jpg",
+    "name": "Liam Martinez",
+    "email": "liam@example.com",
+    "reviewsId": "d2c9b8a5e6f3d4c1b7a2"
   }
 ]

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import useReview from "../../Components/Hooks/useReview";
 import { Rating } from "@smastrom/react-rating";
@@ -9,14 +9,33 @@ import useAxiosPublic from "../../Components/Hooks/useAxiosPublic";
 import ReviewSlider from "./ReviewSlider";
 
 const MakeReview = ({ _id }) => {
-  const { user } = useAuth();
+  const { user } = useAuth() || {}; // Ensure user is properly handled even if undefined
   const [reviews] = useReview();
   const [rating, setRating] = useState(0);
-  const { register, handleSubmit, reset } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
   const axiosPublic = useAxiosPublic();
   const [loading, setLoading] = useState(false);
 
+  const filteredReviews = reviews.filter(
+    (review) => review.reviewsId === _id && review.email === user?.email
+  );
+  console.log("Filtered Reviews:", filteredReviews);
+
   const onSubmit = async (data) => {
+    if (rating === 0) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Rating is required.",
+      });
+      return;
+    }
+
     setLoading(true);
     try {
       const formData = {
@@ -24,14 +43,16 @@ const MakeReview = ({ _id }) => {
         description: data.message,
         source: data.profession,
         rating: rating,
-        image: user.photoURL,
-        name: user.displayName,
-        email: user.email,
+        image: user?.photoURL,
+        name: user?.displayName,
+        email: user?.email,
+        reviewsId: _id,
       };
       const res = await axiosPublic.post("/reviews", formData);
       if (res.data.insertedId) {
         console.log("added to the database");
         reset();
+        setRating(0); // Reset the rating
         Swal.fire({
           position: "top-end",
           icon: "success",
@@ -66,13 +87,15 @@ const MakeReview = ({ _id }) => {
         </div>
         <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
           <div className="form-control">
-            {/* Updated the Rating component to pass the setRating function */}
             <Rating
               style={{ maxWidth: 180 }}
               value={rating}
-              onChange={setRating} // Update the rating value on change
-              isRequired
+              onChange={setRating}
+              required
             />
+            {/* {rating === 0 && (
+              <span className="text-red-500 text-sm">Rating is required.</span>
+            )} */}
           </div>
           <div className="form-control">
             <input
@@ -80,8 +103,13 @@ const MakeReview = ({ _id }) => {
               name="title"
               placeholder="Title For Review"
               className="p-4 rounded-md resize-none text-white bg-secondary"
-              {...register("title")}
+              {...register("title", { required: "Title is required." })}
             />
+            {errors.title && (
+              <span className="text-red-500 text-sm">
+                {errors.title.message}
+              </span>
+            )}
           </div>
           <div className="form-control">
             <input
@@ -89,8 +117,15 @@ const MakeReview = ({ _id }) => {
               name="profession"
               placeholder="Your Profession"
               className="p-4 rounded-md resize-none text-white bg-secondary"
-              {...register("profession")}
+              {...register("profession", {
+                required: "Profession is required.",
+              })}
             />
+            {errors.profession && (
+              <span className="text-red-500 text-sm">
+                {errors.profession.message}
+              </span>
+            )}
           </div>
           <div className="form-control">
             <textarea
@@ -98,13 +133,28 @@ const MakeReview = ({ _id }) => {
               name="message"
               placeholder="Message..."
               className="p-4 rounded-md resize-none text-white bg-secondary"
-              {...register("message")}
+              {...register("message", { required: "Message is required." })}
             ></textarea>
+            {errors.message && (
+              <span className="text-red-500 text-sm">
+                {errors.message.message}
+              </span>
+            )}
           </div>
           <div className="form-control mt-6">
-            <button className="btn btn-secondary text-white" type="submit">
-              Leave feedback
-            </button>
+            {filteredReviews.length === 0 ? (
+              <button className="btn btn-secondary text-white" type="submit">
+                {loading ? (
+                  <span className="loading loading-ring loading-sm"></span>
+                ) : (
+                  "Leave feedback"
+                )}
+              </button>
+            ) : (
+              <p className="text-center text-secondary font-semibold">
+                Already Submitted
+              </p>
+            )}
           </div>
         </form>
       </div>
