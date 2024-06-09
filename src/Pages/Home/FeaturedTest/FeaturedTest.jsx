@@ -1,4 +1,5 @@
-import PopularTest from "./PopularTest";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../../Components/Hooks/useAxiosSecure";
 
 import {
   Navigation,
@@ -15,25 +16,21 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "swiper/css/autoplay";
-import useTests from "../../../Components/Hooks/useTests";
-import useBook from "../../../Components/Hooks/useBook";
+import PopularTest from "./PopularTest";
 
 const FeaturedTest = () => {
-  const [tests] = useTests();
-  const [bookings] = useBook();
-  console.log("booking for feature", bookings);
-  const popular = tests.filter((item) => item.category === "Popular");
+  const axiosSecure = useAxiosSecure();
+
+  const { data: populars = {} } = useQuery({
+    queryKey: ["popular-tests"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/popular-tests");
+      return res.data;
+    },
+  });
 
   return (
-    <div className="mt-10 container mx-auto">
-      <div className="w-1/2 text-center mx-auto space-y-4 mb-5">
-        <p className="text-lg font-bold">Diagnostic plans</p>
-        <p className="text-5xl text-primary font-semibold">Featured Tests</p>
-        <p>book: {bookings.length}</p>
-        <p>test: {tests.length}</p>
-        <p>bookedTests: </p>
-      </div>
-
+    <div className="container mx-auto my-10">
       <Swiper
         spaceBetween={20}
         slidesPerView={3}
@@ -47,12 +44,18 @@ const FeaturedTest = () => {
         // onSwiper={(swiper) => console.log(swiper)}
         // onSlideChange={() => console.log("slide change")}
       >
-        {popular.map((item) => (
-          <SwiperSlide key={item._id}>
-            <PopularTest item={item}></PopularTest>
+        {populars.map((popular) => (
+          <SwiperSlide key={popular.test._id}>
+            <PopularTest popular={popular.test}></PopularTest>
           </SwiperSlide>
         ))}
       </Swiper>
+      {/* {populars.map((popular) => (
+        <PopularTest
+          key={popular.test._id}
+          popular={popular.test}
+        ></PopularTest>
+      ))} */}
     </div>
   );
 };

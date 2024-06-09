@@ -1,35 +1,61 @@
-import React, { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../../Components/Hooks/useAxiosSecure";
+
+import {
+  Navigation,
+  Pagination,
+  Scrollbar,
+  A11y,
+  Autoplay,
+} from "swiper/modules";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+import "swiper/css/autoplay";
+import PopularTest from "./PopularTest";
 
 const PopularTests = () => {
-  const [popularTests, setPopularTests] = useState([]);
+  const axiosSecure = useAxiosSecure();
 
-  useEffect(() => {
-    fetchPopularTests();
-  }, []);
-
-  const fetchPopularTests = async () => {
-    try {
-      const response = await fetch("http://localhost:3000/popular-tests"); // Replace with your backend URL
-      if (!response.ok) {
-        throw new Error("Failed to fetch popular tests");
-      }
-      const data = await response.json();
-      setPopularTests(data);
-    } catch (error) {
-      console.error("Error fetching popular tests:", error.message);
-    }
-  };
+  const { data: populars = {} } = useQuery({
+    queryKey: ["popular-tests"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/popular-tests");
+      return res.data;
+    },
+  });
 
   return (
     <div>
-      <h2>Popular Tests</h2>
-      <ul>
-        {popularTests.map((test) => (
-          <li key={test._id}>
-            {test.testName} - Bookings: {test.totalBookings}
-          </li>
+      <Swiper
+        spaceBetween={20}
+        slidesPerView={3}
+        navigation={true}
+        autoplay={{ delay: 8000 }}
+        loop={true}
+        // pagination={{ clickable: true }}
+        // scrollbar={{ draggable: true }}
+        modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
+        className="mySwiper"
+        // onSwiper={(swiper) => console.log(swiper)}
+        // onSlideChange={() => console.log("slide change")}
+      >
+        {populars.map((popular) => (
+          <SwiperSlide key={popular.test._id}>
+            <PopularTest popular={popular.test}></PopularTest>
+          </SwiperSlide>
         ))}
-      </ul>
+      </Swiper>
+      {/* {populars.map((popular) => (
+        <PopularTest
+          key={popular.test._id}
+          popular={popular.test}
+        ></PopularTest>
+      ))} */}
     </div>
   );
 };
