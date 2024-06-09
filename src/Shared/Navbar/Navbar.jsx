@@ -55,6 +55,36 @@ const Navbar = () => {
           All Tests
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          to="/doctors"
+          style={({ isActive }) =>
+            isActive ? { backgroundColor: "#47ccc8", color: "white" } : {}
+          }
+        >
+          Doctors
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/contact"
+          style={({ isActive }) =>
+            isActive ? { backgroundColor: "#47ccc8", color: "white" } : {}
+          }
+        >
+          Contact
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/about"
+          style={({ isActive }) =>
+            isActive ? { backgroundColor: "#47ccc8", color: "white" } : {}
+          }
+        >
+          About
+        </NavLink>
+      </li>
       {user && userStatus === "active" && (
         <NavLink
           to={user.role === "admin" ? "/dashboard/admin" : "/dashboard/user"}

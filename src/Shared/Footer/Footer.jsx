@@ -58,7 +58,7 @@ const Footer = () => {
                 <span>
                   <MdEmail />
                 </span>
-                info@cozystay.com
+                info@ carequest.com
               </li>
               <li className="flex items-center gap-2 font-jost">
                 <span>

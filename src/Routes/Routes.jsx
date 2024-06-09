@@ -21,6 +21,9 @@ import AllBanner from "../Pages/Dashboard/Admin/AllBanner/AllBanner";
 import UpdateItem from "../Pages/Dashboard/Admin/UpdateItem/UpdateItem";
 import MakeReview from "../Pages/AllTests/MakeReview";
 import AddReview from "../Pages/Dashboard/Admin/AddReview/AddReview";
+import Doctors from "../Pages/Doctors/Doctors";
+import Contact from "../Pages/Contact/Contact";
+import About from "../Pages/About/About";
 
 export const router = createBrowserRouter([
   {
@@ -48,6 +51,18 @@ export const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp></SignUp>,
+      },
+      {
+        path: "/doctors",
+        element: <Doctors></Doctors>,
+      },
+      {
+        path: "/contact",
+        element: <Contact></Contact>,
+      },
+      {
+        path: "/about",
+        element: <About></About>,
       },
       {
         path: "/dashboard",
