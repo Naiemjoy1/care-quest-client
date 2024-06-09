@@ -16,6 +16,8 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "swiper/css/autoplay";
+import useAxiosSecure from "../../../Components/Hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
 const Promotions = () => {
   const [promotions, setPromotions] = useState([]);
@@ -27,6 +29,15 @@ const Promotions = () => {
         setPromotions(data);
       });
   }, []);
+
+  const axiosSecure = useAxiosSecure();
+  const { data: banners = [], refetch } = useQuery({
+    queryKey: ["banners"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/banners");
+      return res.data;
+    },
+  });
 
   return (
     <div className=" bg-secondary pt-32 pb-14">
@@ -55,7 +66,7 @@ const Promotions = () => {
           // onSwiper={(swiper) => console.log(swiper)}
           // onSlideChange={() => console.log("slide change")}
         >
-          {promotions.map((promotion) => (
+          {banners.map((promotion) => (
             <SwiperSlide key={promotion._id}>
               <Promotion promotion={promotion}></Promotion>
             </SwiperSlide>
