@@ -45,7 +45,7 @@ const AddBanner = () => {
           cuponcode: data.cuponcode,
           rate: data.rate + "%",
           image: bannerImg,
-          isActive: data.isActive,
+          isActive: false,
         };
         console.log("Banner item:", bannerItem);
 
@@ -196,18 +196,6 @@ const AddBanner = () => {
               />
               {errors.image && <span>This field is required</span>}
             </div>
-          </div>
-
-          <div className="form-control w-1/2">
-            <label className="label">
-              <input
-                type="checkbox"
-                name="isActive"
-                className="checkbox checkbox-primary"
-                {...register("isActive", { required: true })}
-              />
-              {errors.isActive && <span>This field is required</span>}
-            </label>
           </div>
 
           <div className="form-control mt-6">
