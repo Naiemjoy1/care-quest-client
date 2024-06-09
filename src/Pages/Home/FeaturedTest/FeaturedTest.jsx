@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Components/Hooks/useAxiosSecure";
-
 import {
   Navigation,
   Pagination,
@@ -8,9 +7,7 @@ import {
   A11y,
   Autoplay,
 } from "swiper/modules";
-
 import { Swiper, SwiperSlide } from "swiper/react";
-
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -21,7 +18,7 @@ import PopularTest from "./PopularTest";
 const FeaturedTest = () => {
   const axiosSecure = useAxiosSecure();
 
-  const { data: populars = {} } = useQuery({
+  const { data: populars = [] } = useQuery({
     queryKey: ["popular-tests"],
     queryFn: async () => {
       const res = await axiosSecure.get("/popular-tests");
@@ -37,12 +34,8 @@ const FeaturedTest = () => {
         navigation={true}
         autoplay={{ delay: 8000 }}
         loop={true}
-        // pagination={{ clickable: true }}
-        // scrollbar={{ draggable: true }}
         modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
         className="mySwiper"
-        // onSwiper={(swiper) => console.log(swiper)}
-        // onSlideChange={() => console.log("slide change")}
       >
         {populars.map((popular) => (
           <SwiperSlide key={popular.test._id}>
@@ -50,12 +43,6 @@ const FeaturedTest = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-      {/* {populars.map((popular) => (
-        <PopularTest
-          key={popular.test._id}
-          popular={popular.test}
-        ></PopularTest>
-      ))} */}
     </div>
   );
 };
