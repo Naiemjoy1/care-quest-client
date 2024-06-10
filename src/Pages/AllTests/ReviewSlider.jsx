@@ -21,9 +21,7 @@ import useAuth from "../../Components/Hooks/useAuth";
 const ReviewSlider = ({ reviews, _id }) => {
   const { user } = useAuth() || {}; // Ensure user is properly handled even if undefined
 
-  const filteredReviews = reviews.filter(
-    (review) => review.reviewsId === _id && review.email === user?.email
-  );
+  const filteredReviews = reviews.filter((review) => review.reviewsId === _id);
   console.log("Filtered Reviews for slider: ", filteredReviews);
 
   return (

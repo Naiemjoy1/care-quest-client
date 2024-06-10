@@ -89,12 +89,12 @@ const AddBanner = () => {
           <div className="flex gap-4">
             <div className="form-control w-1/2">
               <label className="label">
-                <span className="label-text">Banner Titel</span>
+                <span className="label-text">Banner Title</span>
               </label>
               <input
                 type="text"
                 name="bannertitle"
-                placeholder="Name"
+                placeholder="Banner Title"
                 className="input input-bordered"
                 {...register("bannertitle", { required: true })}
               />
@@ -107,7 +107,7 @@ const AddBanner = () => {
               <input
                 type="text"
                 name="description"
-                placeholder="Name"
+                placeholder="Banner Description"
                 className="input input-bordered"
                 {...register("description", { required: true })}
               />
@@ -122,7 +122,7 @@ const AddBanner = () => {
               <input
                 type="text"
                 name="cupontitle"
-                placeholder="Name"
+                placeholder="Cupon Title"
                 className="input input-bordered"
                 {...register("cupontitle", { required: true })}
               />
@@ -135,7 +135,7 @@ const AddBanner = () => {
               <input
                 type="text"
                 name="cupondescrioption"
-                placeholder="Name"
+                placeholder="Cupon Description"
                 className="input input-bordered"
                 {...register("cupondescrioption", { required: true })}
               />
@@ -150,7 +150,7 @@ const AddBanner = () => {
               <input
                 type="date"
                 name="expiry"
-                placeholder="Name"
+                placeholder="Expiry"
                 className="input input-bordered"
                 {...register("expiry", { required: true })}
               />
@@ -163,7 +163,7 @@ const AddBanner = () => {
               <input
                 type="text"
                 name="cuponcode"
-                placeholder="Name"
+                placeholder="Cupon Code"
                 className="input input-bordered"
                 {...register("cuponcode", { required: true })}
               />
@@ -178,7 +178,7 @@ const AddBanner = () => {
               <input
                 type="number"
                 name="rate"
-                placeholder="Name"
+                placeholder="Discount Rate"
                 className="input input-bordered"
                 {...register("rate", { required: true })}
               />
@@ -190,7 +190,7 @@ const AddBanner = () => {
               </label>
               <input
                 type="file"
-                name="image"
+                name="Banner Image"
                 className="file-input w-full max-w-xs"
                 {...register("image", { required: true })}
               />

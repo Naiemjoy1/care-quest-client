@@ -20,21 +20,21 @@ const AboutClinic = () => {
         <div className="flex justify-between">
           <div
             className="radial-progress text-primary"
-            style={{ "--value": 85, "--size": "12rem", "--thickness": "10px" }}
+            style={{ "--value": 85, "--size": "6rem", "--thickness": "10px" }}
             role="progressbar"
           >
             85%
           </div>
           <div
             className="radial-progress text-primary"
-            style={{ "--value": 68, "--size": "12rem", "--thickness": "10px" }}
+            style={{ "--value": 68, "--size": "6rem", "--thickness": "10px" }}
             role="progressbar"
           >
             68%
           </div>
           <div
             className="radial-progress text-primary"
-            style={{ "--value": 79, "--size": "12rem", "--thickness": "10px" }}
+            style={{ "--value": 79, "--size": "6rem", "--thickness": "10px" }}
             role="progressbar"
           >
             79%

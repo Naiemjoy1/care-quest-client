@@ -1,6 +1,16 @@
-import { FaHome } from "react-icons/fa";
+import {
+  FaClipboardList,
+  FaHome,
+  FaHouseUser,
+  FaRegImage,
+  FaUsers,
+} from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../../Components/Hooks/useAdmin";
+import { BiSolidImageAdd } from "react-icons/bi";
+import { PiListDashesFill, PiListPlusFill } from "react-icons/pi";
+import { BsBookmarksFill } from "react-icons/bs";
+import { MdBookmarkAdded } from "react-icons/md";
 
 const Dashboard = () => {
   const [isAdmin, isAdminLoading] = useAdmin();
@@ -36,7 +46,7 @@ const Dashboard = () => {
                       : {}
                   }
                 >
-                  <FaHome /> Add Banner
+                  <BiSolidImageAdd /> Add Banner
                 </NavLink>
               </li>
               <li>
@@ -48,7 +58,7 @@ const Dashboard = () => {
                       : {}
                   }
                 >
-                  <FaHome /> All Banner
+                  <FaRegImage /> All Banner
                 </NavLink>
               </li>
               <li>
@@ -60,7 +70,7 @@ const Dashboard = () => {
                       : {}
                   }
                 >
-                  <FaHome /> All Users
+                  <FaUsers /> All Users
                 </NavLink>
               </li>
               <li>
@@ -72,7 +82,7 @@ const Dashboard = () => {
                       : {}
                   }
                 >
-                  <FaHome /> Add Test
+                  <PiListPlusFill /> Add Test
                 </NavLink>
               </li>
               <li>
@@ -84,7 +94,7 @@ const Dashboard = () => {
                       : {}
                   }
                 >
-                  <FaHome /> All Tests
+                  <PiListDashesFill /> All Tests
                 </NavLink>
               </li>
               <li>
@@ -96,21 +106,9 @@ const Dashboard = () => {
                       : {}
                   }
                 >
-                  <FaHome /> Reservations
+                  <BsBookmarksFill /> Reservations
                 </NavLink>
               </li>
-              {/* <li>
-                <NavLink
-                  to="/dashboard/reviews"
-                  style={({ isActive }) =>
-                    isActive
-                      ? { backgroundColor: "#2d3663", color: "white" }
-                      : {}
-                  }
-                >
-                  <FaHome /> Add Reviews
-                </NavLink>
-              </li> */}
             </>
           ) : (
             <>
@@ -123,7 +121,7 @@ const Dashboard = () => {
                       : {}
                   }
                 >
-                  <FaHome /> User Home
+                  <FaHouseUser /> User Home
                 </NavLink>
               </li>
               <li>
@@ -135,7 +133,7 @@ const Dashboard = () => {
                       : {}
                   }
                 >
-                  <FaHome /> Appointments
+                  <MdBookmarkAdded /> Appointments
                 </NavLink>
               </li>
               <li>
@@ -147,7 +145,7 @@ const Dashboard = () => {
                       : {}
                   }
                 >
-                  <FaHome /> Test Results
+                  <FaClipboardList /> Test Results
                 </NavLink>
               </li>
             </>

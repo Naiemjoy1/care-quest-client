@@ -151,7 +151,6 @@ const UserHome = () => {
           </button>
         </div>
       </div>
-      <EmailUser></EmailUser>
     </div>
   );
 };

@@ -29,8 +29,8 @@ const Banner = () => {
           }}
         >
           <div className="hero-overlay bg-opacity-60"></div>
-          <div className="flex justify-between items-center gap-20 hero-content text-white">
-            <div className="w-1/2 space-y-4">
+          <div className="flex justify-between container mx-auto items-center gap-20 hero-content text-white">
+            <div className="  w-1/3 space-y-4">
               <h1 className=" text-5xl font-bold">{banner.bannertitle}</h1>
               <p className="">{banner.description}</p>
               <Link to="/tests">
@@ -39,7 +39,7 @@ const Banner = () => {
                 </button>
               </Link>
             </div>
-            <div className="w-1/2 space-y-4 ">
+            <div className="w-1/3  space-y-4 ">
               <p className="text-3xl font-bold">{banner.cupontitle}</p>
               <section className="flex gap-2 items-center">
                 <p className="font-bold text-6xl text-primary">{banner.rate}</p>

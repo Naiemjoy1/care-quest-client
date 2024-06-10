@@ -1,43 +1,43 @@
 [
   {
-    "bannertitle": "Logistic Center A",
-    "banner description": "Offering fast and reliable logistic services",
+    "bannertitle": "SwiftLogistics Hub",
+    "banner description": "SwiftLogistics Hub: Providing swift and dependable logistics services for seamless delivery solutions worldwide.",
     "cupontitle": "Special Discount",
     "cupondescrioption": "Get 10% off on your first shipment",
     "expiry": "2024-12-31",
     "cuponcode": "LC10OFF",
-    "rate": "$5 per shipment"
+    "rate": "10%"
   },
   {
-    "bannertitle": "Logistic Center B",
-    "banner description": "Your trusted partner for all logistics needs",
+    "bannertitle": "ReliableExpress Center",
+    "banner description": "ReliableExpress Center: Your trusted partner offering comprehensive logistics solutions tailored to your every need.",
     "cupontitle": "Limited Time Offer",
     "cupondescrioption": "Free shipping on orders over $50",
     "expiry": "2024-10-31",
     "cuponcode": "FREESHIP",
-    "rate": "$8 per shipment"
+    "rate": "8%"
   },
   {
-    "bannertitle": "Logistic Center C",
-    "banner description": "Efficient logistics solutions tailored to your needs",
+    "bannertitle": "EfficientCargo Depot",
+    "banner description": "EfficientCargo Depot: Tailored logistics solutions designed for efficiency, ensuring your shipments reach their destinations seamlessly.",
     "cupontitle": "Exclusive Deal",
     "cupondescrioption": "50% off on express shipping",
     "expiry": "2024-11-30",
     "cuponcode": "EXP50",
-    "rate": "$10 per shipment"
+    "rate": "10%"
   },
   {
-    "bannertitle": "Logistic Center D",
-    "banner description": "Delivering excellence in logistics since 1995",
+    "bannertitle": "ExcellenceLogistics Base",
+    "banner description": "ExcellenceLogistics Base: Delivering excellence in logistics for over two decades, ensuring your shipments are in safe hands.",
     "cupontitle": "Limited Time Offer",
     "cupondescrioption": "Flat rate shipping for all orders",
     "expiry": "2024-09-30",
     "cuponcode": "FLATRATE",
-    "rate": "$6 per shipment"
+    "rate": "6%"
   },
   {
-    "bannertitle": "Logistic Center E",
-    "banner description": "Your reliable partner for global logistics solutions",
+    "bannertitle": "GlobalConnect Logistics",
+    "banner description": "GlobalConnect Logistics: Your reliable global partner, offering tailored logistics solutions for seamless international shipping.",
     "cupontitle": "Special Promotion",
     "cupondescrioption": "25% off on international shipping",
     "expiry": "2024-12-15",
