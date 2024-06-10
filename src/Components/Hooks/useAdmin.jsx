@@ -17,7 +17,7 @@ const useAdmin = () => {
           return;
         }
 
-        const response = await axios.get(`/users/status/${user.email}`, {
+        const response = await axios.get(`/users/admin/${user.email}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

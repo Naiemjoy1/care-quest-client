@@ -1,22 +1,48 @@
 import { Link, NavLink } from "react-router-dom";
 import useBook from "../../Components/Hooks/useBook";
 import useAuth from "../../Components/Hooks/useAuth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaCartPlus } from "react-icons/fa";
-import useUserStatus from "../../Components/Hooks/useUserStatus";
-import useAdmin from "../../Components/Hooks/useAdmin";
+import useAxiosSecure from "../../Components/Hooks/useAxiosSecure";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const [theme, setTheme] = useState("light");
   const [booking] = useBook();
-  const { status: userStatus } = useUserStatus();
-  const { isAdmin } = useState();
-
   const userBookings = booking.filter((book) => book.email === user?.email);
 
-  console.log("login user role", isAdmin);
-  console.log("login user status", userStatus);
+  const axiosSecure = useAxiosSecure();
+  const [admin, setAdmin] = useState();
+  const [loginStatus, setLoginStatus] = useState();
+
+  useEffect(() => {
+    const fetchAdminStatus = async () => {
+      if (user) {
+        try {
+          const response = await axiosSecure.get(`/users/admin/${user.email}`);
+          // console.log("Admin status:", response.data.admin);
+          setAdmin(response.data.admin);
+        } catch (error) {
+          console.error("Error fetching admin status:", error);
+        }
+      }
+    };
+
+    const fetchLoginStatus = async () => {
+      if (user) {
+        try {
+          const response = await axiosSecure.get(`/users/status/${user.email}`);
+          // console.log("Login User status:", response.data.status);
+          setLoginStatus(response.data.status);
+        } catch (error) {
+          console.error("Error fetching status:", error);
+        }
+      }
+    };
+
+    fetchAdminStatus();
+    fetchLoginStatus();
+  }, [user, axiosSecure]);
 
   const navLink = (
     <>
@@ -76,9 +102,9 @@ const Navbar = () => {
         </NavLink>
       </li>
 
-      {user && userStatus === "active" && (
+      {user && loginStatus ? (
         <li>
-          {!isAdmin ? (
+          {admin ? (
             <NavLink
               to="/dashboard/admin"
               style={({ isActive }) =>
@@ -100,7 +126,7 @@ const Navbar = () => {
             </NavLink>
           )}
         </li>
-      )}
+      ) : null}
     </>
   );
 
@@ -147,13 +173,11 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{navLink}</ul>
       </div>
       <div className="navbar-end gap-2">
-        {user ? (
-          userStatus === "active" ? (
-            <button className="badge badge-success">Active</button>
-          ) : userStatus === "blocked" ? (
-            <button className="badge badge-warning">Blocked</button>
-          ) : null
-        ) : null}
+        {loginStatus ? (
+          <button className="badge badge-success text-white">Active</button>
+        ) : (
+          <button className="badge badge-warning text-white">Blocked</button>
+        )}
 
         <button className="btn btn-sm">
           <FaCartPlus />

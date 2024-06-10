@@ -23,6 +23,7 @@ import AddReview from "../Pages/Dashboard/Admin/AddReview/AddReview";
 import Doctors from "../Pages/Doctors/Doctors";
 import Contact from "../Pages/Contact/Contact";
 import About from "../Pages/About/About";
+import FunctionTest from "../Pages/FunctionTest/FunctionTest";
 
 export const router = createBrowserRouter([
   {
@@ -63,6 +64,7 @@ export const router = createBrowserRouter([
         path: "/about",
         element: <About></About>,
       },
+      { path: "/function", element: <FunctionTest></FunctionTest> },
       {
         path: "/dashboard",
         element: (

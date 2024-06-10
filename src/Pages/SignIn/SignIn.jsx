@@ -18,24 +18,45 @@ const SignIn = () => {
   const [loading, setLoading] = useState(false); // State for loading indicator
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
+  const [admin, setAdmin] = useState();
+  const [loginStatus, setLoginStatus] = useState();
+  const [disabled, setDisabled] = useState(true);
 
-  const [isAdmin, setIsAdmin] = useState(false);
   useEffect(() => {
     const fetchAdminStatus = async () => {
       if (user) {
         try {
           const response = await axiosSecure.get(`/users/admin/${user.email}`);
-          console.log("Admin status from login:", response.data.admin);
+          console.log("Admin status:", response.data.admin);
+          setAdmin(response.data.admin);
         } catch (error) {
           console.error("Error fetching admin status:", error);
         }
       }
     };
 
-    fetchAdminStatus();
-  }, [user, axiosSecure]);
+    const fetchLoginStatus = async () => {
+      if (user) {
+        try {
+          const response = await axiosSecure.get(
+            `/users/status/${user.email}`,
+            {
+              headers: {
+                Authorization: `Bearer ${user.token}`, // Include the user's token in the request headers
+              },
+            }
+          );
+          console.log("Login User status:", response.data.status);
+          setLoginStatus(response.data.status);
+        } catch (error) {
+          console.error("Error fetching status:", error);
+        }
+      }
+    };
 
-  console.log("login admin status", isAdmin);
+    fetchAdminStatus();
+    fetchLoginStatus();
+  }, [user, axiosSecure]);
 
   useEffect(() => {
     loadCaptchaEnginge(6);
@@ -52,20 +73,8 @@ const SignIn = () => {
       const result = await signIn(email, password);
       const user = result.user;
 
-      // Fetch user role
-      const response = await axiosSecure.get(`/users/status/${user.email}`);
-      const userRole = response.data.role;
-      console.log("in login res", response);
-      console.log("in login role", userRole);
-
-      // Check if user is admin
-      const isAdminResponse = await axiosSecure.get(
-        `/users/admin/${user.email}`
-      );
-      const isAdmin = isAdminResponse.data.admin;
-
       // Navigate based on isAdmin status
-      if (isAdmin) {
+      if (admin) {
         navigate("/dashboard/admin");
       } else {
         navigate("/dashboard/user");
@@ -87,6 +96,19 @@ const SignIn = () => {
       });
     } finally {
       setLoading(false); // Set loading back to false after login request completes
+    }
+  };
+
+  useEffect(() => {
+    loadCaptchaEnginge(6);
+  }, []);
+
+  const handleValidateCaptcha = (e) => {
+    const user_captcha_value = e.target.value;
+    if (validateCaptcha(user_captcha_value)) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
     }
   };
 
@@ -127,18 +149,21 @@ const SignIn = () => {
             <label className="label">
               <LoadCanvasTemplate />
             </label>
-            {/* <input
+            <input
               onBlur={handleValidateCaptcha}
               type="text"
               name="captcha"
               placeholder="type the captcha above"
               className="input input-bordered"
               required
-            /> */}
+            />
             {/* disabled={disabled} */}
           </div>
           <div className="form-control mt-6">
-            <button className="btn btn-primary text-white" disabled={loading}>
+            <button
+              className="btn btn-primary text-white"
+              disabled={disabled || loading} // Disable button if captcha is not valid or loading is true
+            >
               {loading ? "Logging in..." : "Login"}{" "}
               {/* Show loading text if loading */}
             </button>
