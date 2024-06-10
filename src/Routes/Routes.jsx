@@ -19,7 +19,6 @@ import Tests from "../Pages/Dashboard/Admin/Tests/Tests";
 import Reservations from "../Pages/Dashboard/Admin/Reservations/Reservations";
 import AllBanner from "../Pages/Dashboard/Admin/AllBanner/AllBanner";
 import UpdateItem from "../Pages/Dashboard/Admin/UpdateItem/UpdateItem";
-import MakeReview from "../Pages/AllTests/MakeReview";
 import AddReview from "../Pages/Dashboard/Admin/AddReview/AddReview";
 import Doctors from "../Pages/Doctors/Doctors";
 import Contact from "../Pages/Contact/Contact";
