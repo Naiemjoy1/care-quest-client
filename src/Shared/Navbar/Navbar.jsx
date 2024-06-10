@@ -37,7 +37,7 @@ const Navbar = () => {
       }
       return null;
     },
-    enabled: !!user,
+    // enabled: !!user,
   });
 
   const userRole = userRoleData?.admin ? "admin" : "user";

@@ -10,7 +10,7 @@ import ReviewSlider from "./ReviewSlider";
 
 const MakeReview = ({ _id, isBooked }) => {
   const { user } = useAuth() || {}; // Ensure user is properly handled even if undefined
-  const [reviews, refetchReviews] = useReview();
+  const [reviews] = useReview();
   const [rating, setRating] = useState(0);
   const {
     register,
@@ -53,13 +53,14 @@ const MakeReview = ({ _id, isBooked }) => {
         console.log("added to the database");
         reset();
         setRating(0); // Reset the rating
-        refetchReviews();
         Swal.fire({
           position: "top-end",
           icon: "success",
           title: "Review Submitted Successfully",
           showConfirmButton: false,
           timer: 1500,
+        }).then(() => {
+          window.location.reload();
         });
       }
     } catch (error) {

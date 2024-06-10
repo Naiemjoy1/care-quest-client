@@ -3,7 +3,7 @@ import useAuth from "./useAuth";
 import axios from "axios";
 
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:3000/",
+  baseURL: "https://care-quest-server.vercel.app/",
 });
 
 const useAxiosSecure = () => {
@@ -28,8 +28,8 @@ const useAxiosSecure = () => {
     async (error) => {
       const status = error.response?.status;
       if (status === 401 || status === 403) {
-        await logOut();
-        navigate("/signin");
+        // await logOut();
+        // navigate("/signin");
       }
       return Promise.reject(error);
     }

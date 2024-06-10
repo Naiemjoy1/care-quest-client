@@ -108,19 +108,18 @@ const SignIn = () => {
             <label className="label">
               <LoadCanvasTemplate />
             </label>
-            <input
+            {/* <input
               onBlur={handleValidateCaptcha}
               type="text"
               name="captcha"
               placeholder="type the captcha above"
               className="input input-bordered"
               required
-            />
+            /> */}
+            {/* disabled={disabled} */}
           </div>
           <div className="form-control mt-6">
-            <button className="btn btn-primary text-white" disabled={disabled}>
-              Login
-            </button>
+            <button className="btn btn-primary text-white">Login</button>
           </div>
           <p className="mt-5 text-center">
             New Here?{" "}

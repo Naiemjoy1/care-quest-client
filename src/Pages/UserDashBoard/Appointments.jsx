@@ -1,8 +1,10 @@
 import Swal from "sweetalert2";
 import useBook from "../../Components/Hooks/useBook";
 import useAxiosSecure from "../../Components/Hooks/useAxiosSecure";
+import useAuth from "../../Components/Hooks/useAuth";
 
 const Appointments = () => {
+  const { user } = useAuth();
   const [booking, refetch] = useBook();
   const axiosSecure = useAxiosSecure();
 
@@ -32,8 +34,11 @@ const Appointments = () => {
     });
   };
 
+  // Filter bookings for the logged-in user
+  const userBookings = booking.filter((item) => item.userEmail === user.email);
+
   // Sort bookings by nearest date
-  const sortedBooking = booking.slice().sort((a, b) => {
+  const sortedBooking = userBookings.slice().sort((a, b) => {
     return new Date(a.date) - new Date(b.date);
   });
 
