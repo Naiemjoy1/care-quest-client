@@ -19,6 +19,7 @@ const Dashboard = () => {
   const axiosSecure = useAxiosSecure();
   const [admin, setAdmin] = useState();
   const [loginStatus, setLoginStatus] = useState();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchAdminStatus = async () => {
@@ -51,6 +52,16 @@ const Dashboard = () => {
 
   return (
     <div className="flex flex-col md:flex-row">
+      {loading && (
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-200 bg-opacity-75 z-50">
+          <div
+            className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full text-blue-600"
+            role="status"
+          >
+            <span className="loading loading-spinner text-4xl text-primary"></span>
+          </div>
+        </div>
+      )}
       <div className="w-full md:w-1/4 lg:min-h-screen bg-primary p-6">
         <ul className="menu text-white text-lg gap-4">
           {admin ? (

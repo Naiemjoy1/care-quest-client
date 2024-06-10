@@ -18,16 +18,19 @@ const SignIn = () => {
   const [loading, setLoading] = useState(false); // State for loading indicator
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
-  const [admin, setAdmin] = useState();
-  const [loginStatus, setLoginStatus] = useState();
+  const [admin, setAdmin] = useState(null);
+  const [loginStatus, setLoginStatus] = useState(null);
   const [disabled, setDisabled] = useState(true);
 
   useEffect(() => {
     const fetchAdminStatus = async () => {
-      if (user) {
+      if (user && user.token) {
         try {
-          const response = await axiosSecure.get(`/users/admin/${user.email}`);
-          // console.log("Admin status:", response.data.admin);
+          const response = await axiosSecure.get(`/users/admin/${user.email}`, {
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
+          });
           setAdmin(response.data.admin);
         } catch (error) {
           console.error("Error fetching admin status:", error);
@@ -36,17 +39,16 @@ const SignIn = () => {
     };
 
     const fetchLoginStatus = async () => {
-      if (user) {
+      if (user && user.token) {
         try {
           const response = await axiosSecure.get(
             `/users/status/${user.email}`,
             {
               headers: {
-                Authorization: `Bearer ${user.token}`, // Include the user's token in the request headers
+                Authorization: `Bearer ${user.token}`,
               },
             }
           );
-          // console.log("Login User status:", response.data.status);
           setLoginStatus(response.data.status);
         } catch (error) {
           console.error("Error fetching status:", error);
@@ -73,7 +75,9 @@ const SignIn = () => {
       const result = await signIn(email, password);
       const user = result.user;
 
-      // Navigate based on isAdmin status
+      // Perform any necessary data loading after login here
+
+      // Navigate based on isAdmin status after the data loading is complete
       if (admin) {
         navigate("/dashboard/admin");
       } else {
@@ -98,10 +102,6 @@ const SignIn = () => {
       setLoading(false); // Set loading back to false after login request completes
     }
   };
-
-  useEffect(() => {
-    loadCaptchaEnginge(6);
-  }, []);
 
   const handleValidateCaptcha = (e) => {
     const user_captcha_value = e.target.value;
@@ -157,7 +157,6 @@ const SignIn = () => {
               className="input input-bordered"
               required
             />
-            {/* disabled={disabled} */}
           </div>
           <div className="form-control mt-6">
             <button

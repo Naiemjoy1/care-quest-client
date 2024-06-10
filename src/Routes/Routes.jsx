@@ -24,6 +24,7 @@ import Doctors from "../Pages/Doctors/Doctors";
 import Contact from "../Pages/Contact/Contact";
 import About from "../Pages/About/About";
 import FunctionTest from "../Pages/FunctionTest/FunctionTest";
+import AdminRoute from "../Routes/AdminRoute";
 
 export const router = createBrowserRouter([
   {
