@@ -24,7 +24,7 @@ const MakeReview = ({ _id, isBooked }) => {
   const filteredReviews = reviews.filter(
     (review) => review.reviewsId === _id && review.email === user?.email
   );
-  console.log("Filtered Reviews:", filteredReviews);
+  // console.log("Filtered Reviews:", filteredReviews);
 
   const onSubmit = async (data) => {
     if (rating === 0) {
@@ -50,7 +50,7 @@ const MakeReview = ({ _id, isBooked }) => {
       };
       const res = await axiosPublic.post("/reviews", formData);
       if (res.data.insertedId) {
-        console.log("added to the database");
+        // console.log("added to the database");
         reset();
         setRating(0); // Reset the rating
         Swal.fire({
@@ -75,7 +75,7 @@ const MakeReview = ({ _id, isBooked }) => {
     }
   };
 
-  console.log("book data in review", isBooked);
+  // console.log("book data in review", isBooked);
 
   return (
     <div className="container mx-auto lg:flex  space-y-4 lg:space-y-0  gap-4 mb-10 px-5">

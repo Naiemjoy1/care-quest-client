@@ -41,7 +41,7 @@ const AddTest = () => {
           "content-type": "multipart/form-data",
         },
       });
-      console.log("Image Upload Response: ", res.data);
+      // console.log("Image Upload Response: ", res.data);
 
       if (res.data.success) {
         // Combine selected time slots
@@ -62,7 +62,7 @@ const AddTest = () => {
         };
 
         const testsRes = await axiosSecure.post("/tests", testsItem);
-        console.log(testsRes.data);
+        // console.log(testsRes.data);
 
         if (testsRes.data.insertedId) {
           // show success popup

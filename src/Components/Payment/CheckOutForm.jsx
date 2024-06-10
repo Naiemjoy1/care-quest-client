@@ -21,7 +21,7 @@ const CheckOutForm = ({ handleConfirmBooking, finalPrice, test }) => {
       axiosSecure
         .post("/create-payment-intent", { price: finalPrice })
         .then((res) => {
-          console.log(res.data.clientSecret);
+          // console.log(res.data.clientSecret);
           setClientSecret(res.data.clientSecret);
         })
         .catch((err) => {
@@ -51,7 +51,7 @@ const CheckOutForm = ({ handleConfirmBooking, finalPrice, test }) => {
       console.error("[error]", error);
       setError(error.message);
     } else {
-      console.log("[PaymentMethod]", paymentMethod);
+      // console.log("[PaymentMethod]", paymentMethod);
       setError("");
     }
 
@@ -72,9 +72,9 @@ const CheckOutForm = ({ handleConfirmBooking, finalPrice, test }) => {
       console.error("Error confirming card payment:", confirmError);
       setError(confirmError.message);
     } else {
-      console.log("Payment intent", paymentIntent);
+      // console.log("Payment intent", paymentIntent);
       if (paymentIntent.status === "succeeded") {
-        console.log("Transaction ID:", paymentIntent.id);
+        // console.log("Transaction ID:", paymentIntent.id);
         setTransactionId(paymentIntent.id);
 
         // save payment
@@ -88,7 +88,7 @@ const CheckOutForm = ({ handleConfirmBooking, finalPrice, test }) => {
         };
 
         const res = await axiosSecure.post("/payments", payment);
-        console.log("Payment saved:", res.data);
+        // console.log("Payment saved:", res.data);
         if (res.data?.paymentResult.insertedId) {
           Swal.fire({
             position: "top-end",

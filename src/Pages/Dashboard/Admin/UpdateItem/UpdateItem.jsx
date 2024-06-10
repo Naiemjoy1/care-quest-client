@@ -9,8 +9,8 @@ import { useParams } from "react-router-dom";
 
 const image_hosting_key = import.meta.env.VITE_IMGBB_API;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
-console.log("API Key:", image_hosting_key);
-console.log("API Endpoint:", image_hosting_api);
+// console.log("API Key:", image_hosting_key);
+// console.log("API Endpoint:", image_hosting_api);
 
 const UpdateItem = () => {
   const { _id } = useParams();
@@ -65,7 +65,7 @@ const UpdateItem = () => {
           },
         });
 
-        console.log("Image Upload Response:", res.data);
+        // console.log("Image Upload Response:", res.data);
 
         if (res.data.success) {
           imageUrl = res.data.data.display_url;
@@ -103,7 +103,7 @@ const UpdateItem = () => {
 
     try {
       const testsRes = await axiosSecure.patch(`/tests/${_id}`, testsItem);
-      console.log("Test Update Response:", testsRes.data);
+      // console.log("Test Update Response:", testsRes.data);
 
       if (testsRes.data.modifiedCount > 0) {
         reset();

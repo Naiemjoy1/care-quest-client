@@ -42,7 +42,7 @@ const AddReview = ({ _id, onCloseModal }) => {
       };
       const res = await axiosPublic.post("/reviews", formData);
       if (res.data.insertedId) {
-        console.log("added to the database");
+        // console.log("added to the database");
         reset();
         setRating(0);
         onCloseModal(); // Reset the rating

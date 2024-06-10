@@ -39,7 +39,7 @@ const BookTest = () => {
   const { user } = useAuth();
 
   useEffect(() => {
-    console.log("Promotions:", promotions);
+    // console.log("Promotions:", promotions);
     const foundTest = tests.find((test) => test._id === _id);
     if (foundTest) {
       setTest(foundTest);
@@ -58,16 +58,16 @@ const BookTest = () => {
 
   const handleConfirmBooking = () => {
     const foundTest = tests.find((test) => test._id === _id);
-    console.log("Found Test Data:", foundTest, user.email);
+    // console.log("Found Test Data:", foundTest, user.email);
     if (user && user.email) {
       if (promoCode && finalPrice) {
-        console.log("Test Name:", test.name);
-        console.log("Test Date:", test.date);
-        console.log("Final Price:", test);
+        // console.log("Test Name:", test.name);
+        // console.log("Test Date:", test.date);
+        // console.log("Final Price:", test);
       } else {
-        console.log("Test Name:", test.name);
-        console.log("Test Date:", test.date);
-        console.log("Original Price:", test.price);
+        // console.log("Test Name:", test.name);
+        // console.log("Test Date:", test.date);
+        // console.log("Original Price:", test.price);
       }
       // Update slots after confirming booking
       setSlots(slots.filter((slot) => slot !== selectedSlot));

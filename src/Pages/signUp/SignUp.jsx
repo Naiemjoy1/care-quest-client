@@ -42,7 +42,7 @@ const SignUp = () => {
     const district = data.district;
     const upazila = data.upazila;
 
-    console.log("Form data:", data);
+    // console.log("Form data:", data);
 
     try {
       const formData = new FormData();
@@ -55,17 +55,17 @@ const SignUp = () => {
 
       const result = await response.json();
       const displayUrl = result.data.display_url;
-      console.log("Name:", name);
-      console.log("Uploaded Image URL:", displayUrl);
-      console.log("Email:", email);
+      // console.log("Name:", name);
+      // console.log("Uploaded Image URL:", displayUrl);
+      // console.log("Email:", email);
 
       // Create user
       const userResult = await createuser(email, password);
-      console.log("Created user:", userResult);
+      // console.log("Created user:", userResult);
 
       // Save username and photo
       await updateUserProfile(name, displayUrl);
-      console.log("Updated user profile with name and image URL");
+      // console.log("Updated user profile with name and image URL");
       //create user database
       const userInfo = {
         name,
@@ -78,7 +78,7 @@ const SignUp = () => {
       };
       axiosPublic.post("/users", userInfo).then((res) => {
         if (res.data.insertedId) {
-          console.log("added to the database");
+          // console.log("added to the database");
           reset();
           Swal.fire({
             position: "top-end",

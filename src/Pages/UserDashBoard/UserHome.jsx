@@ -7,7 +7,7 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 
 const UserHome = () => {
   const { user, updateUserProfile } = useAuth();
-  console.log("user detail", user);
+  // console.log("user detail", user);
   const [displayName, setDisplayName] = useState(user.displayName || "");
   const [image, setImage] = useState(user.photoURL || "");
   const [loading, setLoading] = useState(false);
@@ -63,7 +63,7 @@ const UserHome = () => {
 
         if (data.data.url) {
           photo = data.data.url;
-          console.log("Uploaded image link:", photo);
+          // console.log("Uploaded image link:", photo);
         } else {
           throw new Error("Image upload failed");
         }

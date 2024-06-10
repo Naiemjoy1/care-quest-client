@@ -13,10 +13,10 @@ const Tests = () => {
   const axiosSecure = useAxiosSecure();
   const [bookings] = useBook();
   const [currentTestId, setCurrentTestId] = useState(null); // State to hold the current test _id
-  console.log("booking data from test name", bookings);
+  // console.log("booking data from test name", bookings);
 
   const [allBookings] = useAllBookings();
-  console.log("all books", allBookings);
+  // console.log("all books", allBookings);
 
   const { data: tests = [], refetch } = useQuery({
     queryKey: ["tests"],

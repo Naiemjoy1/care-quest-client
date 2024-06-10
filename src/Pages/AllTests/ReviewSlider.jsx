@@ -19,7 +19,7 @@ import "@smastrom/react-rating/style.css";
 
 const ReviewSlider = ({ reviews, _id }) => {
   const filteredReviews = reviews.filter((review) => review.reviewsId === _id);
-  console.log("Filtered Reviews for slider: ", filteredReviews);
+  // console.log("Filtered Reviews for slider: ", filteredReviews);
 
   return (
     <div>

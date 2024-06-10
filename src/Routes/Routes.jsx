@@ -41,7 +41,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/tests/:_id",
-        element: <TestDetails></TestDetails>,
+        element: (
+          <PrivateRoutes>
+            <TestDetails></TestDetails>
+          </PrivateRoutes>
+        ),
         loader: () => fetch("featuredTests.json"),
       },
       {

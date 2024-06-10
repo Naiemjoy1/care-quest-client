@@ -1,11 +1,13 @@
+import useAuth from "../../Components/Hooks/useAuth";
 import useBook from "../../Components/Hooks/useBook";
 
 const TestResults = () => {
+  const { user } = useAuth();
   const [booking] = useBook();
   const deliveredBookings = booking.filter(
-    (item) => item.status === "Delivered"
+    (item) => item.status === "Delivered" && item.email === user?.email
   );
-  console.log("rest result show", deliveredBookings);
+  // console.log("rest result show", deliveredBookings);
   return (
     <div>
       <h2>User test result: {deliveredBookings.length}</h2>

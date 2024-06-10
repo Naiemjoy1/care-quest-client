@@ -10,7 +10,7 @@ const useImgApi = () => {
 
     try {
       const apiKey = import.meta.env.VITE_IMGBB_API;
-      console.log("API Key:", apiKey);
+      // console.log("API Key:", apiKey);
 
       const { data } = await axios.post(
         `https://api.imgbb.com/1/upload?key=${apiKey}`,

@@ -14,6 +14,7 @@ const Navbar = () => {
   const axiosSecure = useAxiosSecure();
   const [admin, setAdmin] = useState();
   const [loginStatus, setLoginStatus] = useState();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchAdminStatus = async () => {
@@ -44,8 +45,13 @@ const Navbar = () => {
     fetchLoginStatus();
   }, [user, axiosSecure]);
 
+  useEffect(() => {
+    setLoading(false); // Set loading to false after initial fetch operations complete
+  }, []);
+
   const navLink = (
     <>
+      {loading && <span className="loading loading-ring loading-xs"></span>}
       <li>
         <NavLink
           to="/"
@@ -173,11 +179,17 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{navLink}</ul>
       </div>
       <div className="navbar-end gap-2">
-        {loginStatus ? (
-          <button className="badge badge-success text-white">Active</button>
-        ) : (
-          <button className="badge badge-warning text-white">Blocked</button>
-        )}
+        {user ? (
+          <>
+            {loginStatus ? (
+              <button className="badge badge-success text-white">Active</button>
+            ) : (
+              <button className="badge badge-warning text-white">
+                Blocked
+              </button>
+            )}
+          </>
+        ) : null}
 
         <button className="btn btn-sm">
           <FaCartPlus />

@@ -25,7 +25,7 @@ const Dashboard = () => {
       if (user) {
         try {
           const response = await axiosSecure.get(`/users/admin/${user.email}`);
-          console.log("Admin status:", response.data.admin);
+          // console.log("Admin status:", response.data.admin);
           setAdmin(response.data.admin);
         } catch (error) {
           console.error("Error fetching admin status:", error);
@@ -37,7 +37,7 @@ const Dashboard = () => {
       if (user) {
         try {
           const response = await axiosSecure.get(`/users/status/${user.email}`);
-          console.log("Login User status:", response.data.status);
+          // console.log("Login User status:", response.data.status);
           setLoginStatus(response.data.status);
         } catch (error) {
           console.error("Error fetching status:", error);

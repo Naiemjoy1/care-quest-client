@@ -14,7 +14,7 @@ const FunctionTest = () => {
       if (user) {
         try {
           const response = await axiosSecure.get(`/users/admin/${user.email}`);
-          console.log("Admin status:", response.data.admin);
+          //   console.log("Admin status:", response.data.admin);
           setAdmin(response.data.admin);
         } catch (error) {
           console.error("Error fetching admin status:", error);
@@ -26,7 +26,7 @@ const FunctionTest = () => {
       if (user) {
         try {
           const response = await axiosSecure.get(`/users/status/${user.email}`);
-          console.log("Login User status:", response.data.status);
+          //   console.log("Login User status:", response.data.status);
           setLoginStatus(response.data.status);
         } catch (error) {
           console.error("Error fetching status:", error);
@@ -42,8 +42,15 @@ const FunctionTest = () => {
 
   return (
     <div>
-      {loading ? ( // Render loader if loading state is true
-        <p>Loading...</p>
+      {loading ? (
+        <div className="absolute inset-0 lg:flex  items-center justify-center bg-gray-200 bg-opacity-75 z-50">
+          <div
+            className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full text-blue-600"
+            role="status"
+          >
+            <span className="loading loading-spinner text-4xl text-primary"></span>
+          </div>
+        </div>
       ) : (
         <>
           <h2>Admin:</h2>

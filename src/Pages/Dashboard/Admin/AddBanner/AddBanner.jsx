@@ -33,7 +33,7 @@ const AddBanner = () => {
       // If successful, log the uploaded image URL
       if (result.data) {
         const bannerImg = result.data.image.url;
-        console.log("Banner image link:", bannerImg);
+        // console.log("Banner image link:", bannerImg);
 
         // Log the form data with the banner image link
         const bannerItem = {
@@ -47,11 +47,11 @@ const AddBanner = () => {
           image: bannerImg,
           isActive: false,
         };
-        console.log("Banner item:", bannerItem);
+        // console.log("Banner item:", bannerItem);
 
         axiosSecure.post("/banners", bannerItem).then((res) => {
           if (res.data.insertedId) {
-            console.log("added to the database");
+            // console.log("added to the database");
             reset();
             Swal.fire({
               position: "top-end",

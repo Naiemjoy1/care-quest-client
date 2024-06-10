@@ -11,7 +11,7 @@ const Doctors = () => {
     },
   });
 
-  console.log("doctors", doctors);
+  // console.log("doctors", doctors);
 
   return (
     <div className="my-14 grid lg:grid-cols-3 md:grid-cols-2 justify-center items-center gap-4 container mx-auto">

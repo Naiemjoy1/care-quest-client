@@ -16,7 +16,7 @@ const Banner = () => {
   // Filter active banners
   const activeBanners = banners.filter((banner) => banner.isActive);
 
-  console.log("active banners", activeBanners);
+  // console.log("active banners", activeBanners);
 
   return (
     <div>
