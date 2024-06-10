@@ -35,7 +35,7 @@ const Appointments = () => {
   };
 
   // Filter bookings for the logged-in user
-  const userBookings = booking.filter((item) => item.userEmail === user.email);
+  const userBookings = booking.filter((item) => item.email === user.email);
 
   // Sort bookings by nearest date
   const sortedBooking = userBookings.slice().sort((a, b) => {
@@ -46,7 +46,7 @@ const Appointments = () => {
     <div>
       <div className="flex justify-evenly">
         <p>Booking Appointments:</p>
-        <p>{sortedBooking.length}</p>
+        <p>{userBookings.length}</p>
       </div>
       <div>
         <div className="overflow-x-auto">

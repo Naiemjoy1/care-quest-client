@@ -16,16 +16,8 @@ const SignIn = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [disabled, setDisabled] = useState(true);
+  const [loading, setLoading] = useState(false); // State for loading indicator
   const axiosSecure = useAxiosSecure();
-
-  const handleValidateCaptcha = (e) => {
-    const user_captcha_value = e.target.value;
-    if (validateCaptcha(user_captcha_value)) {
-      setDisabled(false);
-    } else {
-      setDisabled(true);
-    }
-  };
 
   useEffect(() => {
     loadCaptchaEnginge(6);
@@ -38,9 +30,9 @@ const SignIn = () => {
     const password = form.password.value;
 
     try {
+      setLoading(true); // Set loading to true before making the login request
       const result = await signIn(email, password);
       const user = result.user;
-      console.log(user);
 
       // Fetch user role
       const response = await axiosSecure.get(`/users/status/${user.email}`);
@@ -68,6 +60,8 @@ const SignIn = () => {
         title: "Oops...",
         text: "Something went wrong!",
       });
+    } finally {
+      setLoading(false); // Set loading back to false after login request completes
     }
   };
 
@@ -119,7 +113,10 @@ const SignIn = () => {
             {/* disabled={disabled} */}
           </div>
           <div className="form-control mt-6">
-            <button className="btn btn-primary text-white">Login</button>
+            <button className="btn btn-primary text-white" disabled={loading}>
+              {loading ? "Logging in..." : "Login"}{" "}
+              {/* Show loading text if loading */}
+            </button>
           </div>
           <p className="mt-5 text-center">
             New Here?{" "}

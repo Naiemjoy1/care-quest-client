@@ -49,6 +49,7 @@ const TestDetails = () => {
   const [filteredBookings, setFilteredBookings] = useState([]);
   const [isBooked, setIsBooked] = useState(false);
   const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GATEWAY_PK);
+  const [selectedBooking, setSelectedBooking] = useState(null);
 
   const totalPrice =
     finalPrice !== null ? finalPrice : test ? test.price : null;
@@ -183,6 +184,11 @@ const TestDetails = () => {
     return <p>Test not found</p>;
   }
 
+  const handleOpenModal = (booking) => {
+    setSelectedBooking(booking);
+    document.getElementById("my_modal_2").showModal();
+  };
+
   return (
     <div>
       <figure>
@@ -223,13 +229,54 @@ const TestDetails = () => {
                   Book Now
                 </Button>
               )}
-              {filteredBookings.map((booking) => (
+              {/* {filteredBookings.map((booking) => (
                 <div key={booking._id}>
                   <button className="btn btn-sm btn-primary mt-5 text-white">
                     {booking.status}
                   </button>
                 </div>
+              ))} */}
+
+              {filteredBookings.map((booking) => (
+                <div key={booking._id}>
+                  {booking.status === "Delivered" ? (
+                    <button
+                      className="btn btn-sm btn-primary mt-5 text-white"
+                      onClick={() => handleOpenModal(booking)}
+                    >
+                      {booking.status}
+                    </button>
+                  ) : (
+                    <button className="btn btn-sm btn-primary mt-5 text-white">
+                      {booking.status}
+                    </button>
+                  )}
+                </div>
               ))}
+
+              <dialog id="my_modal_2" className="modal">
+                <div className="modal-box">
+                  {selectedBooking && (
+                    <>
+                      <a
+                        className=" text-center text-primary"
+                        href={selectedBooking.report}
+                      >
+                        Click here for Download Report
+                      </a>
+                    </>
+                  )}
+                </div>
+                <form method="dialog" className="modal-backdrop">
+                  <button
+                    onClick={() =>
+                      document.getElementById("my_modal_2").close()
+                    }
+                  >
+                    close
+                  </button>
+                </form>
+              </dialog>
 
               <Modal
                 open={open}

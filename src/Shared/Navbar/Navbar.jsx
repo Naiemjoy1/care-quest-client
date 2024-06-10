@@ -5,6 +5,7 @@ import useAuth from "../../Components/Hooks/useAuth";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { FaCartPlus } from "react-icons/fa";
+import axios from "axios";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -12,6 +13,7 @@ const Navbar = () => {
   const [booking] = useBook();
   const [userStatus, setUserStatus] = useState(null);
   const axiosSecure = useAxiosSecure();
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     const fetchUserStatus = async () => {
@@ -26,6 +28,22 @@ const Navbar = () => {
     };
 
     fetchUserStatus();
+  }, [user, axiosSecure]);
+
+  useEffect(() => {
+    const fetchAdminStatus = async () => {
+      if (user) {
+        try {
+          const response = await axiosSecure.get(`/users/admin/${user.email}`);
+          setIsAdmin(response.data.admin);
+          console.log("Admin status:", response.data.admin);
+        } catch (error) {
+          console.error("Error fetching admin status:", error);
+        }
+      }
+    };
+
+    fetchAdminStatus();
   }, [user, axiosSecure]);
 
   const { data: userRoleData } = useQuery({
@@ -44,7 +62,7 @@ const Navbar = () => {
 
   const userBookings = booking.filter((book) => book.email === user?.email);
 
-  console.log("login user role", userRole);
+  console.log("login user role", isAdmin);
 
   const navLink = (
     <>
