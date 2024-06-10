@@ -10,13 +10,12 @@ import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 
 import useTests from "../../Components/Hooks/useTests";
-import usePromotions from "../../Components/Hooks/usePromotions";
 import useAuth from "../../Components/Hooks/useAuth";
 import useAxiosSecure from "../../Components/Hooks/useAxiosSecure";
 import useBook from "../../Components/Hooks/useBook";
-import TestSendData from "./TestSendData";
 import CheckOutForm from "../../Components/Payment/CheckOutForm";
 import MakeReview from "./MakeReview";
+import useBanner from "../../Components/Hooks/useBanner";
 
 const style = {
   position: "absolute",
@@ -38,7 +37,6 @@ const TestDetails = () => {
   const [slots, setSlots] = useState([]);
   const [selectedSlot, setSelectedSlot] = useState("");
   const [open, setOpen] = useState(false);
-  const [promotions] = usePromotions();
   const [promoCode, setPromoCode] = useState("");
   const [finalPrice, setFinalPrice] = useState(null);
   const [promoCodeError, setPromoCodeError] = useState(false);
@@ -49,10 +47,9 @@ const TestDetails = () => {
   const axiosSecure = useAxiosSecure();
   const [booking, refetch] = useBook();
   const [filteredBookings, setFilteredBookings] = useState([]);
-  const [isBooked, setIsBooked] = useState(false); // New state variable
+  const [isBooked, setIsBooked] = useState(false);
   const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GATEWAY_PK);
 
-  // Calculate total price
   const totalPrice =
     finalPrice !== null ? finalPrice : test ? test.price : null;
 
@@ -70,7 +67,6 @@ const TestDetails = () => {
       setSlots(availableSlots);
       setSelectedSlot(availableSlots[0]);
 
-      // Check if the user has already booked a slot
       if (user) {
         const userBooking = filteredByBookId.find(
           (book) => book.email === user.email
@@ -93,12 +89,10 @@ const TestDetails = () => {
     setFinalBookingPrice(test ? test.price : null);
   }, [test]);
 
-  // Function to handle slot change
   const handleSlotChange = (event) => {
     setSelectedSlot(event.target.value);
   };
 
-  // Function to handle modal open
   const handleOpen = async () => {
     const finalBookingPrice = test.price;
     if (user && user.email) {
@@ -131,10 +125,8 @@ const TestDetails = () => {
     setFinalPrice(finalBookingPrice);
   };
 
-  // Function to handle modal close
   const handleClose = () => setOpen(false);
 
-  // Function to handle booking confirmation
   const handleConfirmBooking = () => {
     const bookTest = {
       bookId: test._id,
@@ -165,23 +157,21 @@ const TestDetails = () => {
     setSlots(slots.filter((slot) => slot !== selectedSlot));
   };
 
-  // Function to handle promo code change
   const handlePromoCodeChange = (event) => {
     setPromoCode(event.target.value);
     setPromoCodeError(false);
   };
 
-  // Function to apply promo code
+  const [banners] = useBanner();
+
   const applyPromoCode = () => {
-    const foundPromotion = promotions.find(
-      (promotion) => promotion.couponCode === promoCode
+    const foundPromotion = banners.find(
+      (promotion) => promotion.cuponcode === promoCode
     );
     if (foundPromotion) {
-      const discountRate = parseFloat(
-        foundPromotion.discountRate.replace("%", "")
-      );
+      const rate = parseFloat(foundPromotion.rate.replace("%", ""));
       const discountedPrice =
-        finalBookingPrice - (finalBookingPrice * discountRate) / 100;
+        finalBookingPrice - (finalBookingPrice * rate) / 100;
       setFinalPrice(discountedPrice);
     } else {
       setFinalPrice(finalBookingPrice);
@@ -233,8 +223,6 @@ const TestDetails = () => {
                   Book Now
                 </Button>
               )}
-              {/* test data  */}
-
               {filteredBookings.map((booking) => (
                 <div key={booking._id}>
                   <button className="btn btn-sm btn-primary mt-5 text-white">
@@ -289,13 +277,6 @@ const TestDetails = () => {
                     >
                       Apply Promocode
                     </Button>
-                    <Button
-                      variant="contained"
-                      onClick={handleConfirmBooking}
-                      sx={{ mt: 2 }}
-                    >
-                      Pay
-                    </Button>
                     <Elements stripe={stripePromise}>
                       <CheckOutForm
                         handleConfirmBooking={handleConfirmBooking}
@@ -314,7 +295,8 @@ const TestDetails = () => {
           )}
         </div>
       </div>
-      <MakeReview _id={_id}></MakeReview>
+
+      <MakeReview isBooked={isBooked} _id={_id} />
     </div>
   );
 };

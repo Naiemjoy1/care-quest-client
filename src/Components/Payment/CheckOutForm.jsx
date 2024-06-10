@@ -9,13 +9,12 @@ const CheckOutForm = ({ handleConfirmBooking, finalPrice, test }) => {
   const [error, setError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const [transactionId, setTransactionId] = useState("");
+  const [cardComplete, setCardComplete] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const navigate = useNavigate();
-
-  //   const totalPrice = cart.reduce((total, item) => total + item.price, 0);
 
   useEffect(() => {
     if (finalPrice > 0) {
@@ -104,6 +103,11 @@ const CheckOutForm = ({ handleConfirmBooking, finalPrice, test }) => {
     }
   };
 
+  const handleCardChange = (event) => {
+    setError(event.error ? event.error.message : "");
+    setCardComplete(event.complete);
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <p>Please Pay: {finalPrice}</p>
@@ -122,11 +126,12 @@ const CheckOutForm = ({ handleConfirmBooking, finalPrice, test }) => {
             },
           },
         }}
+        onChange={handleCardChange}
       />
       <button
-        className="btn btn-primary btn-sm mt-10"
+        className="btn btn-primary btn-sm mt-10 text-white"
         type="submit"
-        disabled={!stripe || !clientSecret}
+        disabled={!stripe || !clientSecret || !cardComplete}
       >
         Pay
       </button>

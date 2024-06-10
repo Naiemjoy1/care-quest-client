@@ -8,9 +8,9 @@ import Swal from "sweetalert2";
 import useAxiosPublic from "../../Components/Hooks/useAxiosPublic";
 import ReviewSlider from "./ReviewSlider";
 
-const MakeReview = ({ _id }) => {
+const MakeReview = ({ _id, isBooked }) => {
   const { user } = useAuth() || {}; // Ensure user is properly handled even if undefined
-  const [reviews] = useReview();
+  const [reviews, isLoading, isError, refetchReviews] = useReview();
   const [rating, setRating] = useState(0);
   const {
     register,
@@ -53,6 +53,7 @@ const MakeReview = ({ _id }) => {
         console.log("added to the database");
         reset();
         setRating(0); // Reset the rating
+        refetchReviews();
         Swal.fire({
           position: "top-end",
           icon: "success",
@@ -73,90 +74,100 @@ const MakeReview = ({ _id }) => {
     }
   };
 
+  console.log("book data in review", isBooked);
+
   return (
     <div className="container mx-auto flex gap-8 mb-10">
       <div className="w-1/2 space-y-4">
         <ReviewSlider reviews={reviews} _id={_id}></ReviewSlider>
       </div>
-      <div className="w-1/2 bg-primary p-6 rounded-lg">
-        <h2 className="text-3xl font-semibold text-center">
-          Your opinion matters!
-        </h2>
-        <div className="flex flex-col items-center">
-          <span className="text-center">How was your experience?</span>
-        </div>
-        <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
-          <div className="form-control">
-            <Rating
-              style={{ maxWidth: 180 }}
-              value={rating}
-              onChange={setRating}
-              required
-            />
-            {/* {rating === 0 && (
-              <span className="text-red-500 text-sm">Rating is required.</span>
-            )} */}
-          </div>
-          <div className="form-control">
-            <input
-              type="text"
-              name="title"
-              placeholder="Title For Review"
-              className="p-4 rounded-md resize-none text-white bg-secondary"
-              {...register("title", { required: "Title is required." })}
-            />
-            {errors.title && (
-              <span className="text-red-500 text-sm">
-                {errors.title.message}
-              </span>
-            )}
-          </div>
-          <div className="form-control">
-            <input
-              type="text"
-              name="profession"
-              placeholder="Your Profession"
-              className="p-4 rounded-md resize-none text-white bg-secondary"
-              {...register("profession", {
-                required: "Profession is required.",
-              })}
-            />
-            {errors.profession && (
-              <span className="text-red-500 text-sm">
-                {errors.profession.message}
-              </span>
-            )}
-          </div>
-          <div className="form-control">
-            <textarea
-              rows="3"
-              name="message"
-              placeholder="Message..."
-              className="p-4 rounded-md resize-none text-white bg-secondary"
-              {...register("message", { required: "Message is required." })}
-            ></textarea>
-            {errors.message && (
-              <span className="text-red-500 text-sm">
-                {errors.message.message}
-              </span>
-            )}
-          </div>
-          <div className="form-control mt-6">
-            {filteredReviews.length === 0 ? (
-              <button className="btn btn-secondary text-white" type="submit">
-                {loading ? (
-                  <span className="loading loading-ring loading-sm"></span>
-                ) : (
-                  "Leave feedback"
+      <div className="w-1/2">
+        {isBooked ? (
+          <div className="bg-primary p-6 rounded-lg">
+            <h2 className="text-3xl font-semibold text-center">
+              Your opinion matters!
+            </h2>
+            <div className="flex flex-col items-center">
+              <span className="text-center">How was your experience?</span>
+            </div>
+            <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
+              <div className="form-control">
+                <Rating
+                  style={{ maxWidth: 180 }}
+                  value={rating}
+                  onChange={setRating}
+                  required
+                />
+              </div>
+              <div className="form-control">
+                <input
+                  type="text"
+                  name="title"
+                  placeholder="Title For Review"
+                  className="p-4 rounded-md resize-none text-white bg-secondary"
+                  {...register("title", { required: "Title is required." })}
+                />
+                {errors.title && (
+                  <span className="text-red-500 text-sm">
+                    {errors.title.message}
+                  </span>
                 )}
-              </button>
-            ) : (
-              <p className="text-center text-secondary font-semibold">
-                Already Submitted
-              </p>
-            )}
+              </div>
+              <div className="form-control">
+                <input
+                  type="text"
+                  name="profession"
+                  placeholder="Your Profession"
+                  className="p-4 rounded-md resize-none text-white bg-secondary"
+                  {...register("profession", {
+                    required: "Profession is required.",
+                  })}
+                />
+                {errors.profession && (
+                  <span className="text-red-500 text-sm">
+                    {errors.profession.message}
+                  </span>
+                )}
+              </div>
+              <div className="form-control">
+                <textarea
+                  rows="3"
+                  name="message"
+                  placeholder="Message..."
+                  className="p-4 rounded-md resize-none text-white bg-secondary"
+                  {...register("message", { required: "Message is required." })}
+                ></textarea>
+                {errors.message && (
+                  <span className="text-red-500 text-sm">
+                    {errors.message.message}
+                  </span>
+                )}
+              </div>
+              <div className="form-control mt-6">
+                {filteredReviews.length === 0 ? (
+                  <button
+                    className="btn btn-secondary text-white"
+                    type="submit"
+                  >
+                    {loading ? (
+                      <span className="loading loading-ring loading-sm"></span>
+                    ) : (
+                      "Leave feedback"
+                    )}
+                  </button>
+                ) : (
+                  <p className="text-center text-secondary font-semibold">
+                    Already Submitted
+                  </p>
+                )}
+              </div>
+            </form>
           </div>
-        </form>
+        ) : (
+          <p className="text-center text-secondary font-semibold">
+            Please book a test before leaving a review.
+          </p>
+        )}
       </div>
     </div>
   );

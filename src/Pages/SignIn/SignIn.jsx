@@ -10,7 +10,6 @@ import {
 } from "react-simple-captcha";
 import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 import useAxiosSecure from "../../Components/Hooks/useAxiosSecure";
-import axios from "axios";
 
 const SignIn = () => {
   const { signIn } = useContext(AuthContext);
@@ -43,13 +42,11 @@ const SignIn = () => {
       const user = result.user;
       console.log(user);
 
-      let userRole = "";
-      if (localStorage.getItem("access-token")) {
-        const response = await axiosSecure.get(`/users/status/${user.email}`);
-        userRole = response.data.role;
-      }
-
       // Fetch user role
+      const response = await axiosSecure.get(`/users/status/${user.email}`);
+      const userRole = response.data.role;
+      console.log("in login res", response);
+      console.log("in login role", userRole);
 
       Swal.fire({
         position: "top-end",
@@ -111,17 +108,19 @@ const SignIn = () => {
             <label className="label">
               <LoadCanvasTemplate />
             </label>
-            {/* <input
+            <input
               onBlur={handleValidateCaptcha}
               type="text"
               name="captcha"
               placeholder="type the captcha above"
               className="input input-bordered"
               required
-            /> */}
+            />
           </div>
           <div className="form-control mt-6">
-            <button className="btn btn-primary text-white">Login</button>
+            <button className="btn btn-primary text-white" disabled={disabled}>
+              Login
+            </button>
           </div>
           <p className="mt-5 text-center">
             New Here?{" "}
