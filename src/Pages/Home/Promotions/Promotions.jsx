@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import Promotion from "./Promotion";
 
 import {
@@ -20,18 +19,8 @@ import useAxiosSecure from "../../../Components/Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 
 const Promotions = () => {
-  const [promotions, setPromotions] = useState([]);
-
-  useEffect(() => {
-    fetch("http://localhost:3000/promotions")
-      .then((res) => res.json())
-      .then((data) => {
-        setPromotions(data);
-      });
-  }, []);
-
   const axiosSecure = useAxiosSecure();
-  const { data: banners = [], refetch } = useQuery({
+  const { data: banners = [] } = useQuery({
     queryKey: ["banners"],
     queryFn: async () => {
       const res = await axiosSecure.get("/banners");
@@ -39,11 +28,26 @@ const Promotions = () => {
     },
   });
 
+  const breakpoints = {
+    // when window width is >= 320px (small devices)
+    320: {
+      slidesPerView: 1,
+    },
+    // when window width is >= 640px (medium devices)
+    640: {
+      slidesPerView: 2,
+    },
+    // when window width is >= 1024px (large devices)
+    1024: {
+      slidesPerView: 3,
+    },
+  };
+
   return (
-    <div className=" bg-secondary pt-32 pb-14">
-      <div className="w-1/2 text-center mx-auto text-white space-y-4">
+    <div className=" bg-secondary py-32 px-5">
+      <div className="lg:w-1/2 text-center mx-auto text-white space-y-4">
         <p className="text-lg font-bold">Diagnostic plans</p>
-        <p className="text-5xl text-primary font-semibold">
+        <p className="lg:text-5xl text-3xl text-primary font-semibold">
           Our special offers
         </p>
         <p>
@@ -55,16 +59,12 @@ const Promotions = () => {
       <div className="container mx-auto text-white mt-10">
         <Swiper
           spaceBetween={20}
-          slidesPerView={3}
-          //   navigation={true}
-          autoplay={{ delay: 6000 }}
+          // navigation={true}
+          autoplay={{ delay: 8000 }}
           loop={true}
-          // pagination={{ clickable: true }}
-          // scrollbar={{ draggable: true }}
           modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
           className="mySwiper"
-          // onSwiper={(swiper) => console.log(swiper)}
-          // onSlideChange={() => console.log("slide change")}
+          breakpoints={breakpoints}
         >
           {banners.map((promotion) => (
             <SwiperSlide key={promotion._id}>

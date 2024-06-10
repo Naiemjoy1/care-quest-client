@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import AllTest from "./AllTest";
 import useTests from "../../Components/Hooks/useTests";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
@@ -46,9 +46,9 @@ const AllTests = () => {
   const currentTests = filteredTests.slice(indexOfFirstTest, indexOfLastTest);
 
   return (
-    <div>
-      <div className="flex justify-between py-2 px-6 rounded-full items-center gap-4 border border-primary w-1/2 mx-auto mt-10 text-center">
-        <h2>All Tests</h2>
+    <div className="container mx-auto px-5">
+      <div className="flex justify-between py-2 px-6 rounded-full items-center gap-4 border border-primary lg:w-1/2 mx-auto mt-10 text-center">
+        <p>All Tests</p>
         <input
           type="date"
           value={searchDate}
@@ -56,14 +56,14 @@ const AllTests = () => {
           className="search-input"
         />
       </div>
-      <div className="container mx-auto my-12">
+      <div className=" my-12">
         <Tabs defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
           <TabList>
             <Tab>All</Tab>
             <Tab>Hematology</Tab>
           </TabList>
           <TabPanel>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid lg:grid-cols-3 gap-4">
               {currentTests.map((test) => (
                 <AllTest key={test.id} test={test}></AllTest>
               ))}

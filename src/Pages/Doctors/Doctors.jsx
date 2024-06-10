@@ -3,7 +3,7 @@ import useAxiosPublic from "../../Components/Hooks/useAxiosPublic";
 
 const Doctors = () => {
   const axiosPublic = useAxiosPublic();
-  const { data: doctors = [], refetch } = useQuery({
+  const { data: doctors = [] } = useQuery({
     queryKey: ["doctors"],
     queryFn: async () => {
       const res = await axiosPublic.get("/doctors");
@@ -14,7 +14,7 @@ const Doctors = () => {
   console.log("doctors", doctors);
 
   return (
-    <div className="my-14 grid grid-cols-3 justify-center items-center gap-4 container mx-auto">
+    <div className="my-14 grid lg:grid-cols-3 md:grid-cols-2 justify-center items-center gap-4 container mx-auto">
       {doctors.map((doctor) => (
         <div
           key={doctor._id}

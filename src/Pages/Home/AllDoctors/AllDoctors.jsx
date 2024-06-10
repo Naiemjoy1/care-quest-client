@@ -28,9 +28,9 @@ const AllDoctors = () => {
   );
 
   return (
-    <div>
+    <div className="px-5">
       <section>
-        <div className="w-1/2 text-center mx-auto my-16 space-y-4">
+        <div className="lg:w-1/2 text-center mx-auto my-16 space-y-4">
           <p className="text-lg text-primary font-bold">Our team</p>
           <p className="text-5xl text-secondary font-semibold">
             Meet our doctors

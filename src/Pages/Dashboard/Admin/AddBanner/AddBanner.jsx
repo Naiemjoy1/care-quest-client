@@ -75,7 +75,7 @@ const AddBanner = () => {
   return (
     <div>
       {loading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-gray-200 bg-opacity-75 z-50">
+        <div className="absolute inset-0 lg:flex  items-center justify-center bg-gray-200 bg-opacity-75 z-50">
           <div
             className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full text-blue-600"
             role="status"
@@ -86,8 +86,8 @@ const AddBanner = () => {
       )}
       <form onSubmit={handleSubmit(onSubmit)} className="">
         <div className="gap-4">
-          <div className="flex gap-4">
-            <div className="form-control w-1/2">
+          <div className="lg:lg:flex  gap-4">
+            <div className="form-control lg:w-1/2">
               <label className="label">
                 <span className="label-text">Banner Title</span>
               </label>
@@ -100,7 +100,7 @@ const AddBanner = () => {
               />
               {errors.bannertitle && <span>This field is required</span>}
             </div>
-            <div className="form-control w-1/2">
+            <div className="form-control lg:w-1/2">
               <label className="label">
                 <span className="label-text">Banner Description</span>
               </label>
@@ -114,8 +114,8 @@ const AddBanner = () => {
               {errors.description && <span>This field is required</span>}
             </div>
           </div>
-          <div className="flex gap-4">
-            <div className="form-control w-1/2">
+          <div className="lg:flex  gap-4">
+            <div className="form-control lg:w-1/2">
               <label className="label">
                 <span className="label-text">Cupon Title</span>
               </label>
@@ -128,7 +128,7 @@ const AddBanner = () => {
               />
               {errors.cupontitle && <span>This field is required</span>}
             </div>
-            <div className="form-control w-1/2">
+            <div className="form-control lg:w-1/2">
               <label className="label">
                 <span className="label-text">Cupon Description</span>
               </label>
@@ -142,8 +142,8 @@ const AddBanner = () => {
               {errors.cupondescrioption && <span>This field is required</span>}
             </div>
           </div>
-          <div className="flex gap-4">
-            <div className="form-control w-1/2">
+          <div className="lg:flex  gap-4">
+            <div className="form-control lg:w-1/2">
               <label className="label">
                 <span className="label-text">Expiry</span>
               </label>
@@ -156,7 +156,7 @@ const AddBanner = () => {
               />
               {errors.expiry && <span>This field is required</span>}
             </div>
-            <div className="form-control w-1/2">
+            <div className="form-control lg:w-1/2">
               <label className="label">
                 <span className="label-text">Cupon Code</span>
               </label>
@@ -170,8 +170,8 @@ const AddBanner = () => {
               {errors.cuponcode && <span>This field is required</span>}
             </div>
           </div>
-          <div className="flex gap-4">
-            <div className="form-control w-1/2">
+          <div className="lg:flex  gap-4">
+            <div className="form-control lg:w-1/2">
               <label className="label">
                 <span className="label-text">Discount Rate</span>
               </label>
@@ -184,7 +184,7 @@ const AddBanner = () => {
               />
               {errors.rate && <span>This field is required</span>}
             </div>
-            <div className="form-control w-1/2">
+            <div className="form-control lg:w-1/2">
               <label className="label">
                 <span className="label-text">Banner Image</span>
               </label>

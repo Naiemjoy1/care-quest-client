@@ -40,7 +40,6 @@ const renderCustomizedLabel = ({
   innerRadius,
   outerRadius,
   percent,
-  index,
 }) => {
   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
@@ -99,57 +98,59 @@ const AdminChart = () => {
   ];
 
   return (
-    <div className="flex justify-center gap-10 items-center">
-      <div className="w-1/2">
+    <div className="flex flex-col lg:flex-row justify-center gap-10 items-center">
+      <div className="w-full lg:w-1/2">
         <p>Mostly Booked:</p>
-        <BarChart
-          width={500}
-          height={300}
-          data={chartData}
-          margin={{
-            top: 20,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="_id" />
-          <YAxis />
-          <Tooltip />
-          <Bar
-            dataKey="totalCount"
-            fill="#8884d8"
-            shape={<TriangleBar />}
-            label={{ position: "top" }}
+        <ResponsiveContainer width="100%" height={300}>
+          <BarChart
+            data={chartData}
+            margin={{
+              top: 20,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
           >
-            {chartData.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={colors[index % 6]} />
-            ))}
-          </Bar>
-        </BarChart>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="_id" />
+            <YAxis />
+            <Tooltip />
+            <Bar
+              dataKey="totalCount"
+              fill="#8884d8"
+              shape={<TriangleBar />}
+              label={{ position: "top" }}
+            >
+              {chartData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={colors[index % 6]} />
+              ))}
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
       </div>
-      <div className="w-1/2">
+      <div className="w-full lg:w-1/2">
         <p>Total Report Delivery Ratio:</p>
-        <PieChart width={400} height={400}>
-          <Pie
-            data={pieChartData}
-            cx="50%"
-            cy="50%"
-            labelLine={false}
-            label={renderCustomizedLabel}
-            outerRadius={80}
-            fill="#8884d8"
-            dataKey="value"
-          >
-            {pieChartData.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={colors[index % colors.length]}
-              />
-            ))}
-          </Pie>
-        </PieChart>
+        <ResponsiveContainer width="100%" height={400}>
+          <PieChart>
+            <Pie
+              data={pieChartData}
+              cx="50%"
+              cy="50%"
+              labelLine={false}
+              label={renderCustomizedLabel}
+              outerRadius={80}
+              fill="#8884d8"
+              dataKey="value"
+            >
+              {pieChartData.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={colors[index % colors.length]}
+                />
+              ))}
+            </Pie>
+          </PieChart>
+        </ResponsiveContainer>
       </div>
     </div>
   );

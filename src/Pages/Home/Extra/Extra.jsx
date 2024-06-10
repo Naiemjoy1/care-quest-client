@@ -3,8 +3,8 @@ import { FaStethoscope } from "react-icons/fa";
 const Extra = () => {
   return (
     <div className="bg-primary p-12">
-      <div className="flex justify-between items-center container mx-auto ">
-        <div className="w-1/2 flex justify-center items-center gap-5">
+      <div className="lg:flex grid grid-cols-1 gap-5 justify-between items-center container mx-auto ">
+        <div className="lg:w-1/2 flex justify-center items-center gap-5">
           <FaStethoscope className=" text-8xl text-secondary" />
           <div>
             <p className=" text-secondary text-xl font-semibold">
@@ -15,7 +15,7 @@ const Extra = () => {
             </p>
           </div>
         </div>
-        <div className="w-1/2">
+        <div className="lg:w-1/2">
           <label className="input input-bordered flex items-center gap-2 rounded-full">
             <input
               type="text"

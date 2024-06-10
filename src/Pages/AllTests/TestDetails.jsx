@@ -186,10 +186,10 @@ const TestDetails = () => {
   return (
     <div>
       <figure>
-        <img className="h-[550px] w-full" src={test.image} alt={test.name} />
+        <img className="lg:h-[550px] w-full" src={test.image} alt={test.name} />
       </figure>
-      <div className="flex justify-between gap-10 container mx-auto my-14">
-        <div className="w-1/2">
+      <div className="lg:flex px-5 justify-between gap-10 container mx-auto my-14">
+        <div className="lg:w-1/2">
           <h2 className="card-title">{test.name}</h2>
           <p>{test.description}</p>
           <p>Date: {test.date}</p>
@@ -198,7 +198,7 @@ const TestDetails = () => {
           <p>Slots: {slots.join(", ")}</p>
           <p>Total Price: {totalPrice}</p>
         </div>
-        <div className="w-1/2">
+        <div className="lg:w-1/2">
           {capacity > 0 && slots.length > 0 ? (
             <div>
               <label htmlFor="slot-select" className="block mb-2">

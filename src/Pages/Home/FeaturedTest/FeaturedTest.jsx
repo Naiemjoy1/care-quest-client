@@ -26,16 +26,31 @@ const FeaturedTest = () => {
     },
   });
 
+  const breakpoints = {
+    // when window width is >= 320px (small devices)
+    320: {
+      slidesPerView: 1,
+    },
+    // when window width is >= 640px (medium devices)
+    640: {
+      slidesPerView: 2,
+    },
+    // when window width is >= 1024px (large devices)
+    1024: {
+      slidesPerView: 3,
+    },
+  };
+
   return (
-    <div className="container mx-auto my-10">
+    <div className="container mx-auto my-10 px-5 lg:px-0">
       <Swiper
         spaceBetween={20}
-        slidesPerView={3}
         navigation={true}
         autoplay={{ delay: 8000 }}
         loop={true}
         modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
         className="mySwiper"
+        breakpoints={breakpoints}
       >
         {populars.map((popular) => (
           <SwiperSlide key={popular.test._id}>

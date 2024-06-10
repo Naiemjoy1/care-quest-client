@@ -6,6 +6,9 @@ import useAxiosSecure from "../../../../Components//Hooks/useAxiosSecure";
 
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
+import { MdCancel } from "react-icons/md";
+import { IoCheckmarkCircle } from "react-icons/io5";
+import { TiUpload } from "react-icons/ti";
 
 const style = {
   position: "absolute",
@@ -159,20 +162,20 @@ const Reservations = () => {
                                   className="btn text-white btn-xs btn-error"
                                   onClick={() => handleDelete(booking._id)}
                                 >
-                                  Cancel
+                                  <MdCancel />
                                 </button>
                               </td>
                               <td>
                                 {booking.status === "Pending" ? (
                                   <button
                                     onClick={() => handleOpenModal(booking)}
-                                    className="btn btn-xs btn-primary text-white"
+                                    className="btn btn-xs btn-warning text-white"
                                   >
-                                    submit
+                                    <TiUpload />
                                   </button>
                                 ) : (
-                                  <button className="btn btn-warning text-white btn-xs">
-                                    Done
+                                  <button className="btn btn-success text-white btn-xs">
+                                    <IoCheckmarkCircle />
                                   </button>
                                 )}
                               </td>

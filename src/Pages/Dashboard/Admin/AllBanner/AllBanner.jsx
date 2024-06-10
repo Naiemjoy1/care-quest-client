@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../Components/Hooks/useAxiosSecure";
 import { useState } from "react";
-import Banner from "./Banner";
 import { Link } from "react-router-dom";
 
 const AllBanner = () => {
@@ -72,10 +71,9 @@ const AllBanner = () => {
   };
 
   return (
-    <div className="flex">
+    <div className="p-4 md:p-6 lg:p-8">
       <div className="overflow-x-auto">
-        <table className="table">
-          {/* head */}
+        <table className="table w-full">
           <thead>
             <tr>
               <th>Active</th>
@@ -84,7 +82,6 @@ const AllBanner = () => {
             </tr>
           </thead>
           <tbody>
-            {/* row 1 */}
             {banners.map((banner) => (
               <tr key={banner._id}>
                 <th>
@@ -96,33 +93,32 @@ const AllBanner = () => {
                   />
                 </th>
                 <td>
-                  {" "}
                   <div
-                    className="hero "
+                    className="hero bg-cover bg-center"
                     style={{
                       backgroundImage: `url(${banner.image})`,
                     }}
                   >
                     <div className="hero-overlay bg-opacity-60"></div>
-                    <div className=" text-neutral-content">
-                      <div className="flex justify-center gap-4 items-center p-4 text-sm">
-                        <div className="w-1/2 space-y-2">
+                    <div className="text-neutral-content p-4 md:p-6 lg:p-8">
+                      <div className="flex flex-col md:flex-row justify-center gap-4 items-center">
+                        <div className="w-full md:w-1/2 space-y-2 text-sm md:text-base lg:text-lg">
                           <h1 className="font-bold">{banner.bannertitle}</h1>
-                          <p className="">{banner.description}</p>
+                          <p>{banner.description}</p>
                           <Link to="/tests">
                             <button className="btn btn-sm btn-primary text-white">
-                              Get All Test
+                              Get All Tests
                             </button>
                           </Link>
                         </div>
-                        <div className="w-1/2 space-y-2">
-                          <p className=" font-bold">{banner.cupontitle}</p>
-                          <section className="flex gap-2 items-center">
+                        <div className="w-full md:w-1/2 space-y-2 text-sm md:text-base lg:text-lg">
+                          <p className="font-bold">{banner.cupontitle}</p>
+                          <section className="flex flex-col md:flex-row gap-2 items-center">
                             <p className="font-bold text-2xl text-primary">
                               {banner.rate}
                             </p>
                             <div>
-                              <p>Cupon Code: {banner.cuponcode}</p>
+                              <p>Coupon Code: {banner.cuponcode}</p>
                               <p>Expiry: {banner.expiry}</p>
                             </div>
                           </section>

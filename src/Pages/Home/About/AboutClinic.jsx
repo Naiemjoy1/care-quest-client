@@ -1,7 +1,7 @@
 const AboutClinic = () => {
   return (
-    <div className="mt-10 container mx-auto flex gap-10">
-      <div className=" w-1/2 space-y-4">
+    <div className="mt-10 container mx-auto px-4 grid grid-cols-1 lg:flex gap-10">
+      <div className=" lg:w-1/2 space-y-4">
         <h2 className=" text-primary text-xl font-semibold">About clinic</h2>
         <p className="text-6xl font-bold text-secondary">
           Why patients choose our center
@@ -14,10 +14,10 @@ const AboutClinic = () => {
         </p>
         <button className="btn btn-primary text-secondary">Read More</button>
       </div>
-      <div className=" w-1/2 space-y-4">
+      <div className="lg:w-1/2 space-y-4">
         <h2 className=" text-primary text-xl font-semibold">Clinic skills</h2>
         <p className="text-4xl font-bold text-secondary">Our specialisations</p>
-        <div className="flex justify-between">
+        <div className="flex justify-between px-5">
           <div
             className="radial-progress text-primary"
             style={{ "--value": 85, "--size": "6rem", "--thickness": "10px" }}

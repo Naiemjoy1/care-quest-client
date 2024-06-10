@@ -20,91 +20,45 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="flex">
-      <div className="w-1/4 min-h-screen bg-primary p-6">
+    <div className="flex flex-col md:flex-row">
+      <div className="w-full md:w-1/4 lg:min-h-screen bg-primary p-6">
         <ul className="menu text-white text-lg gap-4">
           {isAdmin ? (
             <>
               <li>
-                <NavLink
-                  to="/dashboard/admin"
-                  style={({ isActive }) =>
-                    isActive
-                      ? { backgroundColor: "#2d3663", color: "white" }
-                      : {}
-                  }
-                >
+                <NavLink to="/dashboard/admin" activeClassName="bg-primary">
                   <FaHome /> Admin Home
                 </NavLink>
               </li>
               <li>
-                <NavLink
-                  to="/dashboard/addbanner"
-                  style={({ isActive }) =>
-                    isActive
-                      ? { backgroundColor: "#2d3663", color: "white" }
-                      : {}
-                  }
-                >
+                <NavLink to="/dashboard/addbanner" activeClassName="bg-primary">
                   <BiSolidImageAdd /> Add Banner
                 </NavLink>
               </li>
               <li>
-                <NavLink
-                  to="/dashboard/allbanner"
-                  style={({ isActive }) =>
-                    isActive
-                      ? { backgroundColor: "#2d3663", color: "white" }
-                      : {}
-                  }
-                >
+                <NavLink to="/dashboard/allbanner" activeClassName="bg-primary">
                   <FaRegImage /> All Banner
                 </NavLink>
               </li>
               <li>
-                <NavLink
-                  to="/dashboard/users"
-                  style={({ isActive }) =>
-                    isActive
-                      ? { backgroundColor: "#2d3663", color: "white" }
-                      : {}
-                  }
-                >
+                <NavLink to="/dashboard/users" activeClassName="bg-primary">
                   <FaUsers /> All Users
                 </NavLink>
               </li>
               <li>
-                <NavLink
-                  to="/dashboard/addtest"
-                  style={({ isActive }) =>
-                    isActive
-                      ? { backgroundColor: "#2d3663", color: "white" }
-                      : {}
-                  }
-                >
+                <NavLink to="/dashboard/addtest" activeClassName="bg-primary">
                   <PiListPlusFill /> Add Test
                 </NavLink>
               </li>
               <li>
-                <NavLink
-                  to="/dashboard/tests"
-                  style={({ isActive }) =>
-                    isActive
-                      ? { backgroundColor: "#2d3663", color: "white" }
-                      : {}
-                  }
-                >
+                <NavLink to="/dashboard/tests" activeClassName="bg-primary">
                   <PiListDashesFill /> All Tests
                 </NavLink>
               </li>
               <li>
                 <NavLink
                   to="/dashboard/reservations"
-                  style={({ isActive }) =>
-                    isActive
-                      ? { backgroundColor: "#2d3663", color: "white" }
-                      : {}
-                  }
+                  activeClassName="bg-primary"
                 >
                   <BsBookmarksFill /> Reservations
                 </NavLink>
@@ -113,25 +67,14 @@ const Dashboard = () => {
           ) : (
             <>
               <li>
-                <NavLink
-                  to="/dashboard/user"
-                  style={({ isActive }) =>
-                    isActive
-                      ? { backgroundColor: "#2d3663", color: "white" }
-                      : {}
-                  }
-                >
+                <NavLink to="/dashboard/user" activeClassName="bg-primary">
                   <FaHouseUser /> User Home
                 </NavLink>
               </li>
               <li>
                 <NavLink
                   to="/dashboard/appointments"
-                  style={({ isActive }) =>
-                    isActive
-                      ? { backgroundColor: "#2d3663", color: "white" }
-                      : {}
-                  }
+                  activeClassName="bg-primary"
                 >
                   <MdBookmarkAdded /> Appointments
                 </NavLink>
@@ -139,11 +82,7 @@ const Dashboard = () => {
               <li>
                 <NavLink
                   to="/dashboard/testresults"
-                  style={({ isActive }) =>
-                    isActive
-                      ? { backgroundColor: "#2d3663", color: "white" }
-                      : {}
-                  }
+                  activeClassName="bg-primary"
                 >
                   <FaClipboardList /> Test Results
                 </NavLink>
@@ -152,7 +91,7 @@ const Dashboard = () => {
           )}
         </ul>
       </div>
-      <div className="w-3/4 flex-1 p-10">
+      <div className="w-full md:w-3/4 p-6">
         <Outlet />
       </div>
     </div>

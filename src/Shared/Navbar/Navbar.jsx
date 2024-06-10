@@ -4,6 +4,7 @@ import useAxiosSecure from "../../Components/Hooks/useAxiosSecure";
 import useAuth from "../../Components/Hooks/useAuth";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { FaCartPlus } from "react-icons/fa";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -146,7 +147,7 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-primary text-white rounded-box w-52"
           >
             {navLink}
           </ul>
@@ -168,7 +169,7 @@ const Navbar = () => {
         ) : null}
 
         <button className="btn btn-sm">
-          Booked
+          <FaCartPlus />
           <div className="badge badge-primary">+{userBookings.length}</div>
         </button>
         {user ? (

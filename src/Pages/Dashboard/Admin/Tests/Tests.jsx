@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../Components/Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
@@ -7,6 +7,7 @@ import { FaEdit } from "react-icons/fa";
 import useBook from "../../../../Components/Hooks/useBook";
 import useAllBookings from "../../../../Components/Hooks/useAllBookings";
 import AddReview from "../AddReview/AddReview";
+import { MdDelete, MdOutlineRateReview } from "react-icons/md";
 
 const Tests = () => {
   const axiosSecure = useAxiosSecure();
@@ -109,7 +110,7 @@ const Tests = () => {
                       onClick={() => handleDelete(test)}
                       className="btn btn-xs btn-accent text-white"
                     >
-                      Delete
+                      <MdDelete />
                     </button>
                   </td>
                   <td>
@@ -128,7 +129,7 @@ const Tests = () => {
                         document.getElementById("my_modal_2").showModal();
                       }}
                     >
-                      Add Review
+                      <MdOutlineRateReview />
                     </button>
                     <dialog id="my_modal_2" className="modal">
                       <div className="modal-box p-4">

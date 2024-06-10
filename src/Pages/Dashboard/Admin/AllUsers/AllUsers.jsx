@@ -6,6 +6,10 @@ import { useState } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import jsPDF from "jspdf";
+import { FaFileDownload, FaInfoCircle, FaUsers } from "react-icons/fa";
+import { FaUserLargeSlash } from "react-icons/fa6";
+import { IoMdCheckmarkCircle } from "react-icons/io";
+import { MdDelete } from "react-icons/md";
 
 const style = {
   position: "absolute",
@@ -119,7 +123,7 @@ const AllUsers = () => {
     <div>
       <div className="flex justify-evenly">
         <h2>All Users</h2>
-        <h2>Total User: {users.length}</h2>
+        <h2>Total Users: {users.length}</h2>
       </div>
       <div>
         <div className="overflow-x-auto">
@@ -166,9 +170,9 @@ const AllUsers = () => {
                     ) : (
                       <button
                         onClick={() => handleMakeAdmin(user)}
-                        className="btn btn-accent text-white btn-xs"
+                        className="btn bg-blue-500 hover:bg-blue-600 text-white btn-xs"
                       >
-                        user
+                        <FaUsers />
                       </button>
                     )}
                   </td>
@@ -176,16 +180,16 @@ const AllUsers = () => {
                     {user.status === "active" ? (
                       <button
                         onClick={() => handleChangeStatus(user, "blocked")}
-                        className="btn btn-warning text-white btn-xs"
+                        className="btn bg-yellow-500 hover:bg-yellow-600 text-white btn-xs"
                       >
-                        Block
+                        <FaUserLargeSlash />
                       </button>
                     ) : (
                       <button
                         onClick={() => handleChangeStatus(user, "active")}
-                        className="btn btn-success text-white btn-xs"
+                        className="btn bg-green-500 hover:bg-green-600 text-white btn-xs"
                       >
-                        Activate
+                        <IoMdCheckmarkCircle />
                       </button>
                     )}
                   </td>
@@ -193,25 +197,25 @@ const AllUsers = () => {
                   <th>
                     <button
                       onClick={() => handleDelete(user)}
-                      className="btn btn-accent text-white btn-xs"
+                      className="btn bg-red-500 hover:bg-red-600 text-white btn-xs"
                     >
-                      Delete
+                      <MdDelete />
                     </button>
                   </th>
                   <th>
                     <button
                       onClick={() => handleOpenModal(user)}
-                      className="btn btn-xs btn-primary text-white"
+                      className="btn bg-purple-500 hover:bg-purple-600 text-white btn-xs"
                     >
-                      see info
+                      <FaInfoCircle />
                     </button>
                   </th>
                   <th>
                     <button
                       onClick={() => generatePDF(user)}
-                      className="btn btn-accent text-white btn-xs"
+                      className="btn bg-gray-500 hover:bg-gray-600 text-white btn-xs"
                     >
-                      Download Details
+                      <FaFileDownload />
                     </button>
                   </th>
                 </tr>
@@ -223,7 +227,7 @@ const AllUsers = () => {
       {currentUser && (
         <Modal open={openModal} onClose={handleCloseModal}>
           <Box sx={style}>
-            <h2>hello</h2>
+            <h2>Hello</h2>
           </Box>
         </Modal>
       )}

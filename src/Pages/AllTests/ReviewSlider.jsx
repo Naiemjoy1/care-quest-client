@@ -16,11 +16,8 @@ import "swiper/css/autoplay";
 
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
-import useAuth from "../../Components/Hooks/useAuth";
 
 const ReviewSlider = ({ reviews, _id }) => {
-  const { user } = useAuth() || {}; // Ensure user is properly handled even if undefined
-
   const filteredReviews = reviews.filter((review) => review.reviewsId === _id);
   console.log("Filtered Reviews for slider: ", filteredReviews);
 
@@ -36,7 +33,7 @@ const ReviewSlider = ({ reviews, _id }) => {
       >
         {filteredReviews.map((review) => (
           <SwiperSlide key={review._id}>
-            <div className="flex flex-col w-full max-w-lg p-6 divide-y rounded-md divide-primary bg-secondary text-gray-100">
+            <div className="flex flex-col w-full p-6 divide-y rounded-md divide-primary bg-secondary text-gray-100">
               <div className="flex justify-between p-4">
                 <div className="flex space-x-4">
                   <div>

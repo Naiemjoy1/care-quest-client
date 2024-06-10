@@ -1,7 +1,6 @@
 import { useState } from "react";
 import useAuth from "../../Components/Hooks/useAuth";
 import Swal from "sweetalert2";
-import EmailUser from "./EmailUser";
 
 const image_hosting_key = import.meta.env.VITE_IMGBB_API;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -114,8 +113,8 @@ const UserHome = () => {
           </div>
         </div>
       )}
-      <div className="flex">
-        <div className="w-1/2 bg-primary py-7 px-4 flex flex-col items-center justify-center">
+      <div className="lg:flex">
+        <div className="lg:w-1/2 bg-primary py-7 px-4 flex flex-col items-center justify-center">
           <div className="avatar mb-4">
             <div className="w-24 rounded-full">
               <img src={image} alt="User Avatar" />
@@ -128,7 +127,7 @@ const UserHome = () => {
           />
         </div>
 
-        <div className="w-1/2 bg-secondary grid grid-cols-1 gap-4 text-white py-7 px-4">
+        <div className="lg:w-1/2 bg-secondary grid grid-cols-1 gap-4 text-white py-7 px-4">
           <div>
             <label htmlFor="displayName">Name: </label>
             <input

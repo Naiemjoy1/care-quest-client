@@ -28,27 +28,38 @@ const Reviews = () => {
       });
   }, []);
 
+  const breakpoints = {
+    // when window width is >= 320px (small devices)
+    320: {
+      slidesPerView: 1,
+    },
+    // when window width is >= 640px (medium devices)
+    640: {
+      slidesPerView: 2,
+    },
+    // when window width is >= 1024px (large devices)
+    1024: {
+      slidesPerView: 3,
+    },
+  };
+
   return (
     <div className=" bg-secondary py-12">
-      <div className="w-1/2 text-center mx-auto text-white space-y-2 mb-10">
+      <div className="lg:w-1/2 text-center mx-auto text-white space-y-2 mb-10 px-5">
         <p className="text-lg font-bold">Testimonials</p>
-        <p className="text-5xl text-primary font-semibold">
+        <p className="lg:text-5xl text-3xl text-primary font-semibold">
           What our patients say
         </p>
       </div>
       <div className="container mx-auto">
         <Swiper
           spaceBetween={20}
-          slidesPerView={3}
-          //   navigation={true}
+          // navigation={true}
           autoplay={{ delay: 8000 }}
           loop={true}
-          // pagination={{ clickable: true }}
-          // scrollbar={{ draggable: true }}
           modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
           className="mySwiper"
-          // onSwiper={(swiper) => console.log(swiper)}
-          // onSlideChange={() => console.log("slide change")}
+          breakpoints={breakpoints}
         >
           {reviews.map((review) => (
             <SwiperSlide key={review._id}>

@@ -8,40 +8,23 @@ const Doctors = () => {
           style={{ width: "100%" }}
         />
       </div>
-      <div className="absolute inset-x-0 -bottom-24 bg-white py-10 px-20  container mx-auto rounded-lg flex justify-between">
+      <div className="lg:absolute lg:inset-x-0 -bottom-24 bg-white lg:py-10 p-5 lg:px-20  container mx-auto rounded-lg flex justify-between">
         <div className=" text-center">
-          <p className="text-4xl text-primary font-bold">86</p>
-          <p className=" text-secondary text-xl font-medium">Qualified</p>
-          <p className=" text-secondary text-xl font-medium">doctors</p>
+          <p className="lg:text-4xl  text-primary font-bold">86</p>
+          <p className=" text-secondary lg:text-xl font-medium">Qualified</p>
+          <p className=" text-secondary lg:text-xl font-medium">doctors</p>
         </div>
         <div className="divider divider-horizontal"></div>
         <div className=" text-center">
-          <p className="text-4xl text-primary font-bold">86</p>
-          <p className=" text-secondary text-xl font-medium">Qualified</p>
-          <p className=" text-secondary text-xl font-medium">doctors</p>
+          <p className="lg:text-4xl  text-primary font-bold">86</p>
+          <p className=" text-secondary lg:text-xl font-medium">Qualified</p>
+          <p className=" text-secondary lg:text-xl font-medium">doctors</p>
         </div>
         <div className="divider divider-horizontal"></div>
         <div className=" text-center">
-          <p className="text-4xl text-primary font-bold">86</p>
-          <p className=" text-secondary text-xl font-medium">Qualified</p>
-          <p className=" text-secondary text-xl font-medium">doctors</p>
-        </div>
-        <div className="divider divider-horizontal"></div>
-        <div className=" text-center">
-          <p className="text-4xl text-primary font-bold">86</p>
-          <p className=" text-secondary text-xl font-medium">Qualified</p>
-          <p className=" text-secondary text-xl font-medium">doctors</p>
-        </div>
-        <div className="divider divider-horizontal"></div>
-        <div className=" text-center">
-          <p className="text-4xl text-primary font-bold">86</p>
-          <p className=" text-secondary text-xl font-medium">Qualified</p>
-          <p className=" text-secondary text-xl font-medium">doctors</p>
-        </div>
-        <div className=" text-center">
-          <p className="text-4xl text-primary font-bold">86</p>
-          <p className=" text-secondary text-xl font-medium">Qualified</p>
-          <p className=" text-secondary text-xl font-medium">doctors</p>
+          <p className="lg:text-4xl  text-primary font-bold">86</p>
+          <p className=" text-secondary lg:text-xl font-medium">Qualified</p>
+          <p className=" text-secondary lg:text-xl font-medium">doctors</p>
         </div>
       </div>
     </div>

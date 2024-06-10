@@ -10,7 +10,7 @@ import ReviewSlider from "./ReviewSlider";
 
 const MakeReview = ({ _id, isBooked }) => {
   const { user } = useAuth() || {}; // Ensure user is properly handled even if undefined
-  const [reviews, isLoading, isError, refetchReviews] = useReview();
+  const [reviews, refetchReviews] = useReview();
   const [rating, setRating] = useState(0);
   const {
     register,
@@ -77,11 +77,11 @@ const MakeReview = ({ _id, isBooked }) => {
   console.log("book data in review", isBooked);
 
   return (
-    <div className="container mx-auto flex gap-8 mb-10">
-      <div className="w-1/2 space-y-4">
+    <div className="container mx-auto lg:flex  space-y-4 lg:space-y-0  gap-4 mb-10 px-5">
+      <div className="lg:w-1/2 space-y-4">
         <ReviewSlider reviews={reviews} _id={_id}></ReviewSlider>
       </div>
-      <div className="w-1/2">
+      <div className="lg:w-1/2">
         {isBooked ? (
           <div className="bg-primary p-6 rounded-lg">
             <h2 className="text-3xl font-semibold text-center">

@@ -29,26 +29,34 @@ const Banner = () => {
           }}
         >
           <div className="hero-overlay bg-opacity-60"></div>
-          <div className="flex justify-between container mx-auto items-center gap-20 hero-content text-white">
-            <div className="  w-1/3 space-y-4">
-              <h1 className=" text-5xl font-bold">{banner.bannertitle}</h1>
-              <p className="">{banner.description}</p>
-              <Link to="/tests">
-                <button className="btn btn-sm mt-5 btn-primary text-white">
-                  Get All Test
-                </button>
-              </Link>
-            </div>
-            <div className="w-1/3  space-y-4 ">
-              <p className="text-3xl font-bold">{banner.cupontitle}</p>
-              <section className="flex gap-2 items-center">
-                <p className="font-bold text-6xl text-primary">{banner.rate}</p>
-                <div>
-                  <p>Cupon Code: {banner.cuponcode}</p>
-                  <p>Expiry: {banner.expiry}</p>
+          <div className=" hero-content text-white">
+            <div className="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2 items-center mx-auto container gap-4">
+              <div className="lg:w-1/2 space-y-4">
+                <h1 className="text-5xl font-bold">{banner.bannertitle}</h1>
+                <p className="">{banner.description}</p>
+                <Link to="/tests">
+                  <button className="btn btn-sm mt-5 btn-primary text-white">
+                    Get All Test
+                  </button>
+                </Link>
+              </div>
+              <div className="flex justify-center items-center">
+                <div className="lg:w-1/2 space-y-4 text-center">
+                  <p className="text-3xl font-bold text-left">
+                    {banner.cupontitle}
+                  </p>
+                  <section className="flex gap-2 items-center justify-center">
+                    <p className="font-bold text-6xl text-primary">
+                      {banner.rate}
+                    </p>
+                    <div className="text-left">
+                      <p>Coupon Code: {banner.cuponcode}</p>
+                      <p>Expiry: {banner.expiry}</p>
+                    </div>
+                  </section>
+                  <p className="text-left">{banner.cupondescrioption}</p>
                 </div>
-              </section>
-              <p>{banner.cupondescrioption}</p>
+              </div>
             </div>
           </div>
         </div>

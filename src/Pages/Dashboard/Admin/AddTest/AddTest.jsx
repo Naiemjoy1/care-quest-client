@@ -132,7 +132,7 @@ const AddTest = () => {
           </div>
         </div>
       )}
-      <h2>Add Test</h2>
+      <h2 className="text-center font-bold text-2xl">Add Test</h2>
       <div>
         <form onSubmit={handleSubmit(onSubmit)} className="card-body space-y-2">
           <div className="form-control">
@@ -148,8 +148,8 @@ const AddTest = () => {
             />
             {errors.name && <span>This field is required</span>}
           </div>
-          <div className="flex gap-4">
-            <div className="form-control w-1/2">
+          <div className="lg:flex gap-4">
+            <div className="form-control lg:w-1/2">
               <label className="label">
                 <span className="label-text">Category*</span>
               </label>
@@ -171,7 +171,7 @@ const AddTest = () => {
               </select>
               {errors.category && <span>This field is required</span>}
             </div>
-            <div className="form-control w-1/2">
+            <div className="form-control lg:w-1/2">
               <label className="label">
                 <span className="label-text">Price*</span>
               </label>
@@ -185,9 +185,9 @@ const AddTest = () => {
               {errors.price && <span>This field is required</span>}
             </div>
           </div>
-          <div className="flex justify-between gap-4">
+          <div className="lg:flex justify-between gap-4">
             {/* New form fields */}
-            <div className="form-control w-1/2">
+            <div className="form-control lg:w-1/2">
               <label className="label">
                 <span className="label-text">Date*</span>
               </label>
@@ -199,7 +199,7 @@ const AddTest = () => {
               />
               {errors.date && <span>This field is required</span>}
             </div>
-            <div className="form-control w-1/2">
+            <div className="form-control lg:w-1/2">
               <label className="label">
                 <span className="label-text">Capacity*</span>
               </label>
@@ -215,7 +215,7 @@ const AddTest = () => {
 
             {/* End of new form fields */}
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid lg:grid-cols-2 grid-cols-1 gap-4">
             {timeSlots.map((slot, index) => (
               <div key={index} className="form-control">
                 <label className="label">

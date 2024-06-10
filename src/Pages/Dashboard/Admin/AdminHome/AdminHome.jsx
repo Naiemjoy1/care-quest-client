@@ -16,14 +16,14 @@ const AdminHome = () => {
   });
 
   return (
-    <div className=" space-y-4">
-      <h2 className="text-3xl">
+    <div className="space-y-4 p-4 md:p-6 lg:p-8">
+      <h2 className="text-xl md:text-2xl lg:text-3xl">
         Hi, Welcome{" "}
         <span className="text-primary font-bold">{user?.displayName}</span>
       </h2>
       <div>
-        <div className="stats shadow">
-          <div className="stat">
+        <div className="stats shadow flex flex-wrap justify-between gap-4">
+          <div className="stat flex-1 min-w-[200px]">
             <div className="stat-figure text-secondary">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -44,7 +44,7 @@ const AdminHome = () => {
             <div className="stat-desc">Jan 1st - Feb 1st</div>
           </div>
 
-          <div className="stat">
+          <div className="stat flex-1 min-w-[200px]">
             <div className="stat-figure text-secondary">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -65,7 +65,7 @@ const AdminHome = () => {
             <div className="stat-desc">↗︎ 400 (22%)</div>
           </div>
 
-          <div className="stat">
+          <div className="stat flex-1 min-w-[200px]">
             <div className="stat-figure text-secondary">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -85,7 +85,8 @@ const AdminHome = () => {
             <div className="stat-value">{stats?.bookings}</div>
             <div className="stat-desc">↘︎ 90 (14%)</div>
           </div>
-          <div className="stat">
+
+          <div className="stat flex-1 min-w-[200px]">
             <div className="stat-figure text-secondary">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -107,7 +108,7 @@ const AdminHome = () => {
           </div>
         </div>
       </div>
-      <AdminChart></AdminChart>
+      <AdminChart />
     </div>
   );
 };

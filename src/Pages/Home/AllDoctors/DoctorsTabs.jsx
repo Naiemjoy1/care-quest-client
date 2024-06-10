@@ -16,19 +16,30 @@ import "swiper/css/autoplay";
 import Doctor from "./Doctor";
 
 const DoctorsTabs = ({ doctors }) => {
+  const breakpoints = {
+    // when window width is >= 320px (small devices)
+    320: {
+      slidesPerView: 1,
+    },
+    // when window width is >= 640px (medium devices)
+    640: {
+      slidesPerView: 2,
+    },
+    // when window width is >= 1024px (large devices)
+    1024: {
+      slidesPerView: 3,
+    },
+  };
+
   return (
     <Swiper
       spaceBetween={20}
-      slidesPerView={3}
-      //   navigation={true}
+      // navigation={true}
       autoplay={{ delay: 8000 }}
       loop={true}
-      // pagination={{ clickable: true }}
-      // scrollbar={{ draggable: true }}
       modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
       className="mySwiper"
-      // onSwiper={(swiper) => console.log(swiper)}
-      // onSlideChange={() => console.log("slide change")}
+      breakpoints={breakpoints}
     >
       {doctors.map((doctor) => (
         <SwiperSlide key={doctor._id}>
