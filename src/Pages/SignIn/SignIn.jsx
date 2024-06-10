@@ -10,14 +10,32 @@ import {
 } from "react-simple-captcha";
 import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 import useAxiosSecure from "../../Components/Hooks/useAxiosSecure";
+import useAuth from "../../Components/Hooks/useAuth";
 
 const SignIn = () => {
+  const { user } = useAuth();
   const { signIn } = useContext(AuthContext);
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [disabled, setDisabled] = useState(true);
   const [loading, setLoading] = useState(false); // State for loading indicator
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
+
+  const [isAdmin, setIsAdmin] = useState(false);
+  useEffect(() => {
+    const fetchAdminStatus = async () => {
+      if (user) {
+        try {
+          const response = await axiosSecure.get(`/users/admin/${user.email}`);
+          console.log("Admin status from login:", response.data.admin);
+        } catch (error) {
+          console.error("Error fetching admin status:", error);
+        }
+      }
+    };
+
+    fetchAdminStatus();
+  }, [user, axiosSecure]);
+
+  console.log("login admin status", isAdmin);
 
   useEffect(() => {
     loadCaptchaEnginge(6);
@@ -30,7 +48,7 @@ const SignIn = () => {
     const password = form.password.value;
 
     try {
-      setLoading(true); // Set loading to true before making the login request
+      setLoading(true);
       const result = await signIn(email, password);
       const user = result.user;
 
@@ -40,6 +58,19 @@ const SignIn = () => {
       console.log("in login res", response);
       console.log("in login role", userRole);
 
+      // Check if user is admin
+      const isAdminResponse = await axiosSecure.get(
+        `/users/admin/${user.email}`
+      );
+      const isAdmin = isAdminResponse.data.admin;
+
+      // Navigate based on isAdmin status
+      if (isAdmin) {
+        navigate("/dashboard/admin");
+      } else {
+        navigate("/dashboard/user");
+      }
+
       Swal.fire({
         position: "top-end",
         icon: "success",
@@ -47,12 +78,6 @@ const SignIn = () => {
         showConfirmButton: false,
         timer: 1500,
       });
-
-      // Navigate based on user role
-      const defaultPath =
-        userRole === "admin" ? "/dashboard/admin" : "/dashboard/user";
-      const from = location.state?.from?.pathname || defaultPath;
-      navigate(from, { replace: true });
     } catch (error) {
       console.error("Login failed", error);
       Swal.fire({

@@ -1,68 +1,22 @@
 import { Link, NavLink } from "react-router-dom";
 import useBook from "../../Components/Hooks/useBook";
-import useAxiosSecure from "../../Components/Hooks/useAxiosSecure";
 import useAuth from "../../Components/Hooks/useAuth";
-import { useEffect, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import { FaCartPlus } from "react-icons/fa";
-import axios from "axios";
+import useUserStatus from "../../Components/Hooks/useUserStatus";
+import useAdmin from "../../Components/Hooks/useAdmin";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const [theme, setTheme] = useState("light");
   const [booking] = useBook();
-  const [userStatus, setUserStatus] = useState(null);
-  const axiosSecure = useAxiosSecure();
-  const [isAdmin, setIsAdmin] = useState(false);
-
-  useEffect(() => {
-    const fetchUserStatus = async () => {
-      if (user) {
-        try {
-          const response = await axiosSecure.get(`/users/status/${user.email}`);
-          setUserStatus(response.data.status);
-        } catch (error) {
-          console.error("Error fetching user status:", error);
-        }
-      }
-    };
-
-    fetchUserStatus();
-  }, [user, axiosSecure]);
-
-  useEffect(() => {
-    const fetchAdminStatus = async () => {
-      if (user) {
-        try {
-          const response = await axiosSecure.get(`/users/admin/${user.email}`);
-          setIsAdmin(response.data.admin);
-          console.log("Admin status:", response.data.admin);
-        } catch (error) {
-          console.error("Error fetching admin status:", error);
-        }
-      }
-    };
-
-    fetchAdminStatus();
-  }, [user, axiosSecure]);
-
-  const { data: userRoleData } = useQuery({
-    queryKey: ["userRole"],
-    queryFn: async () => {
-      if (user) {
-        const res = await axiosSecure.get(`/users/admin/${user.email}`);
-        return res.data;
-      }
-      return null;
-    },
-    // enabled: !!user,
-  });
-
-  const userRole = userRoleData?.admin ? "admin" : "user";
+  const { status: userStatus } = useUserStatus();
+  const { isAdmin } = useState();
 
   const userBookings = booking.filter((book) => book.email === user?.email);
 
   console.log("login user role", isAdmin);
+  console.log("login user status", userStatus);
 
   const navLink = (
     <>
@@ -121,16 +75,31 @@ const Navbar = () => {
           About
         </NavLink>
       </li>
+
       {user && userStatus === "active" && (
-        <NavLink
-          to={userRole === "admin" ? "/dashboard/admin" : "/dashboard/user"}
-          style={({ isActive }) =>
-            isActive ? { backgroundColor: "#47ccc8", color: "white" } : {}
-          }
-          activeClassName="bg-primary text-white"
-        >
-          Dashboard
-        </NavLink>
+        <li>
+          {!isAdmin ? (
+            <NavLink
+              to="/dashboard/admin"
+              style={({ isActive }) =>
+                isActive ? { backgroundColor: "#47ccc8", color: "white" } : {}
+              }
+              activeClassName="bg-primary text-white"
+            >
+              Dashboard
+            </NavLink>
+          ) : (
+            <NavLink
+              to="/dashboard/user"
+              style={({ isActive }) =>
+                isActive ? { backgroundColor: "#47ccc8", color: "white" } : {}
+              }
+              activeClassName="bg-primary text-white"
+            >
+              Dashboard
+            </NavLink>
+          )}
+        </li>
       )}
     </>
   );

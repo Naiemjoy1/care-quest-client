@@ -87,7 +87,7 @@ const SignUp = () => {
             showConfirmButton: false,
             timer: 1500,
           });
-          navigate("/dashboard/users");
+          navigate("/dashboard/user");
         }
       });
     } catch (error) {

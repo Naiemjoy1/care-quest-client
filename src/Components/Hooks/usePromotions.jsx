@@ -5,7 +5,7 @@ const usePromotions = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:3000/promotions")
+    fetch("http://localhost:3000//promotions")
       .then((res) => res.json())
       .then((data) => {
         setPromotions(data);

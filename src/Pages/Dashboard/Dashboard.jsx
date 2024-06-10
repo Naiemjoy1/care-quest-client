@@ -6,24 +6,39 @@ import {
   FaUsers,
 } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
-import useAdmin from "../../Components/Hooks/useAdmin";
 import { BiSolidImageAdd } from "react-icons/bi";
 import { PiListDashesFill, PiListPlusFill } from "react-icons/pi";
 import { BsBookmarksFill } from "react-icons/bs";
 import { MdBookmarkAdded } from "react-icons/md";
+import { useEffect, useState } from "react";
+import useAuth from "../../Components/Hooks/useAuth";
+import useAxiosSecure from "../../Components/Hooks/useAxiosSecure";
 
 const Dashboard = () => {
-  const [isAdmin, isAdminLoading] = useAdmin();
+  const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
+  const [isAdmin, setIsAdmin] = useState(false);
 
-  if (isAdminLoading) {
-    return <div>Loading...</div>; // You can replace this with a loading spinner
-  }
+  useEffect(() => {
+    const fetchAdminStatus = async () => {
+      if (user) {
+        try {
+          const response = await axiosSecure.get(`/users/admin/${user.email}`);
+          console.log("Admin status:", response.data.admin); // Log isAdmin data
+        } catch (error) {
+          console.error("Error fetching admin status:", error);
+        }
+      }
+    };
+
+    fetchAdminStatus();
+  }, [user, axiosSecure]);
 
   return (
     <div className="flex flex-col md:flex-row">
       <div className="w-full md:w-1/4 lg:min-h-screen bg-primary p-6">
         <ul className="menu text-white text-lg gap-4">
-          {isAdmin ? (
+          {!isAdmin ? (
             <>
               <li>
                 <NavLink to="/dashboard/admin" activeClassName="bg-primary">
