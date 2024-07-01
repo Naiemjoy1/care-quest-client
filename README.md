@@ -82,8 +82,8 @@ CareQuest addresses the following key challenges:
    npm start
    ```
 
-## Learn More
+## Live Link
 
-Explore the live application [here](https://care-quest-2ae20.web.app/) to see CareQuest in action.
+Explore the live application [Live Link](https://care-quest-2ae20.web.app/) to see CareQuest in action.
 
 ---
