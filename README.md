@@ -229,6 +229,23 @@ diagnostic-center-management-system/
 11. Setup admin routes for user management
 12. Setup admin routes for test management
 
+### Topics
+
+- `healthcare`
+- `diagnostics`
+- `web-development`
+- `react`
+- `nodejs`
+- `express`
+- `mongodb`
+- `firebase`
+- `authentication`
+- `stripe`
+- `tailwindcss`
+- `jsPDF`
+- `admin-dashboard`
+- `user-management`
+
 ---
 
 By following the instructions above, you can set up and run the CareQuest Diagnostic Center Management System on your local machine.
