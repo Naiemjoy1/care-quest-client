@@ -48,21 +48,21 @@ CareQuest addresses the following key challenges:
 1. Clone the repository:
 
    ```sh
-   git clone https://github.com/programming-hero-web-course1/b9a12-client-side-Naiemjoy1
-   git clone https://github.com/programming-hero-web-course1/b9a12-server-side-Naiemjoy1
+   git clone https://github.com/Naiemjoy1/care-quest-client
+   git clone https://github.com/Naiemjoy1/care-quest-server
    ```
 
 2. Navigate to the client directory and install dependencies:
 
    ```sh
-   cd b9a12-client-side-Naiemjoy1
+   cd care-quest-client
    npm install
    ```
 
 3. Navigate to the server directory and install dependencies:
 
    ```sh
-   cd ../b9a12-server-side-Naiemjoy1
+   cd ../care-quest-server
    npm install
    ```
 
@@ -71,14 +71,14 @@ CareQuest addresses the following key challenges:
 1. Start the client:
 
    ```sh
-   cd ../b9a12-client-side-Naiemjoy1
+   cd ../care-quest-client
    npm start
    ```
 
 2. Start the server:
 
    ```sh
-   cd ../b9a12-server-side-Naiemjoy1
+   cd ../care-quest-server
    npm start
    ```
 
