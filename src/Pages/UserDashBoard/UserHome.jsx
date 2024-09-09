@@ -1,16 +1,53 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import useAuth from "../../Components/Hooks/useAuth";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../Components/Hooks/useAxiosSecure";
 
 const image_hosting_key = import.meta.env.VITE_IMGBB_API;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const UserHome = () => {
   const { user, updateUserProfile } = useAuth();
-  // console.log("user detail", user);
   const [displayName, setDisplayName] = useState(user.displayName || "");
   const [image, setImage] = useState(user.photoURL || "");
   const [loading, setLoading] = useState(false);
+  const axiosSecure = useAxiosSecure();
+  const [admin, setAdmin] = useState(null);
+  const [loginStatus, setLoginStatus] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchAdminStatus = async () => {
+      if (user) {
+        try {
+          const response = await axiosSecure.get(`/users/admin/${user.email}`);
+          console.log("Admin status response:", response.data);
+          setAdmin(response.data.admin);
+        } catch (error) {
+          console.error("Error fetching admin status:", error);
+          setAdmin(false); // Set admin status to false on error
+        }
+      }
+    };
+
+    const fetchLoginStatus = async () => {
+      if (user) {
+        try {
+          const response = await axiosSecure.get(`/users/status/${user.email}`);
+          console.log("Login status response:", response.data);
+          setLoginStatus(response.data.status);
+        } catch (error) {
+          console.error("Error fetching login status:", error);
+        } finally {
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchAdminStatus();
+    fetchLoginStatus();
+  }, [user, axiosSecure]);
 
   const handleDisplayNameChange = (event) => {
     setDisplayName(event.target.value);
@@ -30,14 +67,14 @@ const UserHome = () => {
   const handleUpdateProfile = async () => {
     let photo = image;
 
-    setLoading(true); // Start loading
+    setLoading(true);
 
     if (image !== user.photoURL) {
       const imageFile = await fetch(image)
         .then((res) => res.blob())
         .catch((error) => {
           console.error("Error fetching image:", error);
-          setLoading(false); // Stop loading on error
+          setLoading(false);
           return null;
         });
 
@@ -63,7 +100,6 @@ const UserHome = () => {
 
         if (data.data.url) {
           photo = data.data.url;
-          // console.log("Uploaded image link:", photo);
         } else {
           throw new Error("Image upload failed");
         }
@@ -74,12 +110,11 @@ const UserHome = () => {
           title: "Error",
           text: "Failed to upload image. Please try again.",
         });
-        setLoading(false); // Stop loading on error
+        setLoading(false);
         return;
       }
     }
 
-    // Update user profile with the new information
     updateUserProfile(displayName, photo)
       .then(() => {
         Swal.fire({
@@ -97,9 +132,16 @@ const UserHome = () => {
         });
       })
       .finally(() => {
-        setLoading(false); // Stop loading after updating profile
+        setLoading(false);
       });
   };
+
+  useEffect(() => {
+    if (admin) {
+      navigate("/dashboard/admin");
+      // window.location.reload();
+    }
+  }, [admin, navigate]);
 
   return (
     <div>
@@ -114,6 +156,7 @@ const UserHome = () => {
         </div>
       )}
       <div className="lg:flex">
+        {/* {admin ? <button>Hello</button> : <button>bye</button>} */}
         <div className="lg:w-1/2 bg-primary py-7 px-4 flex flex-col items-center justify-center">
           <div className="avatar mb-4">
             <div className="w-24 rounded-full">

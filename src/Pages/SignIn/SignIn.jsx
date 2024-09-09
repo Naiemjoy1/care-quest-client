@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import signin from "../../assets/signin.png";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Components/Provider/AuthProvider";
@@ -11,6 +11,7 @@ import {
 import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 import useAxiosSecure from "../../Components/Hooks/useAxiosSecure";
 import useAuth from "../../Components/Hooks/useAuth";
+import useAdmin from "../../Components/Hooks/useAdmin";
 
 const SignIn = () => {
   const { user } = useAuth();
@@ -21,37 +22,34 @@ const SignIn = () => {
   const [admin, setAdmin] = useState(null);
   const [loginStatus, setLoginStatus] = useState(null);
   const [disabled, setDisabled] = useState(true);
+  const [isAdmin] = useAdmin();
 
   useEffect(() => {
     const fetchAdminStatus = async () => {
-      if (user && user.token) {
+      if (user) {
         try {
-          const response = await axiosSecure.get(`/users/admin/${user.email}`, {
-            headers: {
-              Authorization: `Bearer ${user.token}`,
-            },
-          });
+          const response = await axiosSecure.get(`/users/admin/${user.email}`);
+          console.log("Admin status response:", response.data);
           setAdmin(response.data.admin);
         } catch (error) {
           console.error("Error fetching admin status:", error);
+          // Handle error
+          setAdmin(false); // Set admin status to false on error
         }
       }
     };
 
     const fetchLoginStatus = async () => {
-      if (user && user.token) {
+      if (user) {
         try {
-          const response = await axiosSecure.get(
-            `/users/status/${user.email}`,
-            {
-              headers: {
-                Authorization: `Bearer ${user.token}`,
-              },
-            }
-          );
+          const response = await axiosSecure.get(`/users/status/${user.email}`);
+          console.log("Login status response:", response.data);
           setLoginStatus(response.data.status);
         } catch (error) {
-          console.error("Error fetching status:", error);
+          console.error("Error fetching login status:", error);
+          // Handle error
+        } finally {
+          setLoading(false); // Set loading state to false when data is fetched
         }
       }
     };
@@ -75,12 +73,17 @@ const SignIn = () => {
       const result = await signIn(email, password);
       const user = result.user;
 
-      // Perform any necessary data loading after login here
+      // Wait for admin data to be fetched
+      if (isAdmin === null) {
+        await new Promise((resolve) => setTimeout(resolve, 1000)); // Adjust the timeout as needed
+      }
 
-      // Navigate based on isAdmin status after the data loading is complete
-      if (admin) {
+      // Check if the user is an admin
+      if (isAdmin === true) {
+        // Redirect to the admin dashboard
         navigate("/dashboard/admin");
       } else {
+        // Redirect to the user dashboard
         navigate("/dashboard/user");
       }
 
@@ -91,6 +94,7 @@ const SignIn = () => {
         showConfirmButton: false,
         timer: 1500,
       });
+      window.location.reload();
     } catch (error) {
       console.error("Login failed", error);
       Swal.fire({
@@ -114,6 +118,7 @@ const SignIn = () => {
 
   return (
     <div className="flex gap-4 justify-center items-center container mx-auto my-10">
+      {admin ? <button>Hello</button> : <button>bye</button>}
       <div className="w-1/2">
         <form onSubmit={handleLogin} className="card-body">
           <div className="form-control">

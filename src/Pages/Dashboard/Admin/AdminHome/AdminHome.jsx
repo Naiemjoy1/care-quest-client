@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../../Components/Hooks/useAuth";
 import useAxiosSecure from "../../../../Components/Hooks/useAxiosSecure";
 import AdminChart from "./AdminChart/AdminChart";
+import useDivision from "../../../../Components/Hooks/useDivision";
 
 const AdminHome = () => {
   const { user } = useAuth();
@@ -15,8 +16,26 @@ const AdminHome = () => {
     },
   });
 
+  const { divisions, error } = useDivision();
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
   return (
     <div className="space-y-4 p-4 md:p-6 lg:p-8">
+      {divisions.length === 0 ? (
+        <div>Loading...</div>
+      ) : (
+        <select>
+          <option value="">Select Division</option>
+          {divisions.map((division) => (
+            <option key={division.id} value={division.id}>
+              {division.name}
+            </option>
+          ))}
+        </select>
+      )}
       <h2 className="text-xl md:text-2xl lg:text-3xl">
         Hi, Welcome{" "}
         <span className="text-primary font-bold">{user?.displayName}</span>

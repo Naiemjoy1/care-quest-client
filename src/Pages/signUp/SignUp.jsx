@@ -88,6 +88,7 @@ const SignUp = () => {
             timer: 1500,
           });
           navigate("/dashboard/user");
+          window.location.reload();
         }
       });
     } catch (error) {

@@ -3,7 +3,7 @@ const Doctors = () => {
     <div className="mt-14 relative">
       <div className="">
         <img
-          src="https://i.ibb.co/Yj5WYYG/istockphoto-482545892-170667a.jpg"
+          src="https://i.ibb.co.com/5s4GWch/pexels-olly-3779705.jpg"
           alt=""
           style={{ width: "100%" }}
         />
