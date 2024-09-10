@@ -1,31 +1,33 @@
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-
 import useDoctors from "../../../Components/Hooks/useDoctors";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DoctorsTabs from "./DoctorsTabs";
 
 const AllDoctors = () => {
   const [doctors] = useDoctors();
+
   const [tabIndex, setTabIndex] = useState(0);
-  const Cardiologist = doctors.filter(
-    (doctor) => doctor.specialization === "Cardiologist"
-  );
-  const Endocrinologist = doctors.filter(
-    (doctor) => doctor.specialization === "Endocrinologist"
-  );
-  const Urologist = doctors.filter(
-    (doctor) => doctor.specialization === "Urologist"
-  );
-  const Neurologist = doctors.filter(
-    (doctor) => doctor.specialization === "Neurologist"
-  );
-  const Orthopedic = doctors.filter(
-    (doctor) => doctor.specialization === "Orthopedic"
-  );
-  const Dermatologist = doctors.filter(
-    (doctor) => doctor.specialization === "Dermatologist"
-  );
+  const [specializations, setSpecializations] = useState([]);
+
+  // Extract unique specializations from doctors data
+  useEffect(() => {
+    if (doctors.length > 0) {
+      const uniqueSpecializations = [
+        "All",
+        ...new Set(doctors.map((doctor) => doctor.specialization)),
+      ];
+      setSpecializations(uniqueSpecializations);
+    }
+  }, [doctors]);
+
+  // Filter doctors based on selected tab (specialization)
+  const getFilteredDoctors = (specialization) => {
+    if (specialization === "All") {
+      return doctors;
+    }
+    return doctors.filter((doctor) => doctor.specialization === specialization);
+  };
 
   return (
     <div className="px-5">
@@ -42,38 +44,19 @@ const AllDoctors = () => {
           </p>
         </div>
       </section>
-      <div className="container mx-auto mb-12 ">
+      <div className="container mx-auto mb-12">
         <Tabs defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
           <TabList>
-            <Tab>All</Tab>
-            <Tab>Cardiologist</Tab>
-            <Tab>Endocrinologist</Tab>
-            <Tab>Urologist</Tab>
-            <Tab>Neurologist</Tab>
-            <Tab>Orthopedic</Tab>
-            <Tab>Dermatologist</Tab>
+            {specializations.map((specialization, index) => (
+              <Tab key={index}>{specialization}</Tab>
+            ))}
           </TabList>
-          <TabPanel>
-            <DoctorsTabs doctors={doctors}></DoctorsTabs>
-          </TabPanel>
-          <TabPanel>
-            <DoctorsTabs doctors={Cardiologist}></DoctorsTabs>
-          </TabPanel>
-          <TabPanel>
-            <DoctorsTabs doctors={Endocrinologist}></DoctorsTabs>
-          </TabPanel>
-          <TabPanel>
-            <DoctorsTabs doctors={Urologist}></DoctorsTabs>
-          </TabPanel>
-          <TabPanel>
-            <DoctorsTabs doctors={Neurologist}></DoctorsTabs>
-          </TabPanel>
-          <TabPanel>
-            <DoctorsTabs doctors={Orthopedic}></DoctorsTabs>
-          </TabPanel>
-          <TabPanel>
-            <DoctorsTabs doctors={Dermatologist}></DoctorsTabs>
-          </TabPanel>
+
+          {specializations.map((specialization, index) => (
+            <TabPanel key={index}>
+              <DoctorsTabs doctors={getFilteredDoctors(specialization)} />
+            </TabPanel>
+          ))}
         </Tabs>
       </div>
     </div>

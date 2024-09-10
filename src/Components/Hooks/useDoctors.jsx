@@ -5,7 +5,7 @@ const useDoctors = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://care-quest-server.vercel.app//doctors")
+    fetch("http://localhost:3000/doctors")
       .then((res) => res.json())
       .then((data) => {
         setDoctors(data);

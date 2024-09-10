@@ -3,7 +3,7 @@ import useAuth from "./useAuth";
 import axios from "axios";
 
 const axiosSecure = axios.create({
-  baseURL: "https://care-quest-server.vercel.app//",
+  baseURL: "http://localhost:3000",
 });
 
 const useAxiosSecure = () => {
