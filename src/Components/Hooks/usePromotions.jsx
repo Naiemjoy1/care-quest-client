@@ -5,7 +5,7 @@ const usePromotions = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:3000/promotions")
+    fetch("https://care-quest-server.vercel.app/promotions")
       .then((res) => res.json())
       .then((data) => {
         setPromotions(data);
