@@ -118,7 +118,6 @@ const SignIn = () => {
 
   return (
     <div className="flex gap-4 justify-center items-center container mx-auto my-10">
-      {admin ? <button>Hello</button> : <button>bye</button>}
       <div className="w-1/2">
         <form onSubmit={handleLogin} className="card-body">
           <div className="form-control">

@@ -1,4 +1,3 @@
-
 # CareQuest
 
 CareQuest is a comprehensive full-stack web application designed to streamline management tasks for diagnostic centers, including appointment scheduling, patient record management, test result tracking, and administrative operations.
@@ -14,6 +13,7 @@ The primary goal of CareQuest is to address the challenges faced by diagnostic c
 ## Problem Solving
 
 CareQuest addresses the following key challenges:
+
 - **Appointment Management:** Simplifies the booking, rescheduling, and cancellation of appointments.
 - **Patient Record Management:** Centralizes patient information for easy access and management.
 - **Administrative Tasks:** Streamlines administrative operations such as report submission, user management, and feedback collection.
@@ -21,9 +21,7 @@ CareQuest addresses the following key challenges:
 ## Key Features
 
 1. **Comprehensive User Dashboard:** Provides users with a personalized dashboard to manage appointments, track test results, and update profiles.
-   
 2. **Admin Dashboard:** Equips administrators with tools to manage users, and appointments, and generate reports effortlessly.
-   
 3. **Secure Authentication and Payment Integration:** Implements Firebase Authentication for secure user login and integrates Stripe for seamless payment processing.
 
 ## Technologies Used
@@ -85,5 +83,7 @@ CareQuest addresses the following key challenges:
 ## Live Link
 
 Explore the live application [Live Link](https://care-quest-2ae20.web.app/) to see CareQuest in action.
+
+admin - admin@carequest.com pass - Pa$$w0rd!
 
 ---
