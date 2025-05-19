@@ -12,7 +12,9 @@ const AboutClinic = () => {
           aliquam odio, ut consectetur enim. Ut sit amet iaculis nulla, sed
           dapibus justo. Nullam quis placerat massa, vitae ullamcorper nulla.
         </p>
-        <button className="btn btn-primary text-secondary">Read More</button>
+        <button className="btn btn-primary text-secondary transition-transform duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg">
+          Read More
+        </button>
       </div>
       <div className="lg:w-1/2 space-y-4">
         <h2 className=" text-primary text-xl font-semibold">Clinic skills</h2>

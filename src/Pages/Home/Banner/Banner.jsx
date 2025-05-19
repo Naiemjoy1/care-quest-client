@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../../Components/Hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
+import useAxiosSecure from "../../../Components/Hooks/useAxiosSecure";
 
 const Banner = () => {
   const axiosSecure = useAxiosSecure();
@@ -13,17 +13,14 @@ const Banner = () => {
     },
   });
 
-  // Filter active banners
   const activeBanners = banners.filter((banner) => banner.isActive);
-
-  // console.log("active banners", activeBanners);
 
   return (
     <div>
       {activeBanners.map((banner, index) => (
         <div
           key={index}
-          className="hero min-h-screen"
+          className="hero"
           style={{
             backgroundImage: `url(${banner.image})`,
           }}

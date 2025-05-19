@@ -1,22 +1,22 @@
 import Promotion from "./Promotion";
 
 import {
+  A11y,
+  Autoplay,
   Navigation,
   Pagination,
   Scrollbar,
-  A11y,
-  Autoplay,
 } from "swiper/modules";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
+import { useQuery } from "@tanstack/react-query";
 import "swiper/css";
+import "swiper/css/autoplay";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import "swiper/css/autoplay";
 import useAxiosSecure from "../../../Components/Hooks/useAxiosSecure";
-import { useQuery } from "@tanstack/react-query";
 
 const Promotions = () => {
   const axiosSecure = useAxiosSecure();
@@ -56,7 +56,7 @@ const Promotions = () => {
           aliquam odio, ut consectetur enim.
         </p>
       </div>
-      <div className="container mx-auto text-white mt-10">
+      <div className="container mx-auto text-white mt-10 ">
         <Swiper
           spaceBetween={20}
           // navigation={true}

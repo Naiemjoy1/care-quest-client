@@ -10,4 +10,3 @@ const useAxiosPublic = () => {
 
 export default useAxiosPublic;
 
-//update

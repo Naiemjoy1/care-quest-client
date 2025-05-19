@@ -1,10 +1,13 @@
+// tailwind.config.js
+import daisyui from "daisyui";
+
 /** @type {import('tailwindcss').Config} */
-export default {
+const config = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       fontFamily: {
-        poppins: "'Poppins', sans-serif ",
+        poppins: "'Poppins', sans-serif",
         reenie: "'Reenie Beanie', cursive",
         roboto: "'Roboto', sans-serif",
         robotoslab: "'Roboto Slab', serif",
@@ -14,7 +17,7 @@ export default {
       },
     },
   },
-  plugins: [require("daisyui")],
+  plugins: [daisyui],
   daisyui: {
     themes: [
       {
@@ -31,3 +34,5 @@ export default {
     ],
   },
 };
+
+export default config;

@@ -4,7 +4,7 @@ const Promotion = ({ promotion }) => {
   const { cupontitle, cupondescrioption, expiry, cuponcode, rate } = promotion;
   return (
     <div>
-      <div className="card bg-gradient-to-r from-cyan-500 to-blue-500 shadow-xl h-[310px]">
+      <div className="card bg-gradient-to-r from-cyan-500 to-blue-500 shadow-xl h-[310px] ">
         <div className="p-5">
           <div className="flex justify-between items-center">
             <h2 className="card-title">{cupontitle}</h2>
